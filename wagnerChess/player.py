@@ -8,6 +8,11 @@ class Player(object):
         if color not in ["white","black"]:
             raise Exception("invalid color")
         self.color=color
+
+        self.board=Board()
+
+        regardless of color, THIS player, lives on the LOW end
+        The larger the index number gets, the deeper into enemy territory
         
         if color=="black":
             self.pieces=[King(location=Location("B",1),color=self.color),

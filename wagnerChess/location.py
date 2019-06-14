@@ -1,20 +1,16 @@
+when the Board is told to move a piece, it checks the logic of the request, THEN
+Updates the Piece-poiter inside the changing Locations.
+
 class Location(object):
 
-    self.letterMap={"A":[0],
-                    "B":[-1,1],
-                    "C":[-1,0,1],
-                    "D":[-2,-1,1,2],
-                    "E":[-2,-1,0,1,2],
-                    "F":[-3,-2,-1,1,2,3],
-                    "G":[-3,-2,-1,0,1,2,3],
-                    "H":[-4,-3,-2,-1,1,2,3,4],
-                    "I":[-3,-2,-1,0,1,2,3],
-                    "J":[-3,-2,-1,1,2,3],
-                    "K":[-2,-1,0,1,2],
-                    "L":[-2,-1,1,2],
-                    "M":[-1,0,1],
-                    "N":[-1,1],
-                    "O":[0]
+    letterMap={"A":[0,1,2,3,4,5,6,7],
+               "B":[0,1,2,3,4,5,6],
+               "C":[0,1,2,3,4,5],
+               "D":[0,1,2,3,4],
+               "E":[0,1,2,3],
+               "F":[0,1,2],
+               "G":[0,1],
+               "H":[0]
     }
                     
     def __init__(self,letter,number):
@@ -35,7 +31,14 @@ class Location(object):
 
     def getNumber(self):
         return number
-        
+
+    def placePiece(self,piece):
+        self.piece=piece
+
+    def clearPiece(self):
+        self.piece=None
+
+    
     def equals(self,location):
         if not isinstance(location,Location):
             raise Exception("not a Loation")
