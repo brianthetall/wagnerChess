@@ -1,3 +1,4 @@
+from piece import Piece
 from location import Location
 
 class Board(object):
@@ -13,3 +14,22 @@ class Board(object):
             numbers=Location.letterMap[l]
             for n in numbers:
                 self.board.append( Location(l,n) )                
+
+
+    def assignPiece(self,piece,location):
+        location.placePiece()
+
+
+    #updates the threat list for each piece
+    #then loops through all parts to see which pose a threat to <piece>
+    #return list of Piece objects currently threatending <piece>
+    def checkForThreats(self,piece):
+        #check for, and return a list of threat-pieces
+        ret=[]
+        what is the O() of this question?
+         
+        
+        return ret
+
+
+                            

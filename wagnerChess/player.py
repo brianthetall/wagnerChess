@@ -1,5 +1,10 @@
 from piece import Piece
 from king import King
+from queen import Queen
+from bishop import Bishop
+from knight import Knight
+from rook import Rook
+from pawn import Pawn
 
 class Player(object):
 
@@ -9,53 +14,65 @@ class Player(object):
             raise Exception("invalid color")
         self.color=color
 
-        self.board=Board()
-
-        regardless of color, THIS player, lives on the LOW end
-        The larger the index number gets, the deeper into enemy territory
         
+        self.root={
+            "player":self,
+            "board":None,
+            "pieces":[]
+            
+        self.root['board']=Board(self.root)
+        #but where and how are the piece pointers kept?
+        #passing a datastruct full of everything
+        #regardless of color, THIS player, lives on the LOW end
+        #The larger the index number gets, the deeper into enemy territory
         if color=="black":
-            self.pieces=[King(location=Location("B",1),color=self.color),
-                         Queen(location=Location("B",-1),color=self.color),
-                         Bishop(Location("C",-1),color=self.color),
-                         Bishop(Location("C",1),color=self.color),
-                         Knight(Location("D",-2),color=self.color),
-                         Knight(Location("D",2),color=self.color),
-                         Rook(Location("E",-2),color=self.color),
-                         Rook(Location("E",2),color=self.color),
 
-                         Pawn(Location("A",0),color=self.color),
-                         Pawn(Location("C",0),color=self.color),
-                         Pawn(Location("E",0),color=self.color),
-                         Pawn(Location("G",0),color=self.color),
-                         Pawn(Location("E",-1),color=self.color),
-                         Pawn(Location("D",-1),color=self.color),
-                         Pawn(Location("E",1),color=self.color),
-                         Pawn(Location("D",1),color=self.color)
+            self.pieces=[ King(
+            
+            
+            self.root['pieces']=[King(location=Location("B",1),root=self.root),
+                                 Queen(location=Location("B",-1),root=self.root),
+                                 Bishop(Location("C",-1),root=self.root),
+                                 Bishop(Location("C",1),root=self.root),
+                                 Knight(Location("D",-2),root=self.root),
+                                 Knight(Location("D",2),root=self.root),
+                                 Rook(Location("E",-2),root=self.root),
+                                 Rook(Location("E",2),root=self.root),
+                                 
+                                 Pawn(Location("A",0),root=self.root),
+                                 Pawn(Location("C",0),root=self.root),
+                                 Pawn(Location("E",0),root=self.root),
+                                 Pawn(Location("G",0),root=self.root),
+                                 Pawn(Location("E",-1),root=self.root),
+                                 Pawn(Location("D",-1),root=self.root),
+                                 Pawn(Location("E",1),root=self.root),
+                                 Pawn(Location("D",1),root=self.root)
             ]
-
+                
         elif color=="white":
-            self.pieces=[King(location=Location("N",1),color=self.color),
-                         Queen(location=Location("N",-1),color=self.color),
-                         Bishop(Location("M",-1),color=self.color),
-                         Bishop(Location("M",1),color=self.color),
-                         Knight(Location("L",-2),color=self.color),
-                         Knight(Location("L",2),color=self.color),
-                         Rook(Location("K",-2),color=self.color),
-                         Rook(Location("K",2),color=self.color),
+            self.root['pieces']=[King(location=Location("N",1),root=self.root),
+                                 Queen(location=Location("N",-1),root=self.root),
+                                 Bishop(Location("M",-1),root=self.root),
+                                 Bishop(Location("M",1),root=self.root),
+                                 Knight(Location("L",-2),root=self.root),
+                                 Knight(Location("L",2),root=self.root),
+                                 Rook(Location("K",-2),root=self.root),
+                                 Rook(Location("K",2),root=self.root),
 
-                         Pawn(Location("O",0),color=self.color),
-                         Pawn(Location("M",0),color=self.color),
-                         Pawn(Location("K",0),color=self.color),
-                         Pawn(Location("I",0),color=self.color),
-                         Pawn(Location("L",-1),color=self.color),
-                         Pawn(Location("K",-1),color=self.color),
-                         Pawn(Location("L",1),color=self.color),
-                         Pawn(Location("K",1),color=self.color)
-            ]
+                                 Pawn(Location("O",0),root=self.root),
+                                 Pawn(Location("M",0),root=self.root),
+                                 Pawn(Location("K",0),root=self.root),
+                                 Pawn(Location("I",0),root=self.root),
+                                 Pawn(Location("L",-1),root=self.root),
+                                 Pawn(Location("K",-1),root=self.root),
+                                 Pawn(Location("L",1),root=self.root),
+                                 Pawn(Location("K",1),root=self.root)
+                    ]
 
     def killPiece(self):
         #remove This from self.pieces
-        
-            
-    def move(self):
+        pass
+
+    #init/destLocation are Location
+                #i need a resolvePartAtLocation that returns Piece
+    def move(self, initLocation, destLocation):

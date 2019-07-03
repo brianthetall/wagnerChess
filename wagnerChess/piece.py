@@ -2,13 +2,11 @@ from location import Location
 
 class Piece(object):
 
-    def __init__(self,location,color):
+    #root: Player's root datastruct in RAM
+    def __init__(self,location,root):
 
+        self.root=root
         self.location=location
-        if color not in ["white","black"]:
-            raise Exception("invalid color")
-        
-        self.color=color
 
 
     def listMoves(self):
