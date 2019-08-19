@@ -73,6 +73,6 @@ class Player(object):
         #remove This from self.pieces
         pass
 
-    #init/destLocation are Location
-                #i need a resolvePartAtLocation that returns Piece
-    def move(self, initLocation, destLocation):
+    def move(self):
+        pass
+

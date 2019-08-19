@@ -1,7 +1,8 @@
-when the Board is told to move a piece, it checks the logic of the request, THEN
-Updates the Piece-poiter inside the changing Locations.
+#when the Board is told to move a piece, it checks the logic of the request, THEN
+#Updates the Piece-poiter inside the changing Locations.
 
 class Location(object):
+
 
     letterMap={"A":[0,1,2,3,4,5,6,7],
                "B":[0,1,2,3,4,5,6],
@@ -13,21 +14,26 @@ class Location(object):
                "H":[0]
     }
                     
-    def __init__(self,letter,number):
+    def __init__(self,x,y):
+
+        #this is probably useful for equals()
+                
+        try:
+            if x not in range(0,7) or y not in range(0,7):
+                raise Exception("invalid x or y range: %d,%d" % (x,y))
+            self.x=x
+            self.y=y
+
+        except Exception:
+            print "Did you send an int? Type=%s,%s"%(type(x),type(y))
+            raise
         
-        if letter not in self.letterMap.keys():
-            raise Exception("invalid letter: %s" % letter)
-        self.letter=letter
-
-        if number not in self.letterMap[letter]:
-            raise Exception("invalid number: %s not in %s" % (number,self.letterMap[letter]))
-        self.number=number
-
         self.piece=None
 
 
-    def getLetter(self):
-        return letter
+    def get(self):
+        return self.x,self.y
+
 
     def getNumber(self):
         return number
@@ -38,9 +44,13 @@ class Location(object):
     def clearPiece(self):
         self.piece=None
 
-    
     def equals(self,location):
+        '''
         if not isinstance(location,Location):
             raise Exception("not a Loation")
 
-        return self.letterMap[self.letter]==self.letterMap[location.getLetter()] and self.number==location.getNumber()
+        xs,ys=location.get()
+        if 
+        '''
+        pass
+    

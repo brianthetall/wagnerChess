@@ -1,5 +1,7 @@
 from piece import Piece
 from location import Location
+from player import Player
+
 
 class Board(object):
 
