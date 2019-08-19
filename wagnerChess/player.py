@@ -51,6 +51,7 @@ class Player(object):
 
     def killPiece(self):
         #remove This from self.pieces
-        
+        pass
             
     def move(self):
+        pass
