@@ -20,23 +20,31 @@ class Location(object):
                "N":[0,1],
                "O":[0]
     }
-                    
-    def __init__(self,x,y):
 
-        #this is probably useful for equals()
-                
-        try:
-            if x not in range(0,7) or y not in range(0,7):
-                raise Exception("invalid x or y range: %d,%d" % (x,y))
-            self.x=x
-            self.y=y
-
-        except Exception:
-            print "Did you send an int? Type=%s,%s"%(type(x),type(y))
-            raise
-        
+    #pass the Location something valid in the letterMap above
+    def __init__(self,letter,index):
         self.piece=None
+        self.letter=letter
+        self.index=index
+        self.connections={"0":None,"1":None,"2":None,"3":None,"4":None,"5":None,"6":None,"7":None}
 
+
+    def interconnect(board):
+        b=board.getBoard()
+        if self.letter=="A":
+            del(self.connections["0"])
+            del(self.connections["1"])
+            del(self.connections["2"])
+            del(self.connections["3"])
+            del(self.connections["4"])
+            b["B,1"].connect("4",self)
+            b["C,1"].connect("3",self)
+            b["B,0"].connect("2",self)
+
+
+    def connect(self,connectionSiteNumber,locationPointer):
+        self.connections[connectionSiteNumber]=locationPointer
+        
 
     def get(self):
         return self.x,self.y
