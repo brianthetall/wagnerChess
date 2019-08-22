@@ -41,6 +41,8 @@ class Location(object):
             b["C,1"].connect("3",self)
             b["B,0"].connect("2",self)
 
+        elif self.letter=="
+#this is going to get tedious, or you will find a pattern.
 
     def connect(self,connectionSiteNumber,locationPointer):
         self.connections[connectionSiteNumber]=locationPointer
