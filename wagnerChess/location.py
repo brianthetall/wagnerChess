@@ -4,21 +4,14 @@
 class Location(object):
 
 
-    letterMap={"A":[0],
-               "B":[0,1]
-               "C":[0,1,2],
-               "D":[0,1,2,3],
-               "E":[0,1,2,3,4],
-               "F":[0,1,2,3,4,5],
-               "G":[0,1,2,3,4,5,6],
-               "H":[0,1,2,3,4,5,6,7],
-               "I":[0,1,2,3,4,5,6],
-               "J":[0,1,2,3,4,5],
-               "K":[0,1,2,3,4],
-               "L":[0,1,2,3],
-               "M":[0,1,2],
-               "N":[0,1],
-               "O":[0]
+    letterMap={"A":[0,1,2,3,4,5,6,7],
+               "B":[0,1,2,3,4,5,6,7],
+               "C":[0,1,2,3,4,5,6,7],
+               "D":[0,1,2,3,4,5,6,7],
+               "E":[0,1,2,3,4,5,6,7],
+               "F":[0,1,2,3,4,5,6,7],
+               "G":[0,1,2,3,4,5,6,7],
+               "H":[0,1,2,3,4,5,6,7]
     }
 
     #pass the Location something valid in the letterMap above
@@ -41,8 +34,8 @@ class Location(object):
             b["C,1"].connect("3",self)
             b["B,0"].connect("2",self)
 
-        elif self.letter=="
-#this is going to get tedious, or you will find a pattern.
+            
+            #this is going to get tedious, or you will find a pattern.
 
     def connect(self,connectionSiteNumber,locationPointer):
         self.connections[connectionSiteNumber]=locationPointer
@@ -64,7 +57,7 @@ class Location(object):
     def equals(self,location):
         '''
         if not isinstance(location,Location):
-            raise Exception("not a Loation")
+        #raise Exception("not a Loation")
 
         xs,ys=location.get()
         if 
