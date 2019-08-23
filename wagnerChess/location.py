@@ -25,15 +25,39 @@ class Location(object):
     def interconnect(board):
         b=board.getBoard()
         if self.letter=="A":
-            del(self.connections["0"])
+
             del(self.connections["1"])
             del(self.connections["2"])
             del(self.connections["3"])
-            del(self.connections["4"])
-            b["B,1"].connect("4",self)
-            b["C,1"].connect("3",self)
-            b["B,0"].connect("2",self)
 
+            b["B,$d"%self.index].connect("2",self)
+            b["B,$d"%(self.index+1)].connect("3",self)
+
+            if self.index<7:
+                b["A,$d"%self.index+1].connect("4",self)
+
+
+        elif self.letter=="H":
+
+            del(self.connections["5"])
+            del(self.connections["6"])
+            del(self.connections["7"])
+
+            if self.index<7:
+                b[].connect("",self)
+                b[].connect("",self)
+                b[].connect("",self)
+            else:
+                b[].connect("",self)
+                b[].connect("",self)
+                b[].connect("",self)
+
+            if self.index>0:
+
+                b[].connect("",self)
+                b[].connect("",self)
+
+                
             
             #this is going to get tedious, or you will find a pattern.
 
