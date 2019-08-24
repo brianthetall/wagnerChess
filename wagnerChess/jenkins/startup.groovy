@@ -5,7 +5,7 @@ env.pyenv = "/usr/local/bin/python2.7" // system python2.7
 def gitclone() {
 
     //git url: "$backend", branch: "$branch", credentialsId: "$credid"
-   dir('wagnerChess') {
+   dir('games/wagnerChess') {
        println "-git checkout games..."
        git url:"$games", branch: "$branch", credentialsId: "$credid"
    }
@@ -20,7 +20,7 @@ node('master'){
 
 	stage("Build Env for Back and Front"){
 		     println "%pip install running..."
-		     dir('wagnerChess') {
+		     dir('games/wagnerChess') {
 
 		            // setup virtualenv
 			    withPythonEnv('/usr/local/bin/python2.7') {
