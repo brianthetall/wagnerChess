@@ -1,0 +1,39 @@
+currentBuild.description = "branch: $branch"
+
+env.pyenv = "/usr/local/bin/python2.7" // system python2.7
+
+def gitclone() {
+
+    //git url: "$backend", branch: "$branch", credentialsId: "$credid"
+   dir('wagnerChess') {
+       println "-git checkout games..."
+       git url:"$games", branch: "$branch", credentialsId: "$credid"
+   }
+
+}
+
+node('master'){
+	stage ("gitclone") {
+	      println "%DEPLOYDB-I-GITCL cloning git repo..."
+	      gitclone()
+        }	      
+
+	stage("Build Env for Back and Front"){
+		     println "%pip install running..."
+		     dir('wagnerChess') {
+
+		            // setup virtualenv
+			    withPythonEnv('/usr/local/bin/python2.7') {
+			             pysh 'pip install -r requirements.txt'
+       				     }
+    		     }
+				     
+
+		dir("wagnerChess"){
+		      println "running jenkins test script from wagnerChess/pytests"
+		      sh 'jenkins/run_tests.sh'
+
+    		}
+	}
+
+}
