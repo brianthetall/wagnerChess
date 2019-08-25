@@ -23,7 +23,7 @@ node('master'){
 		     dir('games/wagnerChess') {
 
 		            // setup virtualenv
-			    withPythonEnv('/usr/local/bin/python2.7') {
+			    withPythonEnv('/usr/local/bin/python3.6') {
 			             pysh 'pip install -r requirements.txt'
        				     }
     		     }
