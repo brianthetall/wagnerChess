@@ -1,6 +1,6 @@
 currentBuild.description = "branch: $branch"
 
-env.pyenv = "/usr/local/bin/python2.7" // system python2.7
+env.pyenv = "/usr/local/bin/python" // system python3.6
 
 def gitclone() {
 
