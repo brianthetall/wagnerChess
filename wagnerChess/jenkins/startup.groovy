@@ -26,7 +26,7 @@ node('master'){
 			    withPythonEnv('/usr/local/bin/python3.6') {
 				pysh 'pip install --upgrade pip'
 				pysh 'ls -alh'
-			             pysh 'pip install -r requirements.txt'
+			             pysh 'cd wagnerChess && pip install -r requirements.txt'
        				     }
     		     }
 				     
