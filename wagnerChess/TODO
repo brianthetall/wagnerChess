@@ -1,2 +1,4 @@
 Track the square object. Link list the squares together to build the board.
 For each Piece, the partType+#of square into the move, the Square can provide links to legal next square(s).
+
+Everything needs tests!
