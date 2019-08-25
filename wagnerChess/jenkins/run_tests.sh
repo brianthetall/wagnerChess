@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 
-BACKEND=${BACKEND:="$WORKSPACE/games/wagnerChess"}
+BACKEND=${BACKEND:="$WORKSPACE/games/wagnerChess/wagnerChess"}
 
 pwd
 ls -laht
