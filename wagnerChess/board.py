@@ -11,6 +11,7 @@ class Board(object):
     def __init__(self):
 
         self.board={}
+        self.players={"white":None,"black":None}
         
         #update Location to track a Piece pointer!
 

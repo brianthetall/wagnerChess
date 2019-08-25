@@ -94,24 +94,22 @@ class Location(object):
             del(self.connections["6"])
             del(self.connections["7"])
 
-            if self.index<7:
-                b[].connect("",self)
-                b[].connect("",self)
-                b[].connect("",self)
+            if self.index==0:
+                b["G,0"].connect("4",self)
+                b["G,1"].connect("3",self)
+
+            elif self.index<7:
+                b["G,%d"%(self.index-1)].connect("5",self)
+                b["G,%d"%(self.index)].connect("4",self)
+                b["G,%d"%(self.index+1)].connect("3",self)
+
             else:
-                b[].connect("",self)
-                b[].connect("",self)
-                b[].connect("",self)
+                b["G,7"].connect("4",self)
+                b["G,6"].connect("5",self)
 
-            if self.index>0:
 
-                b[].connect("",self)
-                b[].connect("",self)
 
                 
-            
-            #this is going to get tedious, or you will find a pattern.
-
     def connect(self,connectionSiteNumber,locationPointer):
         self.connections[connectionSiteNumber]=locationPointer
         
@@ -126,7 +124,8 @@ class Location(object):
         for l in letterList:
             if letter==l:
                 return index
-            else index++
+            else:
+                index+=1
             
     def __getPrevLetter(self,letter):
         letterList=Location.letterMap.keys()

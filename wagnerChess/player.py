@@ -17,19 +17,17 @@ class Player(object):
         
         self.root={
             "player":self,
-            "board":None,
+            "board":Board(self.root),
             "pieces":[]
+        }
             
-        self.root['board']=Board(self.root)
         #but where and how are the piece pointers kept?
         #passing a datastruct full of everything
         #regardless of color, THIS player, lives on the LOW end
         #The larger the index number gets, the deeper into enemy territory
         if color=="black":
 
-            self.pieces=[ King(
-            
-            
+            #use the location from the root pointer!
             self.root['pieces']=[King(location=Location("B",1),root=self.root),
                                  Queen(location=Location("B",-1),root=self.root),
                                  Bishop(Location("C",-1),root=self.root),

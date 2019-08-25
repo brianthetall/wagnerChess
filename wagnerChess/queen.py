@@ -1,3 +1,5 @@
+from piece import Piece
+
 class Queen(Piece):
 
     def __init__(self,location,color):
@@ -13,3 +15,4 @@ class Queen(Piece):
     def listMoves(self):
         #how does this take into account the presence of other pieces
         #on the board?
+        pass
