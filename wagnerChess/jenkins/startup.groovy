@@ -33,7 +33,7 @@ node('master'){
 
 		dir("games/wagnerChess"){
 		      println "running jenkins test script from wagnerChess/pytests"
-		      sh 'jenkins/run_tests.sh'
+		      sh './jenkins/run_tests.sh'
 
     		}
 	}

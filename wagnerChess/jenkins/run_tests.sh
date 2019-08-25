@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 
-BACKEND=${BACKEND:="$WORKSPACE/backend"}
+BACKEND=${BACKEND:="$WORKSPACE/games/wagnerChess"}
 
 source $WORKSPACE/.pyenv-usr-local-bin-python3.6/bin/activate
 source $BACKEND/setEnvVariables.sh
