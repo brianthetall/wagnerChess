@@ -26,16 +26,67 @@ class Location(object):
         b=board.getBoard()
         if self.letter=="A":
 
+            #A's dont have anything above
+            del(self.connections["0"])
             del(self.connections["1"])
-            del(self.connections["2"])
-            del(self.connections["3"])
-
-            b["B,$d"%self.index].connect("2",self)
-            b["B,$d"%(self.index+1)].connect("3",self)
-
+            del(self.connections["7"])
+            
+            if self.index==7:#nothing right
+                del(self.connections["6"])
+                del(self.connections["5"])
+            elif self.index==0:#nothing left
+                del(self.connections["2"])
+                del(self.connections["3"])
+                
+            #Make connections:
             if self.index<7:
-                b["A,$d"%self.index+1].connect("4",self)
+                b["B,$d"%self.index].connect("0",self)
+                b["B,$d"%(self.index+1)].connect("1",self)
+            else:
+                b["A,$d"%self.index].connect("0",self)
 
+
+        #you could totoally loop thgouth the apettrern in the iiddle
+        elif self.letter!="H":
+
+
+            prevLetter=self.__getPrevLetter(self.letter)
+            nextLetter=self.__getNextLetter(self.letter)
+            
+            if self.index==7:#nothing right
+                del(self.connections["7"])
+                del(self.connections["6"])
+                del(self.connections["5"])
+            elif self.index==0:#nothing left
+                del(self.connections["1"])
+                del(self.connections["2"])
+                del(self.connections["3"])
+                
+            #Make connections:
+            if self.index==0:
+                b["%s,$d"%(prevLetter,self.index)].connect("4",self)
+                b["%s,$d"%(prevLetter,(self.index+1))].connect("3",self)
+
+                b["%s,$d"%(nextLetter,self.index)].connect("0",self)
+                b["%s,$d"%(nextLetter,(self.index+1))].connect("1",self)
+                
+            elif self.index<7:
+
+                b["%s,$d"%(prevLetter,self.index)].connect("4",self)
+                b["%s,$d"%(nextLetter,(self.index+1))].connect("3",self)
+                b["%s,$d"%(nextLetter,(self.index-1))].connect("5",self)
+
+                b["%s,$d"%(prevLetter,self.index)].connect("0",self)
+                b["%s,$d"%(nextLetter,(self.index+1))].connect("1",self)
+                b["%s,$d"%(nextLetter,(self.index-1))].connect("7",self)
+
+            else:
+                b["%s,$d"%(prevLetter,self.index)].connect("4",self)
+                b["%s,$d"%(nextLetter,(self.index-1))].connect("3",self)
+                
+                b["%s,$d"%(prevLetter,self.index)].connect("0",self)
+                b["%s,$d"%(nextLetter,(self.index-1))].connect("7",self)
+                
 
         elif self.letter=="H":
 
@@ -69,6 +120,28 @@ class Location(object):
         return self.x,self.y
 
 
+    def __getIndex(self,letter):
+        letterList=Location.letterMap.keys()
+        index=0
+        for l in letterList:
+            if letter==l:
+                return index
+            else index++
+            
+    def __getPrevLetter(self,letter):
+        letterList=Location.letterMap.keys()
+        index=self.__getIndex(letter)
+        if index==0:
+            return Exception("nothing over here")
+        return letterList[index-1]
+
+    def __getNextLetter(self,letter):
+        letterList=Location.letterMap.keys()
+        index=self.__getIndex(letter)
+        if index==7:
+            return Exception("nothing over here")
+        return letterList[index+1]
+    
     def getNumber(self):
         return number
 
