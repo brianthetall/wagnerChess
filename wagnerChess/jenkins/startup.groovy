@@ -24,20 +24,14 @@ node('master'){
 
 		            // setup virtualenv
 			    withPythonEnv('/usr/local/bin/python3.6') {
-				pysh 'pip install --upgrade pip'
+			    	pysh 'pip install --upgrade pip'
 				pysh 'ls -alh'
-			             pysh 'cd wagnerChess && pip install -r requirements.txt'
-       				     }
+			        pysh 'cd wagnerChess && pip install -r requirements.txt'
+				pysh './jenkins/run_tests.sh'
+				
+				}
     		     }
 				     
-
-		dir("games/wagnerChess"){
-		      println "running jenkins test script from wagnerChess/pytests"
-		      pwd
-		      ls -lah
-		      sh './jenkins/run_tests.sh'
-
-    		}
 	}
 
 }
