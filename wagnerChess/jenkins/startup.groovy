@@ -27,7 +27,7 @@ node('master'){
 			    	pysh 'pip install --upgrade pip'
 				pysh 'ls -alh'
 			        pysh 'cd wagnerChess && pip install -r requirements.txt'
-				pysh 'pwd && cd jenkins && ./run_tests.sh'
+				pysh 'pwd && cd jenkins && ls -alht && ./run_tests.sh'
 				
 				}
     		     }
