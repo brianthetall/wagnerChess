@@ -24,8 +24,8 @@ node('master'){
 
 		            // setup virtualenv
 			    withPythonEnv('/usr/local/bin/python3.6') {
-				pip install --upgrade pip
-				ls -alh
+				pysh 'pip install --upgrade pip'
+				pysh 'ls -alh'
 			             pysh 'pip install -r requirements.txt'
        				     }
     		     }
