@@ -5,7 +5,7 @@ class Piece(object):
 
     #location "B,3", for example
     #root: Player's root datastruct in RAM
-    def __init__(self,location,root):
+    def __init__(self,location,color,root):
 
         self.root=root
         try:

@@ -1,6 +1,5 @@
 from piece import Piece
 from location import Location
-from player import Player
 
 #make the litter of Locations; they will know their UID on init
 #Later we call a connect the Links function to interlink the Location Objects.
@@ -8,10 +7,9 @@ from player import Player
 
 class Board(object):
 
-    def __init__(self):
+    def __init__(self,args{}):
 
         self.board={}
-        self.players={"white":None,"black":None}
         
         #update Location to track a Piece pointer!
 
@@ -45,7 +43,7 @@ class Board(object):
     def checkForThreats(self,piece):
         #check for, and return a list of threat-pieces
         ret=[]
-        what is the O() of this question?
+        
          
         
         return ret

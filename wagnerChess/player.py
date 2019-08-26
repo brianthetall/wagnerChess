@@ -1,3 +1,4 @@
+from board import Board
 from piece import Piece
 from king import King
 from queen import Queen
@@ -17,10 +18,14 @@ class Player(object):
         
         self.root={
             "player":self,
-            "board":Board(self.root),
+            "board":None,
             "pieces":[]
         }
-            
+
+        Board(args={"color":self.color,"playerRoot":self.root})
+
+
+        
         #but where and how are the piece pointers kept?
         #passing a datastruct full of everything
         #regardless of color, THIS player, lives on the LOW end
