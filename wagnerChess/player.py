@@ -9,16 +9,15 @@ from pawn import Pawn
 
 class Player(object):
 
-    def __init__(self,color):
+    def __init__(self,color,boardRoot):
 
         if color not in ["white","black"]:
             raise Exception("invalid color")
         self.color=color
-
         
         self.root={
             "player":self,
-            "board":None,
+            "board":boardRoot,
             "pieces":[]
         }
 
@@ -30,48 +29,29 @@ class Player(object):
         #passing a datastruct full of everything
         #regardless of color, THIS player, lives on the LOW end
         #The larger the index number gets, the deeper into enemy territory
-        if color=="black":
 
-            #use the location from the root pointer!
-            self.root['pieces']=[King(location=Location("B",1),root=self.root),
-                                 Queen(location=Location("B",-1),root=self.root),
-                                 Bishop(Location("C",-1),root=self.root),
-                                 Bishop(Location("C",1),root=self.root),
-                                 Knight(Location("D",-2),root=self.root),
-                                 Knight(Location("D",2),root=self.root),
-                                 Rook(Location("E",-2),root=self.root),
-                                 Rook(Location("E",2),root=self.root),
-                                 
-                                 Pawn(Location("A",0),root=self.root),
-                                 Pawn(Location("C",0),root=self.root),
-                                 Pawn(Location("E",0),root=self.root),
-                                 Pawn(Location("G",0),root=self.root),
-                                 Pawn(Location("E",-1),root=self.root),
-                                 Pawn(Location("D",-1),root=self.root),
-                                 Pawn(Location("E",1),root=self.root),
-                                 Pawn(Location("D",1),root=self.root)
-            ]
-                
-        elif color=="white":
-            self.root['pieces']=[King(location=Location("N",1),root=self.root),
-                                 Queen(location=Location("N",-1),root=self.root),
-                                 Bishop(Location("M",-1),root=self.root),
-                                 Bishop(Location("M",1),root=self.root),
-                                 Knight(Location("L",-2),root=self.root),
-                                 Knight(Location("L",2),root=self.root),
-                                 Rook(Location("K",-2),root=self.root),
-                                 Rook(Location("K",2),root=self.root),
 
-                                 Pawn(Location("O",0),root=self.root),
-                                 Pawn(Location("M",0),root=self.root),
-                                 Pawn(Location("K",0),root=self.root),
-                                 Pawn(Location("I",0),root=self.root),
-                                 Pawn(Location("L",-1),root=self.root),
-                                 Pawn(Location("K",-1),root=self.root),
-                                 Pawn(Location("L",1),root=self.root),
-                                 Pawn(Location("K",1),root=self.root)
-                    ]
+        #use the location from the root pointer!
+        self.root['pieces']=[King(location=Location("B",1),root=self.root),
+                             Queen(location=Location("B",-1),root=self.root),
+                             Bishop(Location("C",-1),root=self.root),
+                             Bishop(Location("C",1),root=self.root),
+                             Knight(Location("D",-2),root=self.root),
+                             Knight(Location("D",2),root=self.root),
+                             Rook(Location("E",-2),root=self.root),
+                             Rook(Location("E",2),root=self.root),
 
+                             Pawn(Location("A",0),root=self.root),
+                             Pawn(Location("C",0),root=self.root),
+                             Pawn(Location("E",0),root=self.root),
+                             Pawn(Location("G",0),root=self.root),
+                             Pawn(Location("E",-1),root=self.root),
+                             Pawn(Location("D",-1),root=self.root),
+                             Pawn(Location("E",1),root=self.root),
+                             Pawn(Location("D",1),root=self.root)
+        ]
+
+        
     def killPiece(self):
         #remove This from self.pieces
         pass

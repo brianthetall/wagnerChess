@@ -1,15 +1,18 @@
 from piece import Piece
 from location import Location
-
 #make the litter of Locations; they will know their UID on init
 #Later we call a connect the Links function to interlink the Location Objects.
-
 
 class Board(object):
 
     def __init__(self,args{}):
 
-        self.board={}
+        self.board={}#holds the locations; use getBoard(), not root pointer
+        self.root={"players":[],
+                   "board":self}
+
+        self.root["players"].append(Player("white",self.root))
+        self.root["players"].append(Player("black",self.root))
         
         #update Location to track a Piece pointer!
 
@@ -28,14 +31,12 @@ class Board(object):
         for loc in self.board:
             loc.interconnect(self)
 
-
     def getBoard(self):
         return self.board
     
             
     def assignPiece(self,piece,location):
         location.placePiece()
-
 
     #updates the threat list for each piece
     #then loops through all parts to see which pose a threat to <piece>
@@ -44,9 +45,4 @@ class Board(object):
         #check for, and return a list of threat-pieces
         ret=[]
         
-         
-        
         return ret
-
-
-                            

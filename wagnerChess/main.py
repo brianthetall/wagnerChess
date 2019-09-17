@@ -1,4 +1,13 @@
-from player import Player
+from board import Board
 
-white=Player("white")
-black=Player("black")
+
+main has board
+board has players && Locations
+players have pieces?
+
+b=Board(args={})
+b.linkLocations()
+
+
+#white=Player("white")
+#black=Player("black")
