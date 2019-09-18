@@ -4,7 +4,7 @@ class King(Piece):
 
     def __init__(self,location,root):
 
-        super(King,self).__init__(location,root)
+        super(King,self).__init__(location,root,"king")
         pass
 
     def listMoves(self):

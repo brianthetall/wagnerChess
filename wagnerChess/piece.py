@@ -3,13 +3,15 @@ from abc import ABCMeta, abstractmethod
 
 class Piece(object):
 
+    pieces=['king','queen','bishop','knight','rook','pawn']
+
     #location "B,3", for example
     #root: Player's root datastruct in RAM
     def __init__(self,location,root):
 
         self.root=root
         self.location=location
-
+        print("init Piece: ")
 
     @abstractmethod    
     def listMoves(self):

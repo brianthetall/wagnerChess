@@ -10,6 +10,9 @@ class Player(object):
 
     def __init__(self,color,boardRoot):
 
+
+        print("init Player",color,sep=':')
+        
         if color not in ["white","black"]:
             raise Exception("invalid color")
         self.color=color
