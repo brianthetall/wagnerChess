@@ -64,29 +64,32 @@ class Location(object):
                 
             #Make connections:
             if self.index==0:
-                print (prevLetter,",",self.index)
-                b[prevLetter,",",self.index].connect("4",self)
-                b["%s,$d"%(prevLetter,(self.index+1))].connect("3",self)
+                print (prevLetter,",",self.index,sep='')
+                s=prevLetter+","+str(self.index)
+                print(s)
+                
+                b[prevLetter+","+str(self.index)].connect("4",self)
+                b[prevLetter+","+str(self.index+1)].connect("3",self)
 
-                b["%s,$d"%(nextLetter,self.index)].connect("0",self)
-                b["%s,$d"%(nextLetter,(self.index+1))].connect("1",self)
+                b[nextLetter+","+str(self.index)].connect("0",self)
+                b[nextLetter+","+str(self.index+1)].connect("1",self)
                 
             elif self.index<7:
 
-                b["%s,$d"%(prevLetter,self.index)].connect("4",self)
-                b["%s,$d"%(nextLetter,(self.index+1))].connect("3",self)
-                b["%s,$d"%(nextLetter,(self.index-1))].connect("5",self)
+                b[prevLetter+","+str(self.index)].connect("4",self)
+                b[nextLetter+","+str(self.index+1)].connect("3",self)
+                b[nextLetter+","+str(self.index-1)].connect("5",self)
 
-                b["%s,$d"%(prevLetter,self.index)].connect("0",self)
-                b["%s,$d"%(nextLetter,(self.index+1))].connect("1",self)
-                b["%s,$d"%(nextLetter,(self.index-1))].connect("7",self)
+                b[prevLetter+","+str(self.index)].connect("0",self)
+                b[nextLetter+","+str(self.index+1)].connect("1",self)
+                b[nextLetter+","+str(self.index-1)].connect("7",self)
 
             else:
-                b["%s,$d"%(prevLetter,self.index)].connect("4",self)
-                b["%s,$d"%(nextLetter,(self.index-1))].connect("3",self)
+                b[prevLetter+","+str(self.index)].connect("4",self)
+                b[nextLetter+","+str(self.index-1)].connect("3",self)
                 
-                b["%s,$d"%(prevLetter,self.index)].connect("0",self)
-                b["%s,$d"%(nextLetter,(self.index-1))].connect("7",self)
+                b[prevLetter+","+str(self.index)].connect("0",self)
+                b[nextLetter+","+str(self.index-1)].connect("7",self)
                 
 
         elif self.letter=="H":
