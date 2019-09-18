@@ -5,15 +5,10 @@ class Piece(object):
 
     #location "B,3", for example
     #root: Player's root datastruct in RAM
-    def __init__(self,location,color,root):
+    def __init__(self,location,root):
 
         self.root=root
-        try:
-            self.location=self.root["board"].getBoard()[location]
-            
-        except Exception as e:
-            print ("error finding location inside of the board. Error=" , repr(e))
-            raise
+        self.location=location
 
 
     @abstractmethod    

@@ -15,15 +15,15 @@ class Location(object):
     }
 
     #pass the Location something valid in the letterMap above
-    def __init__(self,letter,index):
+    def __init__(self,letter,index,root):
         self.piece=None
         self.letter=letter
         self.index=index
         self.connections={"0":None,"1":None,"2":None,"3":None,"4":None,"5":None,"6":None,"7":None}
+        self.root=root
 
-
-    def interconnect(board):
-        b=board.getBoard()
+    def interconnect(self):
+        b=self.root["board"].getBoard()
         if self.letter=="A":
 
             #A's dont have anything above
@@ -40,10 +40,10 @@ class Location(object):
                 
             #Make connections:
             if self.index<7:
-                b["B,$d"%self.index].connect("0",self)
-                b["B,$d"%(self.index+1)].connect("1",self)
+                b["B,%d"%self.index].connect("0",self)
+                b["B,%d"%(self.index+1)].connect("1",self)
             else:
-                b["A,$d"%self.index].connect("0",self)
+                b["A,%d"%self.index].connect("0",self)
 
 
         #you could totoally loop thgouth the apettrern in the iiddle

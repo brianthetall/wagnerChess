@@ -2,9 +2,9 @@ from piece import Piece
 
 class Rook(Piece):
 
-    def __init__(self,location,color):
+    def __init__(self,location,root):
 
-        super(Rook,self).__init__(location,color)
+        super(Rook,self).__init__(location,root)
 
 
     def listMoves(self):
