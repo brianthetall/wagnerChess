@@ -7,11 +7,15 @@ class Piece(object):
 
     #location "B,3", for example
     #root: Player's root datastruct in RAM
-    def __init__(self,location,root):
+    def __init__(self,location,root,piece):
 
+        if piece not in Piece.pieces:
+            raise Exception("invalid piece passed:",str(piece))
+        
         self.root=root
         self.location=location
-        print("init Piece: ")
+        self.piece=piece
+        print("init Piece",self.piece,sep=':')
 
     @abstractmethod    
     def listMoves(self):
