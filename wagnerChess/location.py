@@ -64,7 +64,8 @@ class Location(object):
                 
             #Make connections:
             if self.index==0:
-                b["%s,$d"%(prevLetter,self.index)].connect("4",self)
+                print (prevLetter,",",self.index)
+                b[prevLetter,",",self.index].connect("4",self)
                 b["%s,$d"%(prevLetter,(self.index+1))].connect("3",self)
 
                 b["%s,$d"%(nextLetter,self.index)].connect("0",self)
@@ -128,15 +129,17 @@ class Location(object):
                 index+=1
             
     def __getPrevLetter(self,letter):
-        letterList=Location.letterMap.keys()
+        letterList=list(Location.letterMap.keys())
         index=self.__getIndex(letter)
+        
         if index==0:
             return Exception("nothing over here")
         return letterList[index-1]
 
     def __getNextLetter(self,letter):
-        letterList=Location.letterMap.keys()
+        letterList=list(Location.letterMap.keys())
         index=self.__getIndex(letter)
+        
         if index==7:
             return Exception("nothing over here")
         return letterList[index+1]
