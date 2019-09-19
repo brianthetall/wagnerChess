@@ -22,7 +22,16 @@ class Location(object):
         self.connections={"0":None,"1":None,"2":None,"3":None,"4":None,"5":None,"6":None,"7":None}
         self.root=root
 
+
+
+    def toString(self):
+        print(self.letter+str(self.index))
+        for c in list(self.connections.keys()):
+            if not self.connections[c]==None:
+                print(self.connections[c].get())
+
     def interconnect(self):
+        print("interconnect:",self.letter,self.index)
         b=self.root["board"].getBoard()
         if self.letter=="A":
 
@@ -40,10 +49,10 @@ class Location(object):
                 
             #Make connections:
             if self.index<7:
-                b["B,%d"%self.index].connect("0",self)
-                b["B,%d"%(self.index+1)].connect("1",self)
+                b["B,"+str(self.index)].connect("0",self)
+                b["B,"+str(self.index+1)].connect("1",self)
             else:
-                b["A,%d"%self.index].connect("0",self)
+                b["A,"+str(self.index)].connect("0",self)
 
 
         #you could totoally loop thgouth the apettrern in the iiddle
@@ -111,6 +120,10 @@ class Location(object):
                 b["G,7"].connect("4",self)
                 b["G,6"].connect("5",self)
 
+        #
+        print("Connections:",self.connections)
+        print(self.toString())
+
 
 
                 
@@ -119,7 +132,7 @@ class Location(object):
         
 
     def get(self):
-        return self.x,self.y
+        return str(self.letter+str(self.index))
 
 
     def __getIndex(self,letter):

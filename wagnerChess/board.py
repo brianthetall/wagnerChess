@@ -8,6 +8,8 @@ class Board(object):
 
     def __init__(self,args={}):
 
+        print("init Board")
+
         self.board={}#holds the locations; use getBoard(), not root pointer
         self.root={"players":[],
                    "board":self}
@@ -20,6 +22,9 @@ class Board(object):
             for n in numbers:
                 index="%s,%d" % (l,n)
                 self.board[index] = Location(l,n,self.root)
+
+
+        print(self.board["A,0"].toString())
 
 
         #the players can reference the Locations made above!
