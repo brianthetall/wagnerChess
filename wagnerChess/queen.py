@@ -10,3 +10,6 @@ class Queen(Piece):
         #how does this take into account the presence of other pieces
         #on the board?
         pass
+
+    def toString(self):
+        return "Q"

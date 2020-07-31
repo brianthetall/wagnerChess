@@ -9,3 +9,9 @@ class Rook(Piece):
 
     def listMoves(self):
         pass
+
+
+
+    def toString(self):
+        return "R"
+    

@@ -11,3 +11,7 @@ class King(Piece):
         #how does this take into account the presence of other pieces
         #on the board?
         pass
+
+
+    def toString(self):
+        return "K"

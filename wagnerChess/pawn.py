@@ -9,3 +9,8 @@ class Pawn(Piece):
 
     def listMoves(self):
         pass
+
+
+    def toString(self):
+        return "p"
+    

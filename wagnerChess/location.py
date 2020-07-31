@@ -25,11 +25,20 @@ class Location(object):
 
 
     def toString(self):
+
+        if empty:
+            print "_"
+        else:
+            #print the piece.toString()
+            
+        """
         print(self.letter+str(self.index))
         for c in list(self.connections.keys()):
             if not self.connections[c]==None:
                 print(self.connections[c].get())
+        """
 
+        
     def interconnect(self):
         print("interconnect:",self.letter,self.index)
         b=self.root["board"].getBoard()

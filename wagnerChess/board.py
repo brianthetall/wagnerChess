@@ -31,6 +31,14 @@ class Board(object):
         self.root["players"].append(Player("white",self.root))
         self.root["players"].append(Player("black",self.root))
 
+
+    #make something nice to see on the console
+    def toString(self):
+        b=self.getBoard()
+        #print the location.toStrings 8x8
+        
+
+        
     def linkLocations(self):
         #The locations are linked together to form the board
         #8-way max, links from a given piece

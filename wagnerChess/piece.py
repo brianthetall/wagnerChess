@@ -22,3 +22,8 @@ class Piece(object):
         #given current location, return list of legal locations
         #return Locations[]
         print ("this needs to be over written by subclass.")
+
+
+    @abstractmethod
+    def toString(self):
+        pass
