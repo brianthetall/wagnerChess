@@ -19,7 +19,9 @@ class Location(object):
         self.piece=None
         self.letter=letter
         self.index=index
-        self.connections={"0":None,"1":None,"2":None,"3":None,"4":None,"5":None,"6":None,"7":None}
+
+        #connections holds other Location pointers
+        self.connections={"n":None,"ne":None,"e":None,"se":None,"s":None,"sw":None,"w":None,"nw":None}
         self.root=root
 
 
@@ -41,27 +43,38 @@ class Location(object):
         
     def interconnect(self):
         print("interconnect:",self.letter,self.index)
-        b=self.root["board"].getBoard()
         if self.letter=="A":
 
             #A's dont have anything above
-            del(self.connections["0"])
-            del(self.connections["1"])
-            del(self.connections["7"])
+            del(self.connections["n"])
+            del(self.connections["nw"])
+            del(self.connections["w"])
             
             if self.index==7:#nothing right
-                del(self.connections["6"])
-                del(self.connections["5"])
+                del(self.connections["ne"])
+                del(self.connections["e"])
             elif self.index==0:#nothing left
-                del(self.connections["2"])
-                del(self.connections["3"])
+                del(self.connections["sw"])
+                del(self.connections["s"])
                 
             #Make connections:
-            if self.index<7:
-                b["B,"+str(self.index)].connect("0",self)
-                b["B,"+str(self.index+1)].connect("1",self)
+            if self.index==0:
+                self.connections["e"]=self.root["board"].getBoard()["B,"+str(self.index+1)]
+                self.connections["ne"]=self.root["board"].getBoard()["A,"+str(self.index+1)]
+                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index)]
+                
+            elif 0<self.index<7:
+                self.connections["sw"]=self.root["board"].getBoard()["A,"+str(self.index-1)]
+                self.connections["s"]=self.root["board"].getBoard()["B,"+str(self.index-1)]
+                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index)]
+                self.connections["e"]=self.root["board"].getBoard()["B,"+str(self.index+1)]
+                self.connections["ne"]=self.root["board"].getBoard()["A,"+str(self.index+1)]
+                
             else:
-                b["A,"+str(self.index)].connect("0",self)
+                self.connections["sw"]=self.root["board"].getBoard()["A,"+str(self.index-1)]
+                self.connections["s"]=self.root["board"].getBoard()["B,"+str(self.index-1)]
+                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index)]
+
 
 
         #you could totoally loop thgouth the apettrern in the iiddle
@@ -112,24 +125,39 @@ class Location(object):
 
         elif self.letter=="H":
 
-            del(self.connections["5"])
-            del(self.connections["6"])
-            del(self.connections["7"])
+            del(self.connections["s"])
+            del(self.connections["se"])
+            del(self.connections["e"])
 
             if self.index==0:
-                b["G,0"].connect("4",self)
-                b["G,1"].connect("3",self)
-
+                del(self.connections["sw"])
+                del(self.connections["w"])
+                
             elif self.index<7:
-                b["G,%d"%(self.index-1)].connect("5",self)
-                b["G,%d"%(self.index)].connect("4",self)
-                b["G,%d"%(self.index+1)].connect("3",self)
+                del(self.connections["ne"])
+                del(self.connections["n"])
 
+            #make connections:
+            #you are here
+            if self.index==0:
+                self.connections["e"]=self.root["board"].getBoard()["B,"+str(self.index+1)]
+                self.connections["ne"]=self.root["board"].getBoard()["A,"+str(self.index+1)]
+                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index)]
+                
+            elif 0<self.index<7:
+                self.connections["sw"]=self.root["board"].getBoard()["A,"+str(self.index-1)]
+                self.connections["s"]=self.root["board"].getBoard()["B,"+str(self.index-1)]
+                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index)]
+                self.connections["e"]=self.root["board"].getBoard()["B,"+str(self.index+1)]
+                self.connections["ne"]=self.root["board"].getBoard()["A,"+str(self.index+1)]
+                
             else:
-                b["G,7"].connect("4",self)
-                b["G,6"].connect("5",self)
+                self.connections["sw"]=self.root["board"].getBoard()["A,"+str(self.index-1)]
+                self.connections["s"]=self.root["board"].getBoard()["B,"+str(self.index-1)]
+                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index)]
 
-        #
+
+
         print("Connections:",self.connections)
         print(self.toString())
 

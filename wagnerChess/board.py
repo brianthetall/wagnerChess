@@ -46,6 +46,7 @@ class Board(object):
         for loc in self.board:
             self.board[loc].interconnect()
 
+            
     def getBoard(self):
         return self.board
     
