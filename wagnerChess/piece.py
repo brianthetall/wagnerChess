@@ -15,7 +15,7 @@ class Piece(object):
         self.root=root
         self.location=location
         self.piece=piece
-        print("init Piece",self.piece,sep=':')
+        print("init Piece",self.piece)
 
     @abstractmethod    
     def listMoves(self):
