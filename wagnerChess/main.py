@@ -14,7 +14,7 @@ while True:
     #check for valid move
     print move
     try:
-        b.movePiece(move)#execute update to board
+        b.movePiece(move,color="white")#execute update to board
     except Exception as e:
         print repr(e)
         
@@ -22,7 +22,7 @@ while True:
 
     move=raw_input("Black Move: ")
     try:
-        b.movePiece(move)#execute update to board
+        b.movePiece(move,color="black")#execute update to board
     except Exception as e:
         print repr(e)
 

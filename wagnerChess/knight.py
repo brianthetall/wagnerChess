@@ -2,9 +2,9 @@ from piece import Piece
 
 class Knight(Piece):
 
-    def __init__(self,location,root):
+    def __init__(self,location,root,color):
 
-        super(Knight,self).__init__(location,root,"knight")
+        super(Knight,self).__init__(location,root,"knight",color)
 
 
     def listMoves(self):

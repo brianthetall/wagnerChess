@@ -23,47 +23,40 @@ class Player(object):
 
         if self.color=='white':
 
-            self.root['pieces']=[King(location=board["H,1"],root=self.root),
-                                 Queen(location=board["G,0"],root=self.root),
-                                 Bishop(board["H,2"],root=self.root),
-                                 Bishop(board["F,0"],root=self.root),
-                                 Knight(board["H,3"],root=self.root),
-                                 Knight(board["E,0"],root=self.root),
-                                 Rook(board["H,4"],root=self.root),
-                                 Rook(board["D,0"],root=self.root),
+            self.root['pieces']=[King(location=board["H,1"],root=self.root,color=self.color),
+                                 Queen(location=board["G,0"],root=self.root,color=self.color),
+                                 Bishop(board["H,2"],root=self.root,color=self.color),
+                                 Bishop(board["F,0"],root=self.root,color=self.color),
+                                 Knight(board["H,3"],root=self.root,color=self.color),
+                                 Knight(board["E,0"],root=self.root,color=self.color),
+                                 Rook(board["H,4"],root=self.root,color=self.color),
+                                 Rook(board["D,0"],root=self.root,color=self.color),
                                  
-                                 Pawn(board["H,0"],root=self.root),
-                                 Pawn(board["F,1"],root=self.root),
-                                 Pawn(board["G,2"],root=self.root),
-                                 Pawn(board["E,3"],root=self.root),
-                                 Pawn(board["F,2"],root=self.root),
-                                 Pawn(board["G,3"],root=self.root),
-                                 Pawn(board["G,1"],root=self.root),
-                                 Pawn(board["E,1"],root=self.root)
+                                 Pawn(board["H,0"],root=self.root,color=self.color),
+                                 Pawn(board["F,1"],root=self.root,color=self.color),
+                                 Pawn(board["G,2"],root=self.root,color=self.color),
+                                 Pawn(board["E,3"],root=self.root,color=self.color),
+                                 Pawn(board["F,2"],root=self.root,color=self.color),
+                                 Pawn(board["G,3"],root=self.root,color=self.color),
+                                 Pawn(board["G,1"],root=self.root,color=self.color),
+                                 Pawn(board["E,1"],root=self.root,color=self.color)
             ]
         else:
-            self.root['pieces']=[King(location=board["B,7"],root=self.root),
-                                 Queen(location=board["A,6"],root=self.root),
-                                 Bishop(board["A,5"],root=self.root),
-                                 Bishop(board["C,7"],root=self.root),
-                                 Knight(board["A,4"],root=self.root),
-                                 Knight(board["D,7"],root=self.root),
-                                 Rook(board["A,3"],root=self.root),
-                                 Rook(board["E,7"],root=self.root),
+            self.root['pieces']=[King(location=board["B,7"],root=self.root,color=self.color),
+                                 Queen(location=board["A,6"],root=self.root,color=self.color),
+                                 Bishop(board["A,5"],root=self.root,color=self.color),
+                                 Bishop(board["C,7"],root=self.root,color=self.color),
+                                 Knight(board["A,4"],root=self.root,color=self.color),
+                                 Knight(board["D,7"],root=self.root,color=self.color),
+                                 Rook(board["A,3"],root=self.root,color=self.color),
+                                 Rook(board["E,7"],root=self.root,color=self.color),
                                  
-                                 Pawn(board["A,7"],root=self.root),
-                                 Pawn(board["C,6"],root=self.root),
-                                 Pawn(board["B,5"],root=self.root),
-                                 Pawn(board["B,4"],root=self.root),
-                                 Pawn(board["C,5"],root=self.root),
-                                 Pawn(board["D,4"],root=self.root),
-                                 Pawn(board["B,6"],root=self.root),
-                                 Pawn(board["D,6"],root=self.root)
+                                 Pawn(board["A,7"],root=self.root,color=self.color),
+                                 Pawn(board["C,6"],root=self.root,color=self.color),
+                                 Pawn(board["B,5"],root=self.root,color=self.color),
+                                 Pawn(board["B,4"],root=self.root,color=self.color),
+                                 Pawn(board["C,5"],root=self.root,color=self.color),
+                                 Pawn(board["D,4"],root=self.root,color=self.color),
+                                 Pawn(board["B,6"],root=self.root,color=self.color),
+                                 Pawn(board["D,6"],root=self.root,color=self.color)
             ]
-    def killPiece(self):
-        #remove This from self.pieces
-        pass
-
-    def move(self):
-        pass
-

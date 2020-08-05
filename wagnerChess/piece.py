@@ -7,7 +7,7 @@ class Piece(object):
 
     #location "B,3", for example
     #root: Player's root datastruct in RAM
-    def __init__(self,location,root,piece):
+    def __init__(self,location,root,piece,color):
 
         if piece not in Piece.pieces:
             raise Exception("invalid piece passed:",str(piece))
@@ -15,8 +15,12 @@ class Piece(object):
         self.root=root
         self.location=location
         self.piece=piece
+        self.color=color
         self.location.setPiece(self)
 
+    def getColor(self):
+        return self.color
+        
     def changeLocation(self,newLoc):
         self.location=newLoc#update location pointer
         newLoc.setPiece(self)#update the Location's piece pointer

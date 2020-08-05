@@ -53,7 +53,7 @@ class Board(object):
                     
         return retval
 
-    def movePiece(self,move):#move is in form: "E1,D0"
+    def movePiece(self,move,color):#move is in form: "E1,D0"
         strings=move.split(",")
         currentLocString=strings[0]
         newLocString=strings[1]
@@ -68,6 +68,8 @@ class Board(object):
         piece=currentLoc.getPiece()
         if piece==None:
             raise Exception("No piece at that location!")
+        elif piece.getColor() != color:
+            raise Exception("Not your piece to move!")
         else:
             piece.changeLocation(newLoc)
             currentLoc.setPiece(None)

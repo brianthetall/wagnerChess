@@ -2,9 +2,9 @@ from piece import Piece
 
 class Queen(Piece):
 
-    def __init__(self,location,root):
+    def __init__(self,location,root,color):
 
-        super(Queen,self).__init__(location,root,"queen")
+        super(Queen,self).__init__(location,root,"queen",color)
 
     def listMoves(self):
         #how does this take into account the presence of other pieces

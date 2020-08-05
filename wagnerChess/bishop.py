@@ -2,9 +2,9 @@ from piece import Piece
 
 class Bishop(Piece):
     
-    def __init__(self,location,root):
+    def __init__(self,location,root,color):
 
-        super(Bishop,self).__init__(location,root,"bishop")
+        super(Bishop,self).__init__(location,root,"bishop",color)
 
 
         
