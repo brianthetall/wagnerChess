@@ -1,5 +1,5 @@
 from board import Board
-
+from notYourPieceException import NotYourPieceException
 
 #main has board
 #board has players && Locations
@@ -10,23 +10,36 @@ b.linkLocations()
 print(b.toString())
 
 while True:
-    move=input("White Move: ")#location,location
-    #check for valid move
-    print(move)
-    try:
-        b.movePiece(move,color="white")#execute update to board
-    except Exception as e:
-        print( repr(e))
 
-        #create an NotYourPieceException
-        #then re-ask for move!
+    while True:
+        try:
+            move=input("White Move: ")#location,location
+            #check for valid move
+            b.movePiece(move,color="white")#execute update to board
+            print(b.toString())
+            break
+
+        except NotYourPieceException as e:
+            print(repr(e))
+            continue
         
-    print(b.toString())
+        except Exception as e:
+            print( repr(e))
+                        
+        
 
-    move=input("Black Move: ")
-    try:
-        b.movePiece(move,color="black")#execute update to board
-    except Exception as e:
-        print (repr(e))
+    while True:
+        try:
+            move=input("Black Move: ")
+            b.movePiece(move,color="black")#execute update to board
+            print(b.toString())
+            break
 
-    print(b.toString())
+        except NotYourPieceException as e:
+            print(repr(e))
+            continue
+        
+        except Exception as e:
+            print (repr(e))
+
+        
