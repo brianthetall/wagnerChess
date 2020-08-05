@@ -41,6 +41,8 @@ class Board(object):
                 if i==7:
                     retval+="\n"
 
+
+        retval+="\n"
         #print just the locations
         for loc in Location.letterMap:
             for i in range(0,len(Location.letterMap["A"])):

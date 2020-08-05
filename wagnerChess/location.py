@@ -1,19 +1,21 @@
+import collections
+
 #when the Board is told to move a piece, it checks the logic of the request, THEN
 #Updates the Piece-poiter inside the changing Locations.
 
 class Location(object):
 
+    letterMap=collections.OrderedDict()
+    letterMap["A"]=[0,1,2,3,4,5,6,7]
+    letterMap["B"]=[0,1,2,3,4,5,6,7]
+    letterMap["C"]=[0,1,2,3,4,5,6,7]
+    letterMap["D"]=[0,1,2,3,4,5,6,7]
+    letterMap["E"]=[0,1,2,3,4,5,6,7]
+    letterMap["F"]=[0,1,2,3,4,5,6,7]
+    letterMap["G"]=[0,1,2,3,4,5,6,7]
+    letterMap["H"]=[0,1,2,3,4,5,6,7]
 
-    letterMap={"A":[0,1,2,3,4,5,6,7],
-               "B":[0,1,2,3,4,5,6,7],
-               "C":[0,1,2,3,4,5,6,7],
-               "D":[0,1,2,3,4,5,6,7],
-               "E":[0,1,2,3,4,5,6,7],
-               "F":[0,1,2,3,4,5,6,7],
-               "G":[0,1,2,3,4,5,6,7],
-               "H":[0,1,2,3,4,5,6,7]
-    }
-
+    
     #pass the Location something valid in the letterMap above
     def __init__(self,letter,index,root):
         self.piece=None
