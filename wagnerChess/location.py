@@ -34,6 +34,9 @@ class Location(object):
     def setPiece(self,piece):
         self.piece=piece
 
+    def getPiece(self):
+        return self.piece
+
     def toString(self):
 
         if self.piece==None:

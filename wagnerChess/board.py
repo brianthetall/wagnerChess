@@ -34,11 +34,20 @@ class Board(object):
         #b=self.getBoard()
 
         retval=""
+        #print locations and pieces
         for loc in Location.letterMap:
             for i in range(0,len(Location.letterMap["A"])):
                 retval+=" "+self.board[loc+","+str(i)].toString()
                 if i==7:
                     retval+="\n"
+
+        #print just the locations
+        for loc in Location.letterMap:
+            for i in range(0,len(Location.letterMap["A"])):
+                retval+=" "+loc+str(i)
+                if i==7:
+                    retval+="\n"
+
                     
         return retval
 
@@ -52,6 +61,15 @@ class Board(object):
         newLoc=self.board[newLocString[0]+","+newLocString[1]]
         print "Current Location: "+currentLoc.toString()
         print "New Location: "+newLoc.toString()
+
+        #is there a piece @ currentLoc?
+        piece=currentLoc.getPiece()
+        if piece==None:
+            raise Exception("No piece at that location!")
+        else:
+            piece.changeLocation(newLoc)
+            currentLoc.setPiece(None)
+            
         
     
         

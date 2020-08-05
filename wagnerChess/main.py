@@ -13,9 +13,17 @@ while True:
     move=raw_input("White Move: ")#location,location
     #check for valid move
     print move
-    b.movePiece(move)#execute update to board
+    try:
+        b.movePiece(move)#execute update to board
+    except Exception as e:
+        print repr(e)
+        
     print b.toString()
 
     move=raw_input("Black Move: ")
-    b.movePiece(move)#execute update to board
+    try:
+        b.movePiece(move)#execute update to board
+    except Exception as e:
+        print repr(e)
+
     print b.toString()

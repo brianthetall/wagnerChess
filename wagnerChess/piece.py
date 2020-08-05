@@ -17,6 +17,10 @@ class Piece(object):
         self.piece=piece
         self.location.setPiece(self)
 
+    def changeLocation(self,newLoc):
+        self.location=newLoc#update location pointer
+        newLoc.setPiece(self)#update the Location's piece pointer
+        
     @abstractmethod    
     def listMoves(self):
         #given current location, return list of legal locations
