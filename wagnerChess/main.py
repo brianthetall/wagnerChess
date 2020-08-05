@@ -7,7 +7,4 @@ from board import Board
 
 b=Board(args={})
 b.linkLocations()
-
-
-#white=Player("white")
-#black=Player("black")
+print b.toString()

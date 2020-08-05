@@ -21,23 +21,29 @@ class Location(object):
         self.index=index
 
         #connections holds other Location pointers
-        self.connections={"n":None,"ne":None,"e":None,"se":None,"s":None,"sw":None,"w":None,"nw":None}
+        self.connections={"n":None,
+                          "ne":None,
+                          "e":None,
+                          "se":None,
+                          "s":None,
+                          "sw":None,
+                          "w":None,
+                          "nw":None}
         self.root=root
 
-
+    def setPiece(self,piece):
+        self.piece=piece
 
     def toString(self):
-        print "TODO"
-        #"""
-        #print(self.letter+str(self.index))
-        #for c in list(self.connections.keys()):
-        #    if not self.connections[c]==None:
-        #        print(self.connections[c].get())
-        #"""
 
+        if self.piece==None:
+            return self.letter+str(self.index)
+        else:
+            return self.piece.toString()
+        
         
     def interconnect(self):
-        print("interconnect:",self.letter,self.index)
+        #print("interconnect:",self.letter,self.index)
         if self.letter=="A":
 
             #A's dont have anything above
@@ -145,10 +151,6 @@ class Location(object):
                 self.connections["w"]=self.root["board"].getBoard()["G,"+str(self.index-1)]
                 self.connections["sw"]=self.root["board"].getBoard()["H,"+str(self.index-1)]
 
-
-
-        print("Connections:",self.connections)
-        print(self.toString())
 
 
 

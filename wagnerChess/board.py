@@ -24,9 +24,6 @@ class Board(object):
                 self.board[index] = Location(l,n,self.root)
 
 
-        print(self.board["A,0"].toString())
-
-
         #the players can reference the Locations made above!
         self.root["players"].append(Player("white",self.root))
         self.root["players"].append(Player("black",self.root))
@@ -34,9 +31,16 @@ class Board(object):
 
     #make something nice to see on the console
     def toString(self):
-        b=self.getBoard()
-        #print the location.toStrings 8x8
-        
+        #b=self.getBoard()
+
+        retval=""
+        for loc in Location.letterMap:
+            for i in range(0,len(Location.letterMap["A"])):
+                retval+=" "+self.board[loc+","+str(i)].toString()
+                if i==7:
+                    retval+="\n"
+                    
+        return retval
 
         
     def linkLocations(self):
