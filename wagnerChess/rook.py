@@ -5,18 +5,6 @@ class Rook(Piece):
     def __init__(self,location,root,color):
 
         super(Rook,self).__init__(location,root,"rook",color)
-
-    #return either None, or location parameter back to caller
-    def checkNextLocation(self,location):
-        if location==None:
-            return None
-        elif location.getPiece()==None:
-            return location
-        else:
-            if location.getPiece().getColor()==self.color:
-                return None
-            else:
-                return location
         
 
     #return a list of valid Locations

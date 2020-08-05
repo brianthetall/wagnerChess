@@ -24,6 +24,19 @@ class Piece(object):
     def changeLocation(self,newLoc):
         self.location=newLoc#update location pointer
         newLoc.setPiece(self)#update the Location's piece pointer
+
+    #return either None, or location parameter back to caller
+    def checkNextLocation(self,location):
+        if location==None:
+            return None
+        elif location.getPiece()==None:
+            return location
+        else:
+            if location.getPiece().getColor()==self.color:
+                return None
+            else:
+                return location
+        
         
     @abstractmethod    
     def listMoves(self):

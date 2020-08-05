@@ -9,7 +9,61 @@ class Bishop(Piece):
 
         
     def listMoves(self):
-        pass
+        validMoves=[]
+
+        #look NE,NW,SW,SE
+        tempLoc=self.location
+        while True:
+            #NorthEast:
+            nextLoc=tempLoc.getNorthEast()
+            if nextLoc==None:
+                break
+            tempLoc=self.checkNextLocation(nextLoc)
+            if tempLoc==None:
+                break
+            else:
+                validMoves.append(tempLoc)
+
+        tempLoc=self.location
+        while True:
+            #NorthWest:
+            nextLoc=tempLoc.getNorthWest()
+            if nextLoc==None:
+                break
+            tempLoc=self.checkNextLocation(nextLoc)
+            if tempLoc==None:
+                break
+            else:
+                validMoves.append(tempLoc)
+
+
+        tempLoc=self.location
+        while True:
+            #SouthWest:
+            nextLoc=tempLoc.getSouthWest()
+            if nextLoc==None:
+                break
+            tempLoc=self.checkNextLocation(nextLoc)
+            if tempLoc==None:
+                break
+            else:
+                validMoves.append(tempLoc)
+
+
+        tempLoc=self.location
+        while True:
+            #SouthEast:
+            nextLoc=tempLoc.getSouthEast()
+            if nextLoc==None:
+                break
+            tempLoc=self.checkNextLocation(nextLoc)
+            if tempLoc==None:
+                break
+            else:
+                validMoves.append(tempLoc)
+                                
+        return validMoves
+
 
 
     def toString(self):
