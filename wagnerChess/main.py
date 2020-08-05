@@ -7,23 +7,26 @@ from board import Board
 
 b=Board(args={})
 b.linkLocations()
-print b.toString()
+print(b.toString())
 
 while True:
-    move=raw_input("White Move: ")#location,location
+    move=input("White Move: ")#location,location
     #check for valid move
-    print move
+    print(move)
     try:
         b.movePiece(move,color="white")#execute update to board
     except Exception as e:
-        print repr(e)
-        
-    print b.toString()
+        print( repr(e))
 
-    move=raw_input("Black Move: ")
+        #create an NotYourPieceException
+        #then re-ask for move!
+        
+    print(b.toString())
+
+    move=input("Black Move: ")
     try:
         b.movePiece(move,color="black")#execute update to board
     except Exception as e:
-        print repr(e)
+        print (repr(e))
 
-    print b.toString()
+    print(b.toString())

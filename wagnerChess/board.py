@@ -1,3 +1,4 @@
+from notYourPieceException import NotYourPieceException
 from player import Player
 from piece import Piece
 from location import Location
@@ -61,15 +62,15 @@ class Board(object):
         #put a comma in the String, then pull the Loc from self.board
         currentLoc=self.board[currentLocString[0]+","+currentLocString[1]]
         newLoc=self.board[newLocString[0]+","+newLocString[1]]
-        print "Current Location: "+currentLoc.toString()
-        print "New Location: "+newLoc.toString()
+        print( "Current Location: "+currentLoc.toString())
+        print( "New Location: "+newLoc.toString())
 
         #is there a piece @ currentLoc?
         piece=currentLoc.getPiece()
         if piece==None:
             raise Exception("No piece at that location!")
         elif piece.getColor() != color:
-            raise Exception("Not your piece to move!")
+            raise NotYourPieceException()
         else:
             piece.changeLocation(newLoc)
             currentLoc.setPiece(None)
