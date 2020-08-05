@@ -33,6 +33,63 @@ class Location(object):
                           "nw":None}
         self.root=root
 
+    def getNorth(self):
+        try:
+            retval=self.connections["n"]
+        except Exception as e:
+            return None
+        return retval
+    
+    def getNorthWest(self):
+        try:
+            retval=self.connections["nw"]
+        except Exception as e:
+            return None
+        return retval
+
+    def getWest(self):
+        try:
+            retval=self.connections["w"]
+        except Exception as e:
+            return None
+        return retval
+
+    def getSouthWest(self):
+        try:
+            retval=self.connections["sw"]
+        except Exception as e:
+            return None
+        return retval
+
+    def getSouth(self):
+        try:
+            retval=self.connections["s"]
+        except Exception as e:
+            return None
+        return retval
+
+    def getSouthEast(self):
+        try:
+            retval=self.connections["se"]
+        except Exception as e:
+            return None
+        return retval
+
+    def getEast(self):
+        try:
+            retval=self.connections["e"]
+        except Exception as e:
+            return None
+        return retval
+
+    def getNorthEast(self):
+        try:
+            retval=self.connections["ne"]
+        except Exception as e:
+            return None
+        return retval
+
+        
     def setPiece(self,piece):
         self.piece=piece
 
@@ -52,38 +109,38 @@ class Location(object):
         if self.letter=="A":
 
             #A's dont have anything above
-            del(self.connections["n"])
             del(self.connections["nw"])
-            del(self.connections["w"])
+            del(self.connections["n"])
+            del(self.connections["ne"])
             
             if self.index==7:#nothing right
-                del(self.connections["ne"])
                 del(self.connections["e"])
+                del(self.connections["se"])
             elif self.index==0:#nothing left
+                del(self.connections["w"])
                 del(self.connections["sw"])
-                del(self.connections["s"])
                 
             #Make connections:
             if self.index==0:
-                self.connections["e"]=self.root["board"].getBoard()["B,"+str(self.index+1)]
-                self.connections["ne"]=self.root["board"].getBoard()["A,"+str(self.index+1)]
-                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index)]
+                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index+1)]
+                self.connections["e"]=self.root["board"].getBoard()["A,"+str(self.index+1)]
+                self.connections["s"]=self.root["board"].getBoard()["B,"+str(self.index)]
                 
             elif 0<self.index<7:
-                self.connections["sw"]=self.root["board"].getBoard()["A,"+str(self.index-1)]
-                self.connections["s"]=self.root["board"].getBoard()["B,"+str(self.index-1)]
-                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index)]
-                self.connections["e"]=self.root["board"].getBoard()["B,"+str(self.index+1)]
-                self.connections["ne"]=self.root["board"].getBoard()["A,"+str(self.index+1)]
+                self.connections["w"]=self.root["board"].getBoard()["A,"+str(self.index-1)]
+                self.connections["sw"]=self.root["board"].getBoard()["B,"+str(self.index-1)]
+                self.connections["s"]=self.root["board"].getBoard()["B,"+str(self.index)]
+                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index+1)]
+                self.connections["e"]=self.root["board"].getBoard()["A,"+str(self.index+1)]
                 
             else:
-                self.connections["sw"]=self.root["board"].getBoard()["A,"+str(self.index-1)]
-                self.connections["s"]=self.root["board"].getBoard()["B,"+str(self.index-1)]
-                self.connections["se"]=self.root["board"].getBoard()["B,"+str(self.index)]
+                self.connections["w"]=self.root["board"].getBoard()["A,"+str(self.index-1)]
+                self.connections["sw"]=self.root["board"].getBoard()["B,"+str(self.index-1)]
+                self.connections["s"]=self.root["board"].getBoard()["B,"+str(self.index)]
 
 
 
-        #you could totoally loop thgouth the apettrern in the iiddle
+        #you could totally loop through the pattern in the middle
         elif self.letter!="H":
 
 
@@ -91,70 +148,70 @@ class Location(object):
             nextL=self.__getNextLetter(self.letter)
             
             if self.index==7:#nothing right
-                del(self.connections["n"])
                 del(self.connections["ne"])
                 del(self.connections["e"])
+                del(self.connections["se"])
             elif self.index==0:#nothing left
+                del(self.connections["nw"])
                 del(self.connections["w"])
                 del(self.connections["sw"])
-                del(self.connections["s"])
                 
             #Make connections for middle of board:
             if self.index==0:
-                self.connections["n"]=self.root["board"].getBoard()[prevL+","+str(self.index+1)]
-                self.connections["nw"]=self.root["board"].getBoard()[prevL+","+str(self.index)]
-                self.connections["se"]=self.root["board"].getBoard()[nextL+","+str(self.index)]
-                self.connections["e"]=self.root["board"].getBoard()[nextL+","+str(self.index+1)]
-                self.connections["ne"]=self.root["board"].getBoard()[self.letter+","+str(self.index+1)]
+                self.connections["n"]=self.root["board"].getBoard()[prevL+","+str(self.index)]
+                self.connections["s"]=self.root["board"].getBoard()[nextL+","+str(self.index)]
+                self.connections["se"]=self.root["board"].getBoard()[nextL+","+str(self.index+1)]
+                self.connections["e"]=self.root["board"].getBoard()[self.letter+","+str(self.index+1)]
+                self.connections["ne"]=self.root["board"].getBoard()[prevL+","+str(self.index+1)]
                 
             elif 0<self.index<7:
-                self.connections["n"]=self.root["board"].getBoard()[prevL+","+str(self.index+1)]
-                self.connections["nw"]=self.root["board"].getBoard()[prevL+","+str(self.index)]
-                self.connections["w"]=self.root["board"].getBoard()[prevL+","+str(self.index-1)]
-                self.connections["sw"]=self.root["board"].getBoard()[self.letter+","+str(self.index-1)]
-                self.connections["s"]=self.root["board"].getBoard()[nextL+","+str(self.index-1)]
-                self.connections["se"]=self.root["board"].getBoard()[nextL+","+str(self.index)]
-                self.connections["e"]=self.root["board"].getBoard()[nextL+","+str(self.index+1)]
-                self.connections["ne"]=self.root["board"].getBoard()[self.letter+","+str(self.index+1)]
+                self.connections["n"]=self.root["board"].getBoard()[prevL+","+str(self.index)]
+                self.connections["nw"]=self.root["board"].getBoard()[prevL+","+str(self.index-1)]
+                self.connections["w"]=self.root["board"].getBoard()[self.letter+","+str(self.index-1)]
+                self.connections["sw"]=self.root["board"].getBoard()[nextL+","+str(self.index-1)]
+                self.connections["s"]=self.root["board"].getBoard()[nextL+","+str(self.index)]
+                self.connections["se"]=self.root["board"].getBoard()[nextL+","+str(self.index+1)]
+                self.connections["e"]=self.root["board"].getBoard()[self.letter+","+str(self.index+1)]
+                self.connections["ne"]=self.root["board"].getBoard()[prevL+","+str(self.index+1)]
                 
             else:
-                self.connections["nw"]=self.root["board"].getBoard()[prevL+","+str(self.index)]
-                self.connections["w"]=self.root["board"].getBoard()[prevL+","+str(self.index-1)]
-                self.connections["sw"]=self.root["board"].getBoard()[self.letter+","+str(self.index-1)]
-                self.connections["s"]=self.root["board"].getBoard()[nextL+","+str(self.index-1)]
-                self.connections["se"]=self.root["board"].getBoard()[nextL+","+str(self.index)]
+                self.connections["n"]=self.root["board"].getBoard()[prevL+","+str(self.index)]
+                self.connections["nw"]=self.root["board"].getBoard()[prevL+","+str(self.index-1)]
+                self.connections["w"]=self.root["board"].getBoard()[self.letter+","+str(self.index-1)]
+                self.connections["sw"]=self.root["board"].getBoard()[nextL+","+str(self.index-1)]
+                self.connections["s"]=self.root["board"].getBoard()[nextL+","+str(self.index)]
                 
         elif self.letter=="H":
 
             del(self.connections["s"])
             del(self.connections["se"])
-            del(self.connections["e"])
+            del(self.connections["sw"])
 
             if self.index==0:
-                del(self.connections["sw"])
                 del(self.connections["w"])
+                del(self.connections["nw"])
                 
             elif self.index<7:
+                del(self.connections["e"])
                 del(self.connections["ne"])
-                del(self.connections["n"])
 
             #make connections:
             if self.index==0:
-                self.connections["nw"]=self.root["board"].getBoard()["G,"+str(self.index)]
-                self.connections["n"]=self.root["board"].getBoard()["G,"+str(self.index+1)]
-                self.connections["ne"]=self.root["board"].getBoard()["H,"+str(self.index+1)]
+                self.connections["n"]=self.root["board"].getBoard()["G,"+str(self.index)]
+                self.connections["ne"]=self.root["board"].getBoard()["G,"+str(self.index+1)]
+                self.connections["e"]=self.root["board"].getBoard()["H,"+str(self.index+1)]
                 
             elif 0<self.index<7:
-                self.connections["sw"]=self.root["board"].getBoard()["H,"+str(self.index-1)]
-                self.connections["w"]=self.root["board"].getBoard()["G,"+str(self.index-1)]
-                self.connections["nw"]=self.root["board"].getBoard()["G,"+str(self.index)]
-                self.connections["n"]=self.root["board"].getBoard()["G,"+str(self.index+1)]
-                self.connections["ne"]=self.root["board"].getBoard()["H,"+str(self.index+1)]
+                self.connections["w"]=self.root["board"].getBoard()["H,"+str(self.index-1)]
+                self.connections["nw"]=self.root["board"].getBoard()["G,"+str(self.index-1)]
+                self.connections["n"]=self.root["board"].getBoard()["G,"+str(self.index)]
+                self.connections["ne"]=self.root["board"].getBoard()["G,"+str(self.index+1)]
+                self.connections["e"]=self.root["board"].getBoard()["H,"+str(self.index+1)]
                 
             else:
-                self.connections["nw"]=self.root["board"].getBoard()["G,"+str(self.index)]
-                self.connections["w"]=self.root["board"].getBoard()["G,"+str(self.index-1)]
-                self.connections["sw"]=self.root["board"].getBoard()["H,"+str(self.index-1)]
+                self.connections["n"]=self.root["board"].getBoard()["G,"+str(self.index)]
+                self.connections["nw"]=self.root["board"].getBoard()["G,"+str(self.index-1)]
+                self.connections["w"]=self.root["board"].getBoard()["H,"+str(self.index-1)]
 
 
 

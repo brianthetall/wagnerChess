@@ -6,10 +6,76 @@ class Rook(Piece):
 
         super(Rook,self).__init__(location,root,"rook",color)
 
+    #return either None, or location parameter back to caller
+    def checkNextLocation(self,location):
+        if location==None:
+            return None
+        elif location.getPiece()==None:
+            return location
+        else:
+            if location.getPiece().getColor()==self.color:
+                return None
+            else:
+                return location
+        
 
     #return a list of valid Locations
     def listMoves(self):
-        return []
+        validMoves=[]
+        #look North,East,South,West
+        #if a piece exists on location of Different color, include the Location & stop traversing the direction
+
+        tempLoc=self.location
+        while True:
+            #North:
+            nextLoc=tempLoc.getNorth()
+            if nextLoc==None:
+                break
+            tempLoc=self.checkNextLocation(nextLoc)
+            if tempLoc==None:
+                break
+            else:
+                validMoves.append(tempLoc)
+
+        tempLoc=self.location
+        while True:
+            #West:
+            nextLoc=tempLoc.getWest()
+            if nextLoc==None:
+                break
+            tempLoc=self.checkNextLocation(nextLoc)
+            if tempLoc==None:
+                break
+            else:
+                validMoves.append(tempLoc)
+
+
+        tempLoc=self.location
+        while True:
+            #South:
+            nextLoc=tempLoc.getSouth()
+            if nextLoc==None:
+                break
+            tempLoc=self.checkNextLocation(nextLoc)
+            if tempLoc==None:
+                break
+            else:
+                validMoves.append(tempLoc)
+
+
+        tempLoc=self.location
+        while True:
+            #East:
+            nextLoc=tempLoc.getEast()
+            if nextLoc==None:
+                break
+            tempLoc=self.checkNextLocation(nextLoc)
+            if tempLoc==None:
+                break
+            else:
+                validMoves.append(tempLoc)
+                                
+        return validMoves
 
 
 
