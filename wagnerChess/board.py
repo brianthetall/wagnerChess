@@ -1,4 +1,5 @@
 from notYourPieceException import NotYourPieceException
+from illegalMoveException import IllegalMoveException
 from player import Player
 from piece import Piece
 from location import Location
@@ -62,7 +63,7 @@ class Board(object):
         #put a comma in the String, then pull the Loc from self.board
         currentLoc=self.board[currentLocString[0]+","+currentLocString[1]]
         newLoc=self.board[newLocString[0]+","+newLocString[1]]
-        print( "Current Location: "+currentLoc.toString())
+        print( "Piece: "+currentLoc.toString())
         print( "New Location: "+newLoc.toString())
 
         #is there a piece @ currentLoc?
@@ -72,6 +73,10 @@ class Board(object):
         elif piece.getColor() != color:
             raise NotYourPieceException()
         else:
+            validLocations=piece.listMoves()#check if move is legal
+            if newLoc not in validLocations:
+                raise IllegalMoveException()
+            
             piece.changeLocation(newLoc)
             currentLoc.setPiece(None)
             

@@ -7,8 +7,9 @@ class Rook(Piece):
         super(Rook,self).__init__(location,root,"rook",color)
 
 
+    #return a list of valid Locations
     def listMoves(self):
-        pass
+        return []
 
 
 
