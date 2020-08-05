@@ -191,9 +191,6 @@ class Location(object):
     def getNumber(self):
         return number
 
-    def placePiece(self,piece):
-        self.piece=piece
-
     def clearPiece(self):
         self.piece=None
 

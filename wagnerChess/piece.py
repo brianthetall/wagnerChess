@@ -15,7 +15,6 @@ class Piece(object):
         self.root=root
         self.location=location
         self.piece=piece
-        print("init Piece",self.piece,"@",location.toString())
         self.location.setPiece(self)
 
     @abstractmethod    

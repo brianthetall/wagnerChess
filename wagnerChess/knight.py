@@ -13,5 +13,4 @@ class Knight(Piece):
 
 
     def toString(self):
-        return "N"
-    
+        return "N "

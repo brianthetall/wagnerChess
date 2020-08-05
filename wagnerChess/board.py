@@ -42,6 +42,18 @@ class Board(object):
                     
         return retval
 
+    def movePiece(self,move):#move is in form: "E1,D0"
+        strings=move.split(",")
+        currentLocString=strings[0]
+        newLocString=strings[1]
+        
+        #put a comma in the String, then pull the Loc from self.board
+        currentLoc=self.board[currentLocString[0]+","+currentLocString[1]]
+        newLoc=self.board[newLocString[0]+","+newLocString[1]]
+        print "Current Location: "+currentLoc.toString()
+        print "New Location: "+newLoc.toString()
+        
+    
         
     def linkLocations(self):
         #The locations are linked together to form the board
@@ -55,9 +67,6 @@ class Board(object):
         return self.board
     
             
-    def assignPiece(self,piece,location):
-        location.placePiece()
-
     #updates the threat list for each piece
     #then loops through all parts to see which pose a threat to <piece>
     #return list of Piece objects currently threatending <piece>

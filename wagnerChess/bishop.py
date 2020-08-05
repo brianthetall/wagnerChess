@@ -13,5 +13,4 @@ class Bishop(Piece):
 
 
     def toString(self):
-        return "B"
-    
+        return "B "

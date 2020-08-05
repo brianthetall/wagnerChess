@@ -13,5 +13,4 @@ class Rook(Piece):
 
 
     def toString(self):
-        return "R"
-    
+        return "R "

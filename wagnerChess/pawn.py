@@ -12,5 +12,4 @@ class Pawn(Piece):
 
 
     def toString(self):
-        return "p"
-    
+        return "p "

@@ -12,4 +12,4 @@ class Queen(Piece):
         pass
 
     def toString(self):
-        return "Q"
+        return "Q "
