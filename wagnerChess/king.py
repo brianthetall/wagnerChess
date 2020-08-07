@@ -8,9 +8,23 @@ class King(Piece):
         pass
 
     def listMoves(self):
-        #how does this take into account the presence of other pieces
-        #on the board?
-        pass
+        validMoves=[]
+        loc=self.checkNextLocation(self.location.getNorth())
+        if loc!=None:
+            validMoves.append(loc)
+        loc=self.checkNextLocation(self.location.getWest())
+        if loc!=None:
+            validMoves.append(loc)
+        loc=self.checkNextLocation(self.location.getSouth())
+        if loc!=None:
+            validMoves.append(loc)
+        loc=self.checkNextLocation(self.location.getEast())
+        if loc!=None:
+            validMoves.append(loc)            
+            
+        for move in validMoves:
+            print("Legal Moves:"+move.toString())
+        return validMoves
 
 
     def toString(self):
