@@ -61,7 +61,11 @@ class Bishop(Piece):
                 break
             else:
                 validMoves.append(tempLoc)
-                                
+
+                
+        for move in validMoves:
+            print("Legal Move: "+move.toString())
+
         return validMoves
 
 

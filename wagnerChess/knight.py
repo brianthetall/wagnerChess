@@ -78,7 +78,7 @@ class Knight(Piece):
             pass
         
         for move in validMoves:
-            print("Legal Moves:"+move.toString())
+            print("Legal Move:"+move.toString())
         return validMoves
 
 
