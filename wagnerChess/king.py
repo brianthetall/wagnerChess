@@ -42,4 +42,4 @@ class King(Piece):
 
 
     def toString(self):
-        return "K "
+        return "\u0332K\u0332 |"

@@ -117,4 +117,4 @@ class Queen(Piece):
 
         
     def toString(self):
-        return "Q "
+        return "\u0332Q\u0332 \u0332|"

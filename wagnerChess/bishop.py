@@ -71,4 +71,4 @@ class Bishop(Piece):
 
 
     def toString(self):
-        return "B "
+        return "\u0332B\u0332 \u0332|"

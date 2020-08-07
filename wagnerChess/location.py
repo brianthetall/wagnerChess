@@ -99,7 +99,7 @@ class Location(object):
     def toString(self):
 
         if self.piece==None:
-            return self.letter+str(self.index)
+            return "\u0332"+self.letter+"\u0332"+str(self.index)+"\u0332|"
         else:
             return self.piece.toString()
         

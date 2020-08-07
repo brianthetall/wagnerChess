@@ -39,7 +39,7 @@ class Board(object):
         #print locations and pieces
         for loc in Location.letterMap:
             for i in range(0,len(Location.letterMap["A"])):
-                retval+=" "+self.board[loc+","+str(i)].toString()
+                retval+="\u0332 "+self.board[loc+","+str(i)].toString()
                 if i==7:
                     retval+="\n"
 

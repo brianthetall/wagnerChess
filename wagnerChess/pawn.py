@@ -93,4 +93,4 @@ class Pawn(Piece):
         return validMoves
 
     def toString(self):
-        return "p "
+        return "\u0332p\u0332 \u0332|"

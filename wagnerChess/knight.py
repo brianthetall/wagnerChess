@@ -84,4 +84,4 @@ class Knight(Piece):
 
 
     def toString(self):
-        return "N "
+        return "\u0332N\u0332 \u0332|"

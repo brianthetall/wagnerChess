@@ -68,4 +68,4 @@ class Rook(Piece):
 
 
     def toString(self):
-        return "R "
+        return "\u0332R\u0332 \u0332|"
