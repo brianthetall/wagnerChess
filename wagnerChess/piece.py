@@ -30,6 +30,7 @@ class Piece(object):
         self.location=newLoc#update location pointer
         newLoc.setPiece(self)#update the Location's piece pointer
 
+    #verify a piece of same color is not already present
     #return either None, or location parameter back to caller
     def checkNextLocation(self,location):
         if location==None:
