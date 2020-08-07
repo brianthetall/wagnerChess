@@ -20,7 +20,21 @@ class King(Piece):
             validMoves.append(loc)
         loc=self.checkNextLocation(self.location.getEast())
         if loc!=None:
-            validMoves.append(loc)            
+            validMoves.append(loc)
+
+        loc=self.checkNextLocation(self.location.getNorthWest())
+        if loc!=None:
+            validMoves.append(loc)
+        loc=self.checkNextLocation(self.location.getSouthWest())
+        if loc!=None:
+            validMoves.append(loc)
+        loc=self.checkNextLocation(self.location.getSouthEast())
+        if loc!=None:
+            validMoves.append(loc)
+        loc=self.checkNextLocation(self.location.getNorthEast())
+        if loc!=None:
+            validMoves.append(loc)
+        
             
         for move in validMoves:
             print("Legal Move:"+move.toString())
