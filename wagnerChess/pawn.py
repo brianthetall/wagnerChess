@@ -1,4 +1,5 @@
 from piece import Piece
+from termcolor import colored
 
 class Pawn(Piece):
 
@@ -93,4 +94,8 @@ class Pawn(Piece):
         return validMoves
 
     def toString(self):
-        return "\u0332p\u0332 \u0332|"
+        if self.color=="white":
+            return colored("\u0332p\u0332 |","white")
+        else:
+            return colored("\u0332p\u0332 |","red")
+

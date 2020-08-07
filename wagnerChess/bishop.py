@@ -1,4 +1,5 @@
 from piece import Piece
+from termcolor import colored
 
 class Bishop(Piece):
     
@@ -71,4 +72,8 @@ class Bishop(Piece):
 
 
     def toString(self):
-        return "\u0332B\u0332 \u0332|"
+        if self.color=="white":
+            return colored("\u0332B\u0332 |","white")
+        else:
+            return colored("\u0332B\u0332 |","red")
+

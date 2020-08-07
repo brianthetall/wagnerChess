@@ -1,4 +1,5 @@
 from piece import Piece
+from termcolor import colored
 
 class Queen(Piece):
 
@@ -117,4 +118,8 @@ class Queen(Piece):
 
         
     def toString(self):
-        return "\u0332Q\u0332 \u0332|"
+        if self.color=="white":
+            return colored("\u0332Q\u0332 |","white")
+        else:
+            return colored("\u0332Q\u0332 |","red")
+

@@ -1,4 +1,5 @@
 from piece import Piece
+from termcolor import colored
 
 class Rook(Piece):
 
@@ -68,4 +69,8 @@ class Rook(Piece):
 
 
     def toString(self):
-        return "\u0332R\u0332 \u0332|"
+        if self.color=="white":
+            return colored("\u0332R\u0332 |","white")
+        else:
+            return colored("\u0332R\u0332 |","red")
+

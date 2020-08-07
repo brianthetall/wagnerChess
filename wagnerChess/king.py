@@ -43,4 +43,7 @@ class King(Piece):
 
 
     def toString(self):
-        return colored("\u0332K\u0332 |","red")
+        if self.color=="white":
+            return colored("\u0332K\u0332 |","white")
+        else:
+            return colored("\u0332K\u0332 |","red")

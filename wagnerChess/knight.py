@@ -1,4 +1,5 @@
 from piece import Piece
+from termcolor import colored
 
 class Knight(Piece):
 
@@ -84,4 +85,8 @@ class Knight(Piece):
 
 
     def toString(self):
-        return "\u0332N\u0332 \u0332|"
+        if self.color=="white":
+            return colored("\u0332N\u0332 |","white")
+        else:
+            return colored("\u0332N\u0332 |","red")
+
