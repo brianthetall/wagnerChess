@@ -9,9 +9,6 @@ from pawn import Pawn
 class Player(object):
 
     def __init__(self,color,boardRoot):
-
-
-        print("init Player",color)
         
         if color not in ["white","black"]:
             raise Exception("invalid color")

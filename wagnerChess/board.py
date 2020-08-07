@@ -10,8 +10,6 @@ class Board(object):
 
     def __init__(self,args={}):
 
-        print("init Board")
-
         self.board={}#holds the locations; use getBoard(), not root pointer
         self.root={"players":[],
                    "board":self}
@@ -48,7 +46,7 @@ class Board(object):
         #print just the locations
         for loc in Location.letterMap:
             for i in range(0,len(Location.letterMap["A"])):
-                retval+=" "+loc+str(i)
+                retval+="\u0332 \u0332"+loc+"\u0332"+str(i)+"\u0332|"
                 if i==7:
                     retval+="\n"
 
