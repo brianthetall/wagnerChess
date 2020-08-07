@@ -1,2 +1,6 @@
 virtualenv -p /usr/bin/python3 ./
 pip install -r requirements.txt
+
+
+Moves are input as [starting location, new location]
+For example: A4,A0
