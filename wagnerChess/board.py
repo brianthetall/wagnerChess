@@ -79,6 +79,7 @@ class Board(object):
             
             piece.changeLocation(newLoc)
             currentLoc.setPiece(None)
+            piece.sex()#revoke virginity
             
         
     

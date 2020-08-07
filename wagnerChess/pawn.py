@@ -6,6 +6,9 @@ class Pawn(Piece):
 
         super(Pawn,self).__init__(location,root,"pawn",color)
 
+        self.secondSquare=True
+        self.isPawn=True#used by checkNextLocation
+
     def isEnemyPresent(self,location):
         piece=location.getPiece()
         if piece==None:
@@ -19,9 +22,10 @@ class Pawn(Piece):
         validMoves=[]
 
         if self.color=="white":
+            tempLoc=self.location
             while True:
                 #look NE
-                tempLoc=self.location.getNorthEast()
+                tempLoc=tempLoc.getNorthEast()#it dis
                 if tempLoc==None:
                     break
                 tempLoc=self.checkNextLocation(tempLoc)
@@ -30,7 +34,9 @@ class Pawn(Piece):
                     break
                 else:
                     validMoves.append(tempLoc)
-                    print("c")
+                    if self.virgin and self.secondSquare:
+                        self.secondSquare=False
+                        continue
                     break
                 
                 
@@ -53,9 +59,10 @@ class Pawn(Piece):
                 
         elif self.color=="black":
             #look SW
+            tempLoc=self.location
             while True:
                 #look NE
-                tempLoc=self.location.getSouthWest()
+                tempLoc=tempLoc.getSouthWest()
                 if tempLoc==None:
                     break
                 tempLoc=self.checkNextLocation(tempLoc)
@@ -63,6 +70,9 @@ class Pawn(Piece):
                     break
                 else:
                     validMoves.append(tempLoc)
+                    if self.virgin and self.secondSquare:
+                        self.secondSquare=False
+                        continue
                     break
 
             #look S for enemey pieces
@@ -77,8 +87,9 @@ class Pawn(Piece):
             if enemyLoc!=None:
                 validMoves.append(enemyLoc)
                 
-                
 
+        for move in validMoves:
+            print (move.toString())
         return validMoves
 
     def toString(self):

@@ -17,7 +17,12 @@ class Piece(object):
         self.piece=piece
         self.color=color
         self.location.setPiece(self)
+        self.virgin=True#able to track is piece has been moved yet [rook,king,pawn]
+        self.isPawn=False
 
+    def sex(self):
+        self.virgin=False
+        
     def getColor(self):
         return self.color
         
@@ -33,6 +38,8 @@ class Piece(object):
             return location
         else:
             if location.getPiece().getColor()==self.color:
+                return None
+            elif self.isPawn and location.getPiece().getColor()!=self.color:
                 return None
             else:
                 return location
