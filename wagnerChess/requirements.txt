@@ -1,3 +1,4 @@
 bottle==0.12.13
 paste==2.0.3
 pytest==3.4.0
+termcolor

@@ -1,4 +1,5 @@
 from piece import Piece
+from termcolor import colored
 
 class King(Piece):
 
@@ -42,4 +43,4 @@ class King(Piece):
 
 
     def toString(self):
-        return "\u0332K\u0332 |"
+        return colored("\u0332K\u0332 |","red")
