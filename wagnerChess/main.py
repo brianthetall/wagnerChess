@@ -10,7 +10,7 @@ while True:
     print ("Try again!")
 
 
-port=26000
+port=2599
 if mode=="s" or mode=="S":#server
     #open a server-socket
     ssocket=socket.socket()
