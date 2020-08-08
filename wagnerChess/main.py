@@ -1,6 +1,7 @@
 from board import Board
 from notYourPieceException import NotYourPieceException
 import socket
+import time
 
 while True:
     mode=input("(S)erver or (C)lient?")
@@ -9,7 +10,7 @@ while True:
     print ("Try again!")
 
 
-port=26002
+port=26000
 if mode=="s" or mode=="S":#server
     #port=input("Port: ")
     #port=26000
@@ -44,13 +45,13 @@ while True:
                 #send move to the Client
                 c,addr=ssocket.accept()
                 print("Sending to IP:"+str(addr))
-                c.send(move)
+                c.send(move.encode())
                 c.close()
                 
             else:
                 #recv from Server player
                 socket.connect((serverIp,port))
-                move=socket.recv(1024)
+                move=socket.recv(1024).decode()
                 print("Move from server: "+move)
                 socket.close()
                 
@@ -65,7 +66,7 @@ while True:
         
         except Exception as e:
             print( repr(e))
-                        
+            time.sleep(1000)
         
 
     while True:
@@ -95,5 +96,6 @@ while True:
         
         except Exception as e:
             print (repr(e))
+            time.sleep(1000)
 
         
