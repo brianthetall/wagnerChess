@@ -22,6 +22,9 @@ class Piece(object):
 
     def sex(self):
         self.virgin=False
+
+    def getPieceType(self):
+        return self.piece
         
     def getColor(self):
         return self.color
@@ -45,7 +48,29 @@ class Piece(object):
             else:
                 return location
         
-        
+    #return location if enemy piece is present
+    def isEnemyPresent(self,location):
+        piece=location.getPiece()
+        if piece==None:
+            return None
+        elif piece.color!=self.color:
+            return location
+        else:
+            return None
+
+
+    #call listMoves, then check each location for enemy piece, return [of pieces]
+    def canThreatenList(self):
+        retval=[]
+        locations=self.listMoves()
+        for l in locations:
+            l=self.isEnemyPresent(l)
+            if l!=None:
+                retval.append(l.getPiece())
+
+        return retval
+
+            
     @abstractmethod    
     def listMoves(self):
         #given current location, return list of legal locations

@@ -57,3 +57,27 @@ class Player(object):
                                  Pawn(board["B,6"],root=self.root,color=self.color),
                                  Pawn(board["D,6"],root=self.root,color=self.color)
             ]
+
+    #True/False, [] of pieces attacking opposing King
+    def hasCheck(self):
+        #collect all self.color pieces from the Collection
+        checkingPieces=[]
+        pieces=[]
+        opposingKing=None
+        for p in self.root['pieces']:
+            if p.getColor()==self.color:
+                pieces.append(p)
+            elif p.getColor()!=self.color && p.getPieceType()=="king":
+                opposingKing=p
+
+        #see if each piece can attack the other King
+        for p in pieces:
+            threatnedPieces=p.canThreatenList()
+            if opposingKing in threatenedPieces:
+                checkingPieces.append(p)
+
+
+        if len(checkingPieces)>0:
+            return True,checkingPieces
+        else:
+            return False,checkingPieces

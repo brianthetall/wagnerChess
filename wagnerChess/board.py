@@ -28,6 +28,21 @@ class Board(object):
         self.root["players"].append(Player("white",self.root))
         self.root["players"].append(Player("black",self.root))
 
+        
+    #return None, or Color in check & opposing pieces holding the check
+    def lookForCheck(self):
+
+        hasCheck, pieces = self.root["players"]["white"].hasCheck()
+        if hasCheck:
+            return "black", pieces
+
+        hasCheck, pieces = self.root["players"]["black"].hasCheck()
+        if hasCheck:
+            return "white", pieces
+
+        return None,None
+            
+        
 
     #make something nice to see on the console
     def toString(self):
@@ -78,8 +93,11 @@ class Board(object):
             piece.changeLocation(newLoc)
             currentLoc.setPiece(None)
             piece.sex()#revoke virginity
-            
-        
+
+            #check for check?
+            colorInCheck,pieceList=self.lookForCheck()
+            if colorInCheck!=None:
+                print(colorInCheck+" is in check! Attacking piece(s): "+pieceList)        
     
         
     def linkLocations(self):

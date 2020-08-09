@@ -37,6 +37,7 @@ while True:
 
     while True:
         try:
+                                    
             if mode=="s" or mode=="S":
                 move=input("White Move: ")#location,location
                 #send move to the Client
@@ -51,6 +52,7 @@ while True:
             #check for valid move
             b.movePiece(move,color="white")#execute update to board
             print(b.toString())
+            
             break
 
         except NotYourPieceException as e:
