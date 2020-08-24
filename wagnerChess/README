@@ -1,5 +1,11 @@
+First Time:
 virtualenv -p /usr/bin/python3 ./
+. bin/activate
 pip install -r requirements.txt
+
+To Play:
+. bin/activate
+python main.py
 
 
 Moves are input as [starting location, new location]
