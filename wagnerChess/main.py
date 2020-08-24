@@ -59,7 +59,7 @@ while True:
         
         except Exception as e:
             print( repr(e))
-            time.sleep(1000)
+
         
 
     while True:
@@ -84,4 +84,3 @@ while True:
         
         except Exception as e:
             print (repr(e))
-            time.sleep(1000)
