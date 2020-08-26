@@ -7,12 +7,12 @@ class Pawn(Piece):
 
         super(Pawn,self).__init__(location,root,"pawn",color)
 
-        self.secondSquare=True
         self.isPawn=True#used by checkNextLocation
 
 
     def listMoves(self):
         validMoves=[]
+        self.secondSquare=True
 
         if self.color=="white":
             tempLoc=self.location
