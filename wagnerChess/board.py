@@ -35,16 +35,22 @@ class Board(object):
     #return None, or Color in check & opposing pieces holding the check
     def lookForCheck(self,color):
         print ("lookForCheck")
-        hasCheck, pieces = self.root["players"][color].hasCheck()#HERE
+
+        if color=="white":
+            hasCheck, pieces = self.root["players"]["black"].hasCheck()
+        else:
+            hasCheck, pieces = self.root["players"]["white"].hasCheck()
+            
         if hasCheck==True:
             print("check found")
+            print(pieces)
         else:
             print("no check found")
             
         if hasCheck and color=="white":
-            return "black", pieces
-        elif hasCheck and color=="black":
             return "white", pieces
+        elif hasCheck and color=="black":
+            return "black", pieces
     
         return None,None
             
@@ -116,7 +122,7 @@ class Board(object):
                 else:
                     newLoc.setPiece(None)
                     
-                raise InCheckException(colorInCheck+" is in check! Attacking piece(s): "+pieceList)
+                raise InCheckException(colorInCheck+" is in check!")
     
         
     def linkLocations(self):
