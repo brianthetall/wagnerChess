@@ -37,7 +37,10 @@ class Piece(object):
         
     def getColor(self):
         return self.color
-        
+
+    def getLocation(self):
+        return self.location
+    
     def changeLocation(self,newLoc):
         self.location=newLoc#update location pointer
         newLoc.setPiece(self)#update the Location's piece pointer

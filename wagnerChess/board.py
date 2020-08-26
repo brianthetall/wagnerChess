@@ -14,7 +14,8 @@ class Board(object):
 
         self.board={}#holds the locations; use getBoard(), not root pointer
         self.root={"players":{"white":None,"black":None},
-                   "board":self}
+                   "board":self,
+                   "pieces":[]}
         
         #update Location to track a Piece pointer!
 
@@ -32,16 +33,19 @@ class Board(object):
 
         
     #return None, or Color in check & opposing pieces holding the check
-    def lookForCheck(self):
+    def lookForCheck(self,color):
         print ("lookForCheck")
-        hasCheck, pieces = self.root["players"]["white"].hasCheck()#HERE
-        if hasCheck:
+        hasCheck, pieces = self.root["players"][color].hasCheck()#HERE
+        if hasCheck==True:
+            print("check found")
+        else:
+            print("no check found")
+            
+        if hasCheck and color=="white":
             return "black", pieces
-
-        hasCheck, pieces = self.root["players"]["black"].hasCheck()
-        if hasCheck:
+        elif hasCheck and color=="black":
             return "white", pieces
-
+    
         return None,None
             
         
@@ -99,7 +103,7 @@ class Board(object):
             firstTime=piece.sex()#revoke virginity
 
             #check for check?
-            colorInCheck,pieceList=self.lookForCheck()
+            colorInCheck,pieceList=self.lookForCheck(piece.getColor())
             if colorInCheck==piece.getColor():
 
                 #UNDO the move on the board
@@ -125,13 +129,3 @@ class Board(object):
             
     def getBoard(self):
         return self.board
-    
-            
-    #updates the threat list for each piece
-    #then loops through all parts to see which pose a threat to <piece>
-    #return list of Piece objects currently threatending <piece>
-    def checkForThreats(self,piece):
-        #check for, and return a list of threat-pieces
-        ret=[]
-        
-        return ret
