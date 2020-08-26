@@ -81,8 +81,9 @@ class Pawn(Piece):
                 validMoves.append(enemyLoc)
                 
 
-        for move in validMoves:
-            print ("Legal Move Pawn: " + move.toString())
+        #for move in validMoves:
+        #    print ("Legal Move Pawn: " + move.toString())
+        
         return validMoves
 
     def toString(self):
