@@ -25,6 +25,8 @@ class Rook(Piece):
                 break
             else:
                 validMoves.append(tempLoc)
+                if tempLoc.getPiece()!=None:
+                    break
 
         tempLoc=self.location
         while True:
@@ -37,7 +39,8 @@ class Rook(Piece):
                 break
             else:
                 validMoves.append(tempLoc)
-
+                if tempLoc.getPiece()!=None:
+                    break
 
         tempLoc=self.location
         while True:
@@ -50,7 +53,8 @@ class Rook(Piece):
                 break
             else:
                 validMoves.append(tempLoc)
-
+                if tempLoc.getPiece()!=None:
+                    break
 
         tempLoc=self.location
         while True:
@@ -63,7 +67,9 @@ class Rook(Piece):
                 break
             else:
                 validMoves.append(tempLoc)
-                                
+                if tempLoc.getPiece()!=None:
+                    break
+                
         return validMoves
 
 
