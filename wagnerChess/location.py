@@ -102,8 +102,10 @@ class Location(object):
             return "\u0332"+self.letter+"\u0332"+str(self.index)+"\u0332|"
         else:
             return self.piece.toString()
-        
-        
+
+    def locString(self):
+        return "\u0332"+self.letter+"\u0332"+str(self.index)+"\u0332|"
+    
     def interconnect(self):
         #print("interconnect:",self.letter,self.index)
         if self.letter=="A":

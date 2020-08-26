@@ -20,12 +20,27 @@ class Piece(object):
         self.virgin=True#able to track is piece has been moved yet [rook,king,pawn]
         self.isPawn=False
 
+    def unsex(self):
+        self.virgin=True
+        
     def sex(self):
+        if self.virgin==True:
+            firstTime=True
+        else:
+            firstTime=False
         self.virgin=False
+        return firstTime
+        
+
+    def getPieceType(self):
+        return self.piece
         
     def getColor(self):
         return self.color
-        
+
+    def getLocation(self):
+        return self.location
+    
     def changeLocation(self,newLoc):
         self.location=newLoc#update location pointer
         newLoc.setPiece(self)#update the Location's piece pointer
@@ -45,7 +60,29 @@ class Piece(object):
             else:
                 return location
         
-        
+    #return location if enemy piece is present
+    def isEnemyPresent(self,location):
+        piece=location.getPiece()
+        if piece==None:
+            return None
+        elif piece.color!=self.color:
+            return location
+        else:
+            return None
+
+
+    #call listMoves, then check each location for enemy piece, return [of pieces]
+    def canThreatenList(self):
+        retval=[]
+        locations=self.listMoves()
+        for l in locations:
+            l=self.isEnemyPresent(l)
+            if l!=None:
+                retval.append(l.getPiece())
+
+        return retval
+
+            
     @abstractmethod    
     def listMoves(self):
         #given current location, return list of legal locations

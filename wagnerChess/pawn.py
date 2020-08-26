@@ -10,14 +10,6 @@ class Pawn(Piece):
         self.secondSquare=True
         self.isPawn=True#used by checkNextLocation
 
-    def isEnemyPresent(self,location):
-        piece=location.getPiece()
-        if piece==None:
-            return None
-        elif piece.color!=self.color:
-            return location
-        else:
-            return None
 
     def listMoves(self):
         validMoves=[]
@@ -26,7 +18,7 @@ class Pawn(Piece):
             tempLoc=self.location
             while True:
                 #look NE
-                tempLoc=tempLoc.getNorthEast()#it dis
+                tempLoc=tempLoc.getNorthEast()
                 if tempLoc==None:
                     break
                 tempLoc=self.checkNextLocation(tempLoc)
@@ -90,7 +82,7 @@ class Pawn(Piece):
                 
 
         for move in validMoves:
-            print (move.toString())
+            print ("Legal Move Pawn: " + move.toString())
         return validMoves
 
     def toString(self):
@@ -98,4 +90,3 @@ class Pawn(Piece):
             return colored("\u0332p\u0332 |","white")
         else:
             return colored("\u0332p\u0332 |","red")
-

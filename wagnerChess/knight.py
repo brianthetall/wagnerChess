@@ -78,8 +78,8 @@ class Knight(Piece):
         except Exception as e:
             pass
         
-        for move in validMoves:
-            print("Legal Move:"+move.toString())
+        #for move in validMoves:
+        #    print("Legal Move:"+move.toString())
         return validMoves
 
 
