@@ -82,7 +82,7 @@ class Pawn(Piece):
                 
 
         for move in validMoves:
-            print (move.toString())
+            print ("Legal Move Pawn: " + move.toString())
         return validMoves
 
     def toString(self):

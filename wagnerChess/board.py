@@ -34,7 +34,7 @@ class Board(object):
         
     #return None, or Color in check & opposing pieces holding the check
     def lookForCheck(self,color):
-        print ("lookForCheck")
+        #print ("lookForCheck")
 
         if color=="white":
             hasCheck, pieces = self.root["players"]["black"].hasCheck()

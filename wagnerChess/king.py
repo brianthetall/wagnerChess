@@ -37,8 +37,8 @@ class King(Piece):
             validMoves.append(loc)
         
             
-        for move in validMoves:
-            print("Legal Move:"+move.toString())
+        #for move in validMoves:
+        #    print("Legal Move:"+move.toString())
         return validMoves
 
 
