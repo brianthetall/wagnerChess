@@ -1,5 +1,9 @@
 from board import Board
+
+from inCheckException import InCheckException
 from notYourPieceException import NotYourPieceException
+from illegalMoveException import IllegalMoveException
+
 import socket
 import time
 
@@ -36,32 +40,35 @@ print(b.toString())
 while True:
 
     while True:
-        try:
-                                    
+        try:                                    
             if mode=="s" or mode=="S":
                 move=input("White Move: ")#location,location
                 #send move to the Client
-                print("Sending to IP:"+str(addr))
                 c.send(move.encode())
                 
-            else:
-                #recv from Server player
-                move=socket.recv(1024).decode()
+            else:#recv from Server player
+                move=socket.recv(10).decode()
                 print("Move from server: "+move)
                 
             #check for valid move
             b.movePiece(move,color="white")#execute update to board
             print(b.toString())
-            
             break
 
         except NotYourPieceException as e:
             print(repr(e))
             continue
+
+        except IllegalMoveException as e:
+            print(repr(e))
+            continue
+
+        except InCheckException as e:
+            print(repr(e))
+            continue
         
         except Exception as e:
             print( repr(e))
-            time.sleep(1000)
         
 
     while True:
@@ -72,10 +79,10 @@ while True:
                 socket.send(move.encode())
                 
             else:#Recv move from Client
-                print("Move from Black-IP:"+str(addr))
                 move=c.recv(10).decode()
                 print("Move from client:"+move)
-                
+
+            #check for valid move
             b.movePiece(move,color="black")#execute update to board
             print(b.toString())
             break
@@ -83,7 +90,14 @@ while True:
         except NotYourPieceException as e:
             print(repr(e))
             continue
+
+        except IllegalMoveException as e:
+            print(repr(e))
+            continue
+
+        except InCheckException as e:
+            print(repr(e))
+            continue
         
         except Exception as e:
             print (repr(e))
-            time.sleep(1000)

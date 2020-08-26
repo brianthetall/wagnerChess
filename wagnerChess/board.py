@@ -1,5 +1,7 @@
+from inCheckException import InCheckException
 from notYourPieceException import NotYourPieceException
 from illegalMoveException import IllegalMoveException
+
 from player import Player
 from piece import Piece
 from location import Location
@@ -11,7 +13,7 @@ class Board(object):
     def __init__(self,args={}):
 
         self.board={}#holds the locations; use getBoard(), not root pointer
-        self.root={"players":[],
+        self.root={"players":{"white":None,"black":None},
                    "board":self}
         
         #update Location to track a Piece pointer!
@@ -25,14 +27,14 @@ class Board(object):
 
 
         #the players can reference the Locations made above!
-        self.root["players"].append(Player("white",self.root))
-        self.root["players"].append(Player("black",self.root))
+        self.root["players"]["white"]=Player("white",self.root)
+        self.root["players"]["black"]=Player("black",self.root)
 
         
     #return None, or Color in check & opposing pieces holding the check
     def lookForCheck(self):
-
-        hasCheck, pieces = self.root["players"]["white"].hasCheck()
+        print ("lookForCheck")
+        hasCheck, pieces = self.root["players"]["white"].hasCheck()#HERE
         if hasCheck:
             return "black", pieces
 
@@ -72,6 +74,7 @@ class Board(object):
         strings=move.split(",")
         currentLocString=strings[0]
         newLocString=strings[1]
+        replacedPieceTemp=None
         
         #put a comma in the String, then pull the Loc from self.board
         currentLoc=self.board[currentLocString[0]+","+currentLocString[1]]
@@ -89,15 +92,27 @@ class Board(object):
             validLocations=piece.listMoves()#check if move is legal
             if newLoc not in validLocations:
                 raise IllegalMoveException()
-            
+
+            replacedPieceTemp=newLoc.getPiece()#hold in case this results in us being in check
             piece.changeLocation(newLoc)
             currentLoc.setPiece(None)
-            piece.sex()#revoke virginity
+            firstTime=piece.sex()#revoke virginity
 
             #check for check?
             colorInCheck,pieceList=self.lookForCheck()
-            if colorInCheck!=None:
-                print(colorInCheck+" is in check! Attacking piece(s): "+pieceList)        
+            if colorInCheck==piece.getColor():
+
+                #UNDO the move on the board
+                if firstTime==True:
+                    piece.unsex()
+                piece.changeLocation(currentLoc)
+
+                if replacedPieceTemp!=None:
+                    replacedPieceTemp.changeLocation(newLoc)
+                else:
+                    newLoc.setPiece(None)
+                    
+                raise InCheckException(colorInCheck+" is in check! Attacking piece(s): "+pieceList)
     
         
     def linkLocations(self):

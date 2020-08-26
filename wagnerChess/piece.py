@@ -20,8 +20,17 @@ class Piece(object):
         self.virgin=True#able to track is piece has been moved yet [rook,king,pawn]
         self.isPawn=False
 
+    def unsex(self):
+        self.virgin=True
+        
     def sex(self):
+        if self.virgin==True:
+            firstTime=True
+        else:
+            firstTime=False
         self.virgin=False
+        return firstTime
+        
 
     def getPieceType(self):
         return self.piece

@@ -64,19 +64,31 @@ class Player(object):
         checkingPieces=[]
         pieces=[]
         opposingKing=None
+
         for p in self.root['pieces']:
             if p.getColor()==self.color:
                 pieces.append(p)
-            elif p.getColor()!=self.color && p.getPieceType()=="king":
+                print (p.toString())
+                
+            elif p.getColor()!=self.color and p.getPieceType()=="king":
                 opposingKing=p
+                print (p.toString())
 
+
+        print ("0")
+        
         #see if each piece can attack the other King
         for p in pieces:
-            threatnedPieces=p.canThreatenList()
+            print ("Can this threaten the king?"+p.toString())
+            threatenedPieces=p.canThreatenList()
+            
+            print("ThreatenedPieces=")
+            print(threatenedPieces)
             if opposingKing in threatenedPieces:
+                print ("5")
                 checkingPieces.append(p)
 
-
+        print ("6")
         if len(checkingPieces)>0:
             return True,checkingPieces
         else:
