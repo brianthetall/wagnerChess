@@ -24,7 +24,9 @@ class Bishop(Piece):
                 break
             else:
                 validMoves.append(tempLoc)
-
+                if tempLoc.getPiece()!=None:
+                    break
+                
         tempLoc=self.location
         while True:
             #NorthWest:
@@ -36,7 +38,8 @@ class Bishop(Piece):
                 break
             else:
                 validMoves.append(tempLoc)
-
+                if tempLoc.getPiece()!=None:
+                    break
 
         tempLoc=self.location
         while True:
@@ -49,7 +52,8 @@ class Bishop(Piece):
                 break
             else:
                 validMoves.append(tempLoc)
-
+                if tempLoc.getPiece()!=None:
+                    break
 
         tempLoc=self.location
         while True:
@@ -62,7 +66,8 @@ class Bishop(Piece):
                 break
             else:
                 validMoves.append(tempLoc)
-
+                if tempLoc.getPiece()!=None:
+                    break
                 
         for move in validMoves:
             print("Legal Move: "+move.toString())
