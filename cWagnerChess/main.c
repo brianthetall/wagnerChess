@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "piece.h"
 #include "location.h"
-#include "board.h"
+//#include "board.h"
 
 #define PORT 2599
 
