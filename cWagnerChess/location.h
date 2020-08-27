@@ -1,8 +1,6 @@
-#include "piece.h"
-
 
 typedef struct location{
-  PiecePtr piece;
+  void* piece;
   
 } Location;
 typedef struct location* LocPtr;
