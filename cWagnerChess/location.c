@@ -18,6 +18,6 @@ LocationPtr initLocation(LocationPtr lp, int i, int j){
 char* toStringLocation(LocationPtr lp){
 
   char* retval = (char*) calloc(sizeof(char),4);
-  sprintf(retval,"|%d%d|",lp->col,lp->row);
+  sprintf(retval,"|%c%d|",lp->col+65,lp->row);
   return retval;
 }

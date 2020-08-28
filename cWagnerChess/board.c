@@ -20,7 +20,7 @@ BoardPtr initBoard(){
 char* toStringBoard(BoardPtr b){
 
   int i,j=0;
-  char* s="Board:\n\n";
+  char* s="";
 
   for(i=0 ; i<=H ; i++){
     for(j=0 ; j<=h ; j++){
