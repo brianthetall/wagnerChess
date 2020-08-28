@@ -5,6 +5,7 @@ BoardPtr initBoard(){
   BoardPtr b = (BoardPtr)malloc(sizeof(Board));
   b->toString=&toStringBoard;
 
+  //INIT LOCATIONS
   int i,j=0;
 
   for(i=0 ; i<=H ; i++){
@@ -12,6 +13,12 @@ BoardPtr initBoard(){
       b->locations[i][j] = initLocation( b->locations[i][j], i, j );
     }
   }
+
+  //INIT PLAYERS:
+  b->white = initPlayer("white");
+  b->black = initPlayer("black");
+
+  printf("Players @ %x & %x\n",b->white,b->black);
   
   return b;
 }
