@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "location.h"
 
 void initLocation(LocationPtr lp, int i, int j){
@@ -8,6 +7,12 @@ void initLocation(LocationPtr lp, int i, int j){
   lp->col=i;
   lp->row=j;
 
+  lp->toString=&toStringLocation;
   
 }
 
+char* toStringLocation(LocationPtr lp){
+  char* retval = (char*) malloc(sizeof(char)*4);
+  sprintf(retval,"|%d%d|",lp->col,lp->row);
+  return retval;
+}
