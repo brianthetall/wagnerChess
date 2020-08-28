@@ -12,7 +12,7 @@ size_t strlen(const char *s){
   return i;
 }
 
-char* strncpy(char* s, const char* t, size_t n){
+char* mystrncpy(char* s, const char* t, size_t n){
   char *start=s;
   for(int i=0; (*s++=*t++) != '\0' && i<n;i++);
   *s='\0';
@@ -20,7 +20,7 @@ char* strncpy(char* s, const char* t, size_t n){
 }
 
 //I'm of the opinion Strings should be immutable.
-char* strncat(char* s,const char* t,size_t n){
+char* mystrncat(char* s,const char* t,size_t n){
   char* retval = calloc(sizeof(char), strlen(s)+n);
   char* start = retval;
   for(;*s!='\0';)
@@ -34,12 +34,13 @@ char* strncat(char* s,const char* t,size_t n){
 
 
 //I'm of the opinion Strings should be immutable.
-char* strcat(char* s,const char* t){
+char* mystrcat(char* s,const char* t){
   char* retval = calloc(sizeof(char), strlen(s)+strlen(t));
   char* start = retval;
-  for(;*s!='\0';)
+  while(*s!='\0')
     *retval++=*s++;
-  for(;*t!='\0';)
+
+  while(*t!='\0')
     *retval++=*t++;
 
   s=start;

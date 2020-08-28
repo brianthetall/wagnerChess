@@ -26,5 +26,5 @@ typedef struct location{
   
 } Location;
 
-void initLocation(LocationPtr,int,int);
+LocationPtr initLocation(LocationPtr,int,int);
 char* toStringLocation(LocationPtr);
