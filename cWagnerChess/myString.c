@@ -21,13 +21,15 @@ char* mystrncpy(char* s, const char* t, size_t n){
 
 //I'm of the opinion Strings should be immutable.
 char* mystrncat(char* s,const char* t,size_t n){
-  char* retval = calloc(sizeof(char), strlen(s)+n);
+  char* retval = calloc(sizeof(char), strlen(s)+n+1);
   char* start = retval;
   for(;*s!='\0';)
     *retval++=*s++;
   for(int i=0; i<n; i++)
     *retval++=*t++;
 
+  *retval='\0';
+    
   s=start;
   return s;
 }
@@ -35,7 +37,7 @@ char* mystrncat(char* s,const char* t,size_t n){
 
 //I'm of the opinion Strings should be immutable.
 char* mystrcat(char* s,const char* t){
-  char* retval = calloc(sizeof(char), strlen(s)+strlen(t));
+  char* retval = calloc(sizeof(char), strlen(s)+strlen(t)+1);
   char* start = retval;
   while(*s!='\0')
     *retval++=*s++;
@@ -43,6 +45,8 @@ char* mystrcat(char* s,const char* t){
   while(*t!='\0')
     *retval++=*t++;
 
+  *retval='\0';
+  
   s=start;
   return s;
 }

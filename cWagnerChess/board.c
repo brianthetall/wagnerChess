@@ -26,9 +26,8 @@ char* toStringBoard(BoardPtr b){
     for(j=0 ; j<=h ; j++){
       LocationPtr lp=b->locations[i][j];
       s=mystrcat(s, lp->toString(lp) );
-      s=mystrcat(s,"\n");
     }
-    //s=mystrcat(s,"\n");
+    s=mystrcat(s,"\n");
   }
   
   
