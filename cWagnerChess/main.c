@@ -11,7 +11,7 @@ int main(int argc,char** argv){
   printf("Board.toString:\n");
   printf("%s",board->toString(board));
   printf("%s\n", board->black->toString(board->black) );
-  printf("%s\n", board->white->pieces[0]->getColor(board->white->pieces[0]));
+  printf("%s\n", board->white->toString(board->white) );
   
   if(argc==1){
     printf("Must specify (c)lient or (s)erver. If client, must also provide IP address of server.\n");

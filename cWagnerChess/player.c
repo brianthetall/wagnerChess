@@ -31,7 +31,8 @@ char* toStringPlayer(PlayerPtr p){
 
   int i=0;
   for(i=0; i<= PAWN+10 ; i++){
-    printf("i=%d@\n",i);
+    printf("%s %s\n",p->pieces[i]->toString(p->pieces[i]),
+	   p->pieces[i]->getType(p->pieces[i]));
   }
 
   return "";
