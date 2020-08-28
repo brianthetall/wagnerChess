@@ -7,13 +7,11 @@
 
 int main(int argc,char** argv){
 
-  //PiecePtr king=initPiece(KING,"white");
-  //printf("color=%s\n",king->getColor(king));
   BoardPtr board=initBoard();
   printf("Board.toString:\n");
   printf("%s",board->toString(board));
-  printf("%s\n%s\n",board->white->toString(board->white),
-	 board->black->toString(board->black));
+  printf("%s\n", board->black->toString(board->black) );
+  printf("%s\n", board->white->pieces[0]->getColor(board->white->pieces[0]));
   
   if(argc==1){
     printf("Must specify (c)lient or (s)erver. If client, must also provide IP address of server.\n");

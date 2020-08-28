@@ -18,7 +18,8 @@ BoardPtr initBoard(){
   b->white = initPlayer("white");
   b->black = initPlayer("black");
 
-  printf("Players @ %x & %x\n",b->white,b->black);
+  printf("Players @ %s & %x\n",b->black->color,b->black);
+  printf("Players @ %X & %x\n",b->black->getColor,b->black);
   
   return b;
 }
