@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 //#include "piece.h"
@@ -5,6 +6,17 @@
 #include "board.h"
 
 #define PORT 2599
+
+int checkInput(char*);
+
+int checkInput(char* location){
+
+  printf("CheckInput: %d<=%d<=%d %d<=%d<=%d\n", 'A',location[0],'H','0',location[1],'7');
+  if ('A' <= location[0] && location[0] <= 'H' && '0' <= location[1] && location[1]<= '7'){
+    return 1;
+  }
+  return 0;
+}
 
 int main(int argc,char** argv){
 
@@ -44,7 +56,13 @@ int main(int argc,char** argv){
       scanf("%s",input);
       loc=strtok(input,",");
       locNew=strtok(NULL,",");
-    
+
+      if(checkInput(loc)==1)
+	printf("LegaL\n");
+      else
+	printf("unlegal\n");
+      
+      
       printf("%s %s\n",loc,locNew);
       moveResult=board->move(board,loc,locNew,"white");
       if (moveResult!=LEGAL_MOVE){
