@@ -43,7 +43,9 @@ char* getColor(PiecePtr p){
 char* toStringPiece(PiecePtr p){
 
   char* s=(char*)malloc(50);
-  strcat(s,p->color);
+  strcat(s,p->getColor(p));
+  strcat(s," ");
+  strcat(s,p->getType(p));
   
   return s;
 }
