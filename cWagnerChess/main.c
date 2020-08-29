@@ -15,7 +15,7 @@ int checkInput(char* location){
   if ('A' <= location[0] && location[0] <= 'H' && '0' <= location[1] && location[1]<= '7'){
     return 1;
   }
-  return 0;
+  return INVALID_INPUT_EXCEPTION;
 }
 
 int main(int argc,char** argv){
@@ -57,26 +57,34 @@ int main(int argc,char** argv){
       loc=strtok(input,",");
       locNew=strtok(NULL,",");
 
-      if(checkInput(loc)==1)
-	printf("LegaL\n");
-      else
-	printf("unlegal\n");
+      if(loc==NULL || locNew==NULL){
+	printf("INVALID_INPUT_EXCEPTION\n");
+	continue;
+      }
       
+      if(checkInput(loc)==LEGAL_INPUT && checkInput(locNew)==LEGAL_INPUT)
+	printf("LegalInput\n");
+      else{
+	printf("INVALID_INPUT_EXCEPTION\n");
+	continue;
+      }
       
-      printf("%s %s\n",loc,locNew);
+      printf("Main: %s %s\n",loc,locNew);
+      
       moveResult=board->move(board,loc,locNew,"white");
+      
       if (moveResult!=LEGAL_MOVE){
 	if (moveResult==NOT_YOUR_PIECE){
-	  printf("NOT_YOUR_PIECE\n");
+	  printf("\nNOT_YOUR_PIECE\n");
 	  continue;
 	}else if(moveResult==ILLEGAL_MOVE_EXCEPTION){
-	  printf("ILLEGAL_MOVE_EXCEPTION\n");
+	  printf("\nILLEGAL_MOVE_EXCEPTION\n");
 	  continue;
 	}else if(moveResult==IN_CHECK_EXCEPTION){
-	  printf("IN_CHECK_EXCEPTION\n");
+	  printf("\nIN_CHECK_EXCEPTION\n");
 	  continue;
 	}else{
-	  printf("Exception\n");
+	  printf("\nException\n");
 	  continue;
 	}
       }

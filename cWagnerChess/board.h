@@ -24,6 +24,8 @@
 #define NOT_YOUR_PIECE 1
 #define ILLEGAL_MOVE_EXCEPTION 2
 #define IN_CHECK_EXCEPTION 3
+#define INVALID_INPUT_EXCEPTION 0
+#define LEGAL_INPUT 1
 
 typedef struct board* BoardPtr;
 typedef struct board{
@@ -38,3 +40,5 @@ typedef struct board{
 BoardPtr initBoard();
 char* toStringBoard(BoardPtr);
 int move(BoardPtr,char*,char*,char*);
+int getCol(char*);
+int getRow(char*);

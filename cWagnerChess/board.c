@@ -79,8 +79,40 @@ char* toStringBoard(BoardPtr b){
 }
 
 int move(BoardPtr b, char* loc, char* locNew,char* color){
+  PiecePtr p=b->locations[getCol(loc)][getRow(loc)]->getPiece(b->locations[getCol(loc)][getRow(loc)]);
+  printf("Piece @ %d%d?\n",getCol(loc),getRow(loc));
+  printf("DestLocation @ %d%d\n",getCol(locNew),getRow(locNew));
+
+  if (p!=NULL)
+    printf("%s\n",p->toString(p));
+  
   return NOT_YOUR_PIECE;
   return ILLEGAL_MOVE_EXCEPTION;
   return IN_CHECK_EXCEPTION;
   return LEGAL_MOVE;
+}
+
+int getCol(char* loc){
+  switch(loc[0]){
+  case 'A':
+    return 0;
+  case 'B':
+    return 1;
+  case 'C':
+    return 2;
+  case 'D':
+    return 3;
+  case 'E':
+    return 4;
+  case 'F':
+    return 5;
+  case 'G':
+    return 6;
+  case 'H':
+    return 7;
+  }
+}
+
+int getRow(char* loc){
+  return atoi(&loc[1]);
 }

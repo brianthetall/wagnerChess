@@ -19,7 +19,8 @@ LocationPtr initLocation(LocationPtr lp, int i, int j){
   lp->toString=&toStringLocation;
   lp->setPiece=setPiece;
   lp->clearPiece=clearPiece;
-
+  lp->getPiece=&getPiece;
+  
   //printf("Location: %s@%x\n",lp->toString(lp),lp);
 
   return lp;
@@ -48,3 +49,6 @@ void clearPiece(LocationPtr lp){
   lp->piece=NULL;
 }
 
+PiecePtr getPiece(LocationPtr lp){
+  return lp->piece;
+}
