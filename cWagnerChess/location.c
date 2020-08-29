@@ -21,3 +21,12 @@ char* toStringLocation(LocationPtr lp){
   sprintf(retval,"|%c%d|",lp->col+65,lp->row);
   return retval;
 }
+
+void setPiece(LocationPtr lp,PiecePtr p){
+  lp->piece=p;
+}
+
+void clearPiece(LocationPtr lp){
+  lp->piece=NULL;
+}
+

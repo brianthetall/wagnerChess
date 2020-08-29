@@ -1,3 +1,6 @@
+#ifndef PIECE
+#define PIECE
+
 enum {KING,QUEEN,BISHOP,KNIGHT,ROOK,PAWN};
 
 
@@ -13,6 +16,7 @@ typedef struct piece{
   char* (*getType)(PiecePtr p);
 } Piece;
 
+#endif
 
 PiecePtr initPiece(int, char*);//the only w/o reference to self!
 char* getColor(PiecePtr);
