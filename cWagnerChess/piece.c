@@ -19,17 +19,17 @@ PiecePtr initPiece(int type, char* color){
 char* getType(PiecePtr p){
   switch(p->pieceType){
   case KING:
-    return "king";
+    return "K ";
   case QUEEN:
-    return "queen";
+    return "Q ";
   case BISHOP:
-    return "bishop";
+    return "B ";
   case KNIGHT:
-    return "knight";
+    return "N ";
   case ROOK:
-    return "rook";
+    return "R ";
   case PAWN:
-    return "pawn";
+    return "p ";
   default:
     return "wtf";
   }
@@ -41,6 +41,10 @@ char* getColor(PiecePtr p){
 }
 
 char* toStringPiece(PiecePtr p){
+  return p->getType(p);
+}
+
+char* toStringPieceLong(PiecePtr p){
 
   char* s=(char*)malloc(50);
   strcat(s,p->getColor(p));
