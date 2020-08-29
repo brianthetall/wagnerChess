@@ -20,14 +20,21 @@
 #define KNIGHT2 14
 #define ROOK2 15
 
+#define LEGAL_MOVE 0
+#define NOT_YOUR_PIECE 1
+#define ILLEGAL_MOVE_EXCEPTION 2
+#define IN_CHECK_EXCEPTION 3
+
 typedef struct board* BoardPtr;
 typedef struct board{
   PlayerPtr white;
   PlayerPtr black;
   LocationPtr locations[8][8];
   char* (*toString)(BoardPtr b);
+  int (*move)(BoardPtr b,char* loc,char* locNew,char* color);
   
 } Board;
 
 BoardPtr initBoard();
 char* toStringBoard(BoardPtr);
+int move(BoardPtr,char*,char*,char*);

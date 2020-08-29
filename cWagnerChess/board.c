@@ -4,6 +4,7 @@ BoardPtr initBoard(){
 
   BoardPtr b = (BoardPtr)malloc(sizeof(Board));
   b->toString=&toStringBoard;
+  b->move=&move;
 
   //INIT LOCATIONS
   int i,j=0;
@@ -75,4 +76,11 @@ char* toStringBoard(BoardPtr b){
   
   return s;
 
+}
+
+int move(BoardPtr b, char* loc, char* locNew,char* color){
+  return NOT_YOUR_PIECE;
+  return ILLEGAL_MOVE_EXCEPTION;
+  return IN_CHECK_EXCEPTION;
+  return LEGAL_MOVE;
 }
