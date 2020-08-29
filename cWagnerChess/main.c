@@ -10,8 +10,8 @@ int main(int argc,char** argv){
   BoardPtr board=initBoard();
   printf("Board.toString:\n");
   printf("%s",board->toString(board));
-  printf("%s\n", board->black->toString(board->black) );
-  printf("%s\n", board->white->toString(board->white) );
+  //printf("%s\n", board->black->toString(board->black) );
+  //printf("%s\n", board->white->toString(board->white) );
   
 
   //CONNECTION FSM STUFF:

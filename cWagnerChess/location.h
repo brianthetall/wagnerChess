@@ -1,6 +1,7 @@
 #ifndef LOC
 #define LOC
 
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "piece.h"

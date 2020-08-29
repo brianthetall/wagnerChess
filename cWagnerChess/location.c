@@ -32,7 +32,7 @@ char* toStringLocation(LocationPtr lp){
   if(lp->piece==NULL)
     sprintf(retval,"|" ANSI_COLOR_BLUE "%c%d" ANSI_COLOR_RESET,lp->col+65,lp->row);
   else{
-    if(lp->piece->getColor(lp->piece)=="black")
+    if( strcmp( lp->piece->getColor(lp->piece), "black" ) == 0  )
       sprintf(retval,"|" ANSI_COLOR_RED "%s" ANSI_COLOR_RESET,lp->piece->toString(lp->piece));
     else
       sprintf(retval,"|" ANSI_COLOR_CYAN "%s" ANSI_COLOR_RESET,lp->piece->toString(lp->piece));

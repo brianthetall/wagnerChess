@@ -3,6 +3,23 @@
 #include <stdlib.h>
 #include "myString.h"
 
+#define KING 0
+#define QUEEN 1
+#define BISHOP 2
+#define KNIGHT 3
+#define ROOK 4
+#define PAWN1 5
+#define PAWN2 6
+#define PAWN3 7
+#define PAWN4 8
+#define PAWN5 9
+#define PAWN6 10
+#define PAWN7 11
+#define PAWN8 12
+#define BISHOP2 13
+#define KNIGHT2 14
+#define ROOK2 15
+
 typedef struct board* BoardPtr;
 typedef struct board{
   PlayerPtr white;
