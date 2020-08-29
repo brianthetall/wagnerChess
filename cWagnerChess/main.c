@@ -13,6 +13,9 @@ int main(int argc,char** argv){
   printf("%s\n", board->black->toString(board->black) );
   printf("%s\n", board->white->toString(board->white) );
   
+
+  //CONNECTION FSM STUFF:
+
   if(argc==1){
     printf("Must specify (c)lient or (s)erver. If client, must also provide IP address of server.\n");
     return -1;

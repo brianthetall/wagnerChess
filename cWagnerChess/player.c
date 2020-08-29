@@ -29,13 +29,14 @@ PlayerPtr initPlayer(char* color){
 
 char* toStringPlayer(PlayerPtr p){
 
+  char *t="",*s=(char*)malloc(50);
   int i=0;
   for(i=0; i<= PAWN+10 ; i++){
-    printf("%s %s\n",p->pieces[i]->toString(p->pieces[i]),
-	   p->pieces[i]->getType(p->pieces[i]));
+    sprintf(s,"%s\n",p->pieces[i]->toString(p->pieces[i]));
+    t=mystrcat(t,s);
   }
 
-  return "";
+  return t;
 }
 
 char* playerGetColor(PlayerPtr p){
