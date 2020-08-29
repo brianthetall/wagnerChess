@@ -8,6 +8,8 @@ LocationPtr initLocation(LocationPtr lp, int i, int j){
   lp->row=j;
 
   lp->toString=&toStringLocation;
+  lp->setPiece=setPiece;
+  lp->clearPiece=clearPiece;
 
   //printf("Location: %s@%x\n",lp->toString(lp),lp);
 
@@ -18,7 +20,10 @@ LocationPtr initLocation(LocationPtr lp, int i, int j){
 char* toStringLocation(LocationPtr lp){
 
   char* retval = (char*) calloc(sizeof(char),4);
-  sprintf(retval,"|%c%d|",lp->col+65,lp->row);
+  if(lp->piece==NULL)
+    sprintf(retval,"|%c%d|",lp->col+65,lp->row);
+  else
+    sprintf(retval,"|%s|",lp->piece->toString(lp->piece));
   return retval;
 }
 

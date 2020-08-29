@@ -17,6 +17,10 @@ BoardPtr initBoard(){
   //INIT PLAYERS:
   b->white = initPlayer("white");
   b->black = initPlayer("black");
+
+  PiecePtr* blacks = b->black->pieces;
+  //printf("%s",blacks[0]->toString(blacks[0]));
+  b->locations[H][1]->setPiece(b->locations[H][1],blacks[0]);
   
   return b;
 }

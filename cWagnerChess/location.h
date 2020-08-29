@@ -27,6 +27,8 @@ typedef struct location{
   enum rows row;
 
   char* (*toString)(LocationPtr lp);
+  void (*setPiece)(LocationPtr lp,PiecePtr p);
+  void (*clearPiece)(LocationPtr lp);
   
 } Location;
 
