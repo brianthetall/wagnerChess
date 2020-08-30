@@ -13,6 +13,11 @@ PiecePtr initPiece(int type, char* color){
   p->toString=&toStringPiece;
   p->getType=&getType;
   p->type=&getEnumType;
+  p->sex=&sex;
+  p->unsex=&unsex;
+  p->hasMoved=&hasMoved;
+  
+  p->virgin=VIRGIN;
   
   return p;
 }
@@ -57,4 +62,14 @@ char* toStringPieceLong(PiecePtr p){
   strcat(s,p->getType(p));
   
   return s;
+}
+
+void sex(PiecePtr p){
+  p->virgin=SCREWED;
+}
+void unsex(PiecePtr p){
+  p->virgin=VIRGIN;
+}
+int hasMoved(PiecePtr p){
+  return p->virgin==VIRGIN ? VIRGIN : SCREWED;
 }

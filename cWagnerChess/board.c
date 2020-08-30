@@ -109,8 +109,13 @@ int move(BoardPtr b, char* loc, char* locNew,char* color){
     return ILLEGAL_MOVE_EXCEPTION;
   else{//execute the move
     locationNew->setPiece(locationNew,p);
+    p->sex(p);//remove piece virginity
     location->clearPiece(location);
     clearLinkedList(b);//clear the linked list pointers in ALL Locations
+    //Look for CHECK
+    //if (check){
+    //p->unsex(p);
+    //}
   }
   
   return LEGAL_MOVE;  

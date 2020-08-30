@@ -173,6 +173,7 @@ LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
 
   printf("pawnMoves:\n");
   if( strcmp( p->getColor(p) , "white") == 0){
+
     //move NE
     current = current->ne==NULL ? NULL:current->ne;
     temp=checkLocation(current,p->getColor(p));
@@ -185,6 +186,21 @@ LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
       head=temp;
     }
 
+    //possibly take the second jump:
+    if( temp != NULL && p->hasMoved(p)==VIRGIN ){
+      temp = temp->ne==NULL ? NULL:temp->ne;
+      temp=checkLocation(temp,p->getColor(p));
+      if (retval==NULL && temp!=NULL){
+	retval=temp;
+	head=temp;
+      }
+      else if(temp!=NULL){
+	head->nextLocation=temp;
+	head=temp;
+      }
+    }
+    
+    
     //look for attack options N,E
     current=lp;
     temp=NULL;
@@ -233,6 +249,21 @@ LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
       head=temp;
     }
 
+    //possibly take the second jump:
+    if( temp != NULL && p->hasMoved(p)==VIRGIN ){
+      temp = temp->sw==NULL ? NULL:temp->sw;
+      temp=checkLocation(temp,p->getColor(p));
+      if (retval==NULL && temp!=NULL){
+	retval=temp;
+	head=temp;
+      }
+      else if(temp!=NULL){
+	head->nextLocation=temp;
+	head=temp;
+      }
+    }
+
+    
     //look for attack options S,W
     current=lp;
     temp=NULL;
@@ -746,7 +777,7 @@ LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   //check NORTH
   current=lp;
-  printf("kingMoves:while\n");
+
   if( current->n != NULL ){    
     temp=checkLocation(current->n,p->getColor(p));
     if (retval==NULL && temp!=NULL){
@@ -762,7 +793,7 @@ LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   //check WEST
   current=lp;
-  printf("kingMoves:while\n");
+
   if( current->w != NULL ){    
     temp=checkLocation(current->w,p->getColor(p));
     if (retval==NULL && temp!=NULL){
@@ -778,7 +809,7 @@ LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   //SOUTH
   current=lp;
-  printf("kingMoves:while\n");
+
   if( current->s != NULL ){    
     temp=checkLocation(current->s,p->getColor(p));
     if (retval==NULL && temp!=NULL){
@@ -794,7 +825,7 @@ LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   //EAST
   current=lp;
-  printf("kingMoves:while\n");
+
   if( current->e != NULL ){    
     temp=checkLocation(current->e,p->getColor(p));
     if (retval==NULL && temp!=NULL){
@@ -810,7 +841,7 @@ LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   //NW
   current=lp;
-  printf("kingMoves:while\n");
+
   if( current->nw != NULL ){    
     temp=checkLocation(current->nw,p->getColor(p));
     if (retval==NULL && temp!=NULL){
@@ -826,7 +857,7 @@ LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   //SW
   current=lp;
-  printf("kingMoves:while\n");
+
   if( current->sw != NULL ){    
     temp=checkLocation(current->sw,p->getColor(p));
     if (retval==NULL && temp!=NULL){
@@ -842,7 +873,7 @@ LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   //SE
   current=lp;
-  printf("kingMoves:while\n");
+
   if( current->se != NULL ){    
     temp=checkLocation(current->se,p->getColor(p));
     if (retval==NULL && temp!=NULL){
@@ -858,7 +889,7 @@ LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   //NE
   current=lp;
-  printf("kingMoves:while\n");
+
   if( current->ne != NULL ){    
     temp=checkLocation(current->ne,p->getColor(p));
     if (retval==NULL && temp!=NULL){
@@ -883,7 +914,6 @@ LocationPtr knightMoves(PiecePtr p, LocationPtr lp){//return a list of LocationP
   printf("knightMoves:\n");
 
   //check NORTH
-  printf("north\n");
   current=lp;
   left=right=NULL;
   current = current->n==NULL ? NULL : current->n;
@@ -893,18 +923,14 @@ LocationPtr knightMoves(PiecePtr p, LocationPtr lp){//return a list of LocationP
     left = current->w==NULL ? NULL : current->w;
   if(current!=NULL)
     right = current->e==NULL ? NULL : current->e;
-
-  printf("%X %X\n",left,right);
   
   if (left!=NULL){
     temp=checkLocation(left,p->getColor(p));
     if (retval==NULL && temp!=NULL){
-      printf("init retval\n");
       retval=temp;
       head=temp;
     }
     else if(temp!=NULL){
-      printf("adding to head\n");
       head->nextLocation=temp;
       head=temp;
     } 
@@ -912,19 +938,16 @@ LocationPtr knightMoves(PiecePtr p, LocationPtr lp){//return a list of LocationP
   if (right!=NULL){
     temp=checkLocation(right,p->getColor(p));
     if (retval==NULL && temp!=NULL){
-      printf("init retval (r)\n");
       retval=temp;
       head=temp;
     }
     else if(temp!=NULL){
-      printf("adding to head (r)\n");
       head->nextLocation=temp;
       head=temp;
     } 
   }//end right
 
   //EAST
-  printf("east\n");
   current=lp;
   left=right=NULL;
   current = current->e==NULL ? NULL : current->e;
@@ -959,7 +982,6 @@ LocationPtr knightMoves(PiecePtr p, LocationPtr lp){//return a list of LocationP
   }//end right
   
   //SOUTH
-  printf("south\n");
   current=lp;
   left=right=NULL;
   current = current->s==NULL ? NULL : current->s;
@@ -994,7 +1016,6 @@ LocationPtr knightMoves(PiecePtr p, LocationPtr lp){//return a list of LocationP
   }//end right
   
   //WEST
-  printf("west\n");
   current=lp;
   left=right=NULL;
   current = current->w==NULL ? NULL : current->w;
