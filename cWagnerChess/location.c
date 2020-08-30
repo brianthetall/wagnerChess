@@ -169,6 +169,7 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
 LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
 //head is the last added to the linked list
   LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL;
+  PiecePtr potentialEnemy=NULL;
 
   printf("pawnMoves:\n");
   if( strcmp( p->getColor(p) , "white") == 0){
@@ -183,8 +184,43 @@ LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
       head->nextLocation=temp;
       head=temp;
     }
+
+    //look for attack options N,E
+    current=lp;
+    temp=NULL;
+    if(current->n!=NULL){
+      potentialEnemy = current->n->getPiece(current->n);
+      temp = potentialEnemy!=NULL && 0!=strcmp(p->getColor(p),potentialEnemy->getColor(potentialEnemy)) ? current->n : NULL;
+
+      if (retval==NULL && temp!=NULL){
+	retval=temp;
+	head=temp;
+      }
+      else if(temp!=NULL){
+	head->nextLocation=temp;
+	head=temp;
+      }
+    }//END NORTH
+    //attack east?
+    current=lp;
+    temp=NULL;
+    if(current->e!=NULL){
+      potentialEnemy = current->e->getPiece(current->e);
+      temp = potentialEnemy!=NULL && 0!=strcmp(p->getColor(p),potentialEnemy->getColor(potentialEnemy)) ? current->e : NULL;
+
+      if (retval==NULL && temp!=NULL){
+	retval=temp;
+	head=temp;
+      }
+      else if(temp!=NULL){
+	head->nextLocation=temp;
+	head=temp;
+      }
+    }//END EAST
+
+    
   }
-  else{
+  else{//black
     //move SW
     current = current->sw==NULL ? NULL:current->sw;
     temp=checkLocation(current,p->getColor(p));
@@ -197,6 +233,38 @@ LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
       head=temp;
     }
 
+    //look for attack options S,W
+    current=lp;
+    temp=NULL;
+    if(current->s!=NULL){
+      potentialEnemy = current->s->getPiece(current->s);
+      temp = potentialEnemy!=NULL && 0!=strcmp(p->getColor(p),potentialEnemy->getColor(potentialEnemy)) ? current->s : NULL;
+
+      if (retval==NULL && temp!=NULL){
+	retval=temp;
+	head=temp;
+      }
+      else if(temp!=NULL){
+	head->nextLocation=temp;
+	head=temp;
+      }
+    }//END south
+    //attack west?
+    current=lp;
+    temp=NULL;
+    if(current->w!=NULL){
+      potentialEnemy = current->w->getPiece(current->w);
+      temp = potentialEnemy!=NULL && 0!=strcmp(p->getColor(p),potentialEnemy->getColor(potentialEnemy)) ? current->w : NULL;
+
+      if (retval==NULL && temp!=NULL){
+	retval=temp;
+	head=temp;
+      }
+      else if(temp!=NULL){
+	head->nextLocation=temp;
+	head=temp;
+      }
+    }//END west
   }
 
   return retval;
