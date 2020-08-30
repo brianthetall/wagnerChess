@@ -405,6 +405,234 @@ LocationPtr bishopMoves(PiecePtr p, LocationPtr lp){//return a list of LocationP
   return retval;
 }
 
+//change to QUEEN:
+LocationPtr queenMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
+
+  //head is the last added to the linked list
+  LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL;
+
+  printf("queenMoves:\n");
+  
+  //check NORTH
+  while(1){
+    printf("queenMoves:while\n");
+    if( current->n == NULL )
+      break;
+    
+    temp=checkLocation(current->n,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+  }
+
+  
+  //check WEST
+  current=lp;
+  while(1){
+    if( current->w == NULL )
+      break;
+    
+    temp=checkLocation(current->w,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+
+  }
+
+  //check SOUTH
+  current=lp;
+  while(1){
+    if( current->s == NULL )
+      break;
+    
+    temp=checkLocation(current->s,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+  }
+
+  //CHECK EAST
+  current=lp;
+  while(1){
+    if( current->e == NULL )
+      break;
+    
+    temp=checkLocation(current->e,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+
+
+  }
+  
+  
+  //check NORTHW
+  while(1){
+    printf("bishopMoves:while\n");
+    if( current->nw == NULL )
+      break;
+    
+    temp=checkLocation(current->nw,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+  }
+
+  
+  //check SouthW
+  current=lp;
+  while(1){
+    if( current->sw == NULL )
+      break;
+    
+    temp=checkLocation(current->sw,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+
+  }
+
+  //check SOUTHEast
+  current=lp;
+  while(1){
+    if( current->se == NULL )
+      break;
+    
+    temp=checkLocation(current->se,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+  }
+
+  //CHECK NorthEAST
+  current=lp;
+  while(1){
+    if( current->ne == NULL )
+      break;
+    
+    temp=checkLocation(current->ne,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+
+
+  }
+  
+  return retval;
+}
+
 
 //return NULL if same color piece or if 
 LocationPtr checkLocation(LocationPtr lp,char *color){
