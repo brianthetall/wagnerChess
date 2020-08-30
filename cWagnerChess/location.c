@@ -172,15 +172,89 @@ LocationPtr rookMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
     }
   }
 
+  
   //check WEST
+  current=lp;
   while(1){
-    break;
+    if( current->w == NULL )
+      break;
+    
+    temp=checkLocation(current->w,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+
   }
 
   //check SOUTH
+  current=lp;
+  while(1){
+    if( current->s == NULL )
+      break;
+    
+    temp=checkLocation(current->s,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+  }
 
   //CHECK EAST
+  current=lp;
+  while(1){
+    if( current->e == NULL )
+      break;
+    
+    temp=checkLocation(current->e,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
 
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+
+
+  }
+  
+  
   return retval;
 
 }
