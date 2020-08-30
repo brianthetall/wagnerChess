@@ -110,11 +110,21 @@ int move(BoardPtr b, char* loc, char* locNew,char* color){
   else{//execute the move
     locationNew->setPiece(locationNew,p);
     location->clearPiece(location);
+    clearLinkedList(b);//clear the linked list pointers in ALL Locations
   }
   
   return LEGAL_MOVE;  
   return IN_CHECK_EXCEPTION;
 
+}
+
+void clearLinkedList(BoardPtr b){
+  int i,j;
+  for (i=0;i<H;i++){
+    for(j=0;j<h;j++){
+      b->locations[i][j]->nextLocation=NULL;
+    }
+  }
 }
 
 int getCol(char* loc){

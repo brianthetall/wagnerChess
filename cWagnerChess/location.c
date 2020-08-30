@@ -120,7 +120,7 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
     legalMovesLinkedList=bishopMoves(p,location);
     break;
 
-  /*
+  
   case KNIGHT:
     printf("knight\n");
     legalMovesLinkedList=knightMoves(p,location);
@@ -136,6 +136,7 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
     legalMovesLinkedList=kingMoves(p,location);
     break;
 
+    /*
   case PAWN:
     printf("pawn\n");
     legalMovesLinkedList=pawnMoves(p,location);
@@ -630,6 +631,301 @@ LocationPtr queenMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPt
 
   }
   
+  return retval;
+}
+
+//change to king;
+LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
+
+  //head is the last added to the linked list
+  LocationPtr retval=NULL,head=NULL,current=NULL,temp=NULL;
+
+  printf("kingMoves:\n");
+  
+  //check NORTH
+  current=lp;
+  printf("kingMoves:while\n");
+  if( current->n != NULL ){    
+    temp=checkLocation(current->n,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    
+  }
+  
+  //check WEST
+  current=lp;
+  printf("kingMoves:while\n");
+  if( current->w != NULL ){    
+    temp=checkLocation(current->w,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    
+  }
+  
+  //SOUTH
+  current=lp;
+  printf("kingMoves:while\n");
+  if( current->s != NULL ){    
+    temp=checkLocation(current->s,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    
+  }
+  
+  //EAST
+  current=lp;
+  printf("kingMoves:while\n");
+  if( current->e != NULL ){    
+    temp=checkLocation(current->e,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    
+  }
+  
+  //NW
+  current=lp;
+  printf("kingMoves:while\n");
+  if( current->nw != NULL ){    
+    temp=checkLocation(current->nw,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    
+  }
+  
+  //SW
+  current=lp;
+  printf("kingMoves:while\n");
+  if( current->sw != NULL ){    
+    temp=checkLocation(current->sw,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    
+  }
+  
+  //SE
+  current=lp;
+  printf("kingMoves:while\n");
+  if( current->se != NULL ){    
+    temp=checkLocation(current->se,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    
+  }
+  
+  //NE
+  current=lp;
+  printf("kingMoves:while\n");
+  if( current->ne != NULL ){    
+    temp=checkLocation(current->ne,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    
+  }
+  
+  return retval;
+}
+
+LocationPtr knightMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
+
+  //head is the last added to the linked list
+  LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL,left=NULL,right=NULL;
+
+  printf("knightMoves:\n");
+
+  //check NORTH
+  printf("north\n");
+  current=lp;
+  left=right=NULL;
+  current = current->n==NULL ? NULL : current->n;
+  if(current!=NULL)
+    current = current->n==NULL ? NULL : current->n;
+  if(current!=NULL)
+    left = current->w==NULL ? NULL : current->w;
+  if(current!=NULL)
+    right = current->e==NULL ? NULL : current->e;
+
+  printf("%X %X\n",left,right);
+  
+  if (left!=NULL){
+    temp=checkLocation(left,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      printf("init retval\n");
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      printf("adding to head\n");
+      head->nextLocation=temp;
+      head=temp;
+    } 
+  }//end left
+  if (right!=NULL){
+    temp=checkLocation(right,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      printf("init retval (r)\n");
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      printf("adding to head (r)\n");
+      head->nextLocation=temp;
+      head=temp;
+    } 
+  }//end right
+
+  //EAST
+  printf("east\n");
+  current=lp;
+  left=right=NULL;
+  current = current->e==NULL ? NULL : current->e;
+  if(current!=NULL)
+    current = current->e==NULL ? NULL : current->e;
+  if(current!=NULL)
+    left = current->s==NULL ? NULL : current->s;
+  if(current!=NULL)
+    right = current->n==NULL ? NULL : current->n;
+
+  if (left!=NULL){
+    temp=checkLocation(left,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    } 
+  }//end left
+  if (right!=NULL){
+    temp=checkLocation(right,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    } 
+  }//end right
+  
+  //SOUTH
+  printf("south\n");
+  current=lp;
+  left=right=NULL;
+  current = current->s==NULL ? NULL : current->s;
+  if(current!=NULL)
+    current = current->s==NULL ? NULL : current->s;
+  if(current!=NULL)
+    left = current->e==NULL ? NULL : current->e;
+  if(current!=NULL)
+    right = current->w==NULL ? NULL : current->w;
+
+  if (left!=NULL){
+    temp=checkLocation(left,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    } 
+  }//end left
+  if (right!=NULL){
+    temp=checkLocation(right,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    } 
+  }//end right
+  
+  //WEST
+  printf("west\n");
+  current=lp;
+  left=right=NULL;
+  current = current->w==NULL ? NULL : current->w;
+  if(current!=NULL)
+    current = current->w==NULL ? NULL : current->w;
+  if(current!=NULL)
+    left = current->s==NULL ? NULL : current->s;
+  if(current!=NULL)
+    right = current->n==NULL ? NULL : current->n;
+
+  if (left!=NULL){
+    temp=checkLocation(left,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    } 
+  }//end left
+  if (right!=NULL){
+    temp=checkLocation(right,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    } 
+  }//end right
+
   return retval;
 }
 
