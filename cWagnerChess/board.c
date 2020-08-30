@@ -92,14 +92,23 @@ char* toStringBoard(BoardPtr b){
 
 int move(BoardPtr b, char* loc, char* locNew,char* color){
   PiecePtr p=b->locations[getCol(loc)][getRow(loc)]->getPiece(b->locations[getCol(loc)][getRow(loc)]);
+  LocationPtr location=b->locations[getCol(loc)][getRow(loc)];
+  LocationPtr locationNew=b->locations[getCol(locNew)][getRow(locNew)];
+  
   printf("Piece @ %d%d?\n",getCol(loc),getRow(loc));
   printf("DestLocation @ %d%d\n",getCol(locNew),getRow(locNew));
-
-  if (p!=NULL)
-    printf("%s\n",p->toString(p));
   
-  return NOT_YOUR_PIECE;
-  return ILLEGAL_MOVE_EXCEPTION;
+  if (p!=NULL)
+    printf("%s, color=%s ?== %s %d\n",p->toString(p), p->getColor(p), color,mystrcmp(color,p->getColor(p)));
+
+  if(p==NULL || mystrcmp(color,p->getColor(p))!=0 )
+    return NOT_YOUR_PIECE;
+
+  /*
+  if (!(location->isMoveLegal(p,location,locationNew)))
+    return ILLEGAL_MOVE_EXCEPTION;
+  */
+  
   return IN_CHECK_EXCEPTION;
   return LEGAL_MOVE;
 }

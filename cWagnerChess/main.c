@@ -11,7 +11,7 @@ int checkInput(char*);
 
 int checkInput(char* location){
 
-  printf("CheckInput: %d<=%d<=%d %d<=%d<=%d\n", 'A',location[0],'H','0',location[1],'7');
+  //printf("CheckInput: %d<=%d<=%d %d<=%d<=%d\n", 'A',location[0],'H','0',location[1],'7');
   if ('A' <= location[0] && location[0] <= 'H' && '0' <= location[1] && location[1]<= '7'){
     return 1;
   }
@@ -69,7 +69,7 @@ int main(int argc,char** argv){
 	continue;
       }
       
-      printf("Main: %s %s\n",loc,locNew);
+      //printf("Main: %s %s\n",loc,locNew);
       
       moveResult=board->move(board,loc,locNew,"white");
       

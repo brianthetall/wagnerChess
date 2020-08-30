@@ -50,3 +50,16 @@ char* mystrcat(char* s,const char* t){
   s=start;
   return s;
 }
+
+int mystrcmp(const char* s, const char *t){
+
+  while( *s==*t && *s!='\0' && *t!='\0'){
+    s++;t++;
+  }
+
+  if (*s!=*t)
+    return 1;
+
+  return 0;
+  
+}

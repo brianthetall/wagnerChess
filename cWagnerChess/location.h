@@ -43,3 +43,6 @@ void setPiece(LocationPtr,PiecePtr);
 void clearPiece(LocationPtr);
 PiecePtr getPiece(LocationPtr);
 char* printInterconnections(LocationPtr);
+int isMoveLegal(PiecePtr,LocationPtr,LocationPtr);
+LocationPtr* rookMoves(LocationPtr,LocationPtr,int*);
+
