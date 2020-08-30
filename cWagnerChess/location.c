@@ -17,10 +17,11 @@ LocationPtr initLocation(LocationPtr lp, int i, int j){
   lp->row=j;
 
   lp->toString=&toStringLocation;
-  lp->setPiece=setPiece;
-  lp->clearPiece=clearPiece;
+  lp->setPiece=&setPiece;
+  lp->clearPiece=&clearPiece;
   lp->getPiece=&getPiece;
   lp->memory=&printInterconnections;
+  lp->isMoveLegal=&isMoveLegal;
 
   lp->n=NULL;
   lp->nw=NULL;
@@ -103,15 +104,27 @@ char* printInterconnections(LocationPtr lp){
 //0false ;; 1true
 int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
 
-  int type=p->getType(p);
+  printf("isMoveLegal:\n");
+  LocationPtr legalMovesLinkedList;
+
   
-  
+  int type=p->type(p);
   switch(type){
   case ROOK:
-    LocationPtr legalMovesLinkedList=rookMoves(p,location);
+    printf("rook:\n");
+    legalMovesLinkedList=rookMoves(p,location);
     break;
   }
+  
+  
+  
+  LocationPtr temp=legalMovesLinkedList;
+  while(temp != NULL){
+    printf("isMoveLegal: %s\n",temp->toString(temp));
+    temp = temp->nextLocation;
+  }
 
+  
   //traverse the linked list, see if 'locationNext' is one of them
   while(1){
     if(locationNext==legalMovesLinkedList)
@@ -120,26 +133,48 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
       return 0;
     legalMovesLinkedList = legalMovesLinkedList->nextLocation;
   }
-
+  
+  
   return 0;
 
 }
 
 LocationPtr rookMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
 
-  LocationPtr retval=NULL,head=NULL;//head is the last added to the linked list
+  //head is the last added to the linked list
+  LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL;
 
+  printf("rookMoves:\n");
+  
   //check NORTH
   while(1){
-    if( lp->n == NULL )
+    printf("rookMoves:while\n");
+    if( current->n == NULL )
       break;
     
+    temp=checkLocation(current->n,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
 
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
   }
 
   //check WEST
   while(1){
-
+    break;
   }
 
   //check SOUTH
@@ -151,6 +186,11 @@ LocationPtr rookMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
 }
 
 //return NULL if same color piece or if 
-LocationPtr checkLocation(LocationPtr lp){
-
+LocationPtr checkLocation(LocationPtr lp,char *color){
+  if(lp->getPiece(lp) == NULL)
+    return lp;//empty location
+  if( 0== strcmp(lp->getPiece(lp)->getColor(lp->getPiece(lp)) , color))
+    return NULL;
+  else
+    return lp;//enemy piece is there
 }

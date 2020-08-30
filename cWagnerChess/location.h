@@ -34,6 +34,7 @@ typedef struct location{
   void (*clearPiece)(LocationPtr lp);
   PiecePtr (*getPiece)(LocationPtr lp);
   char* (*memory)(LocationPtr lp);
+  int (*isMoveLegal)(PiecePtr p, LocationPtr location, LocationPtr locationNext);
   
 } Location;
 
@@ -46,5 +47,6 @@ void clearPiece(LocationPtr);
 PiecePtr getPiece(LocationPtr);
 char* printInterconnections(LocationPtr);
 int isMoveLegal(PiecePtr,LocationPtr,LocationPtr);
-LocationPtr rookMoves(LocationPtr);//return a list of LocationPtr linked
+LocationPtr rookMoves(PiecePtr,LocationPtr);//return a list of LocationPtr linked
+LocationPtr checkLocation(LocationPtr,char*);
 

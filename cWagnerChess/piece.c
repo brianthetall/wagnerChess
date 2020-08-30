@@ -11,9 +11,14 @@ PiecePtr initPiece(int type, char* color){
   p->color=color;
   p->getColor=&getColor;
   p->toString=&toStringPiece;
-  p->getType=getType;
+  p->getType=&getType;
+  p->type=&getEnumType;
   
   return p;
+}
+
+int getEnumType(PiecePtr p){
+  return p->pieceType;
 }
 
 char* getType(PiecePtr p){

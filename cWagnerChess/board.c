@@ -95,22 +95,26 @@ int move(BoardPtr b, char* loc, char* locNew,char* color){
   LocationPtr location=b->locations[getCol(loc)][getRow(loc)];
   LocationPtr locationNew=b->locations[getCol(locNew)][getRow(locNew)];
   
-  printf("Piece @ %d%d?\n",getCol(loc),getRow(loc));
-  printf("DestLocation @ %d%d\n",getCol(locNew),getRow(locNew));
+  printf("MOVE: Piece @ %d%d?\n",getCol(loc),getRow(loc));
+  printf("MOVE: DestLocation @ %d%d\n",getCol(locNew),getRow(locNew));
   
   if (p!=NULL)
-    printf("%s, color=%s ?== %s %d\n",p->toString(p), p->getColor(p), color,mystrcmp(color,p->getColor(p)));
+    printf("MOVE: %s, color=%s ?== %s %d\n",p->toString(p), p->getColor(p), color,mystrcmp(color,p->getColor(p)));
 
   if(p==NULL || mystrcmp(color,p->getColor(p))!=0 )
     return NOT_YOUR_PIECE;
 
-  /*
-  if (!(location->isMoveLegal(p,location,locationNew)))
+  printf("Move:isMoveLegal %X %X %X\n",p,location,locationNew);
+  if ( !(location->isMoveLegal(p,location,locationNew)))
     return ILLEGAL_MOVE_EXCEPTION;
-  */
+  else{//execute the move
+    locationNew->setPiece(locationNew,p);
+    location->clearPiece(location);
+  }
   
+  return LEGAL_MOVE;  
   return IN_CHECK_EXCEPTION;
-  return LEGAL_MOVE;
+
 }
 
 int getCol(char* loc){

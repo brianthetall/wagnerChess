@@ -26,8 +26,7 @@ int main(int argc,char** argv){
   char* locNew=(char*)malloc(4);//for user input via scanf
   
   BoardPtr board=initBoard();
-  printf("Board.toString:\n");
-  printf("%s",board->toString(board));
+
   //printf("%s\n", board->black->toString(board->black) );
   //printf("%s\n", board->white->toString(board->white) );
   
@@ -52,6 +51,7 @@ int main(int argc,char** argv){
 
   while(1){
     while(1){
+      printf("%s",board->toString(board));
       printf("White Move:");
       scanf("%s",input);
       loc=strtok(input,",");
@@ -92,6 +92,7 @@ int main(int argc,char** argv){
     }
 
     while(1){
+      printf("%s",board->toString(board));
       printf("Black Move:");
       scanf("%s",input);
       loc=strtok(input,",");
