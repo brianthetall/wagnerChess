@@ -48,5 +48,10 @@ PiecePtr getPiece(LocationPtr);
 char* printInterconnections(LocationPtr);
 int isMoveLegal(PiecePtr,LocationPtr,LocationPtr);
 LocationPtr rookMoves(PiecePtr,LocationPtr);//return a list of LocationPtr linked
+LocationPtr bishopMoves(PiecePtr,LocationPtr);
+LocationPtr knightMoves(PiecePtr,LocationPtr);
+LocationPtr kingMoves(PiecePtr,LocationPtr);
+LocationPtr queenMoves(PiecePtr,LocationPtr);
+LocationPtr pawnMoves(PiecePtr,LocationPtr);
 LocationPtr checkLocation(LocationPtr,char*);
 

@@ -114,6 +114,33 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
     printf("rook:\n");
     legalMovesLinkedList=rookMoves(p,location);
     break;
+    
+  case BISHOP:
+    printf("bishop\n");
+    legalMovesLinkedList=bishopMoves(p,location);
+    break;
+
+  /*
+  case KNIGHT:
+    printf("knight\n");
+    legalMovesLinkedList=knightMoves(p,location);
+    break;
+
+  case QUEEN:
+    printf("queen\n");
+    legalMovesLinkedList=queenMoves(p,location);
+    break;
+
+  case KING:
+    printf("king\n");
+    legalMovesLinkedList=kingMoves(p,location);
+    break;
+
+  case PAWN:
+    printf("pawn\n");
+    legalMovesLinkedList=pawnMoves(p,location);
+    break;
+   */ 
   }
   
   
@@ -138,6 +165,7 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
   return 0;
 
 }
+
 
 LocationPtr rookMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
 
@@ -256,8 +284,127 @@ LocationPtr rookMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   
   return retval;
-
 }
+
+//change to bishop:
+LocationPtr bishopMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
+
+  //head is the last added to the linked list
+  LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL;
+
+  printf("bishopMoves:\n");
+  
+  //check NORTHW
+  while(1){
+    printf("bishopMoves:while\n");
+    if( current->nw == NULL )
+      break;
+    
+    temp=checkLocation(current->nw,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+  }
+
+  
+  //check SouthW
+  current=lp;
+  while(1){
+    if( current->sw == NULL )
+      break;
+    
+    temp=checkLocation(current->sw,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+
+  }
+
+  //check SOUTHEast
+  current=lp;
+  while(1){
+    if( current->se == NULL )
+      break;
+    
+    temp=checkLocation(current->se,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+  }
+
+  //CHECK NorthEAST
+  current=lp;
+  while(1){
+    if( current->ne == NULL )
+      break;
+    
+    temp=checkLocation(current->ne,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+    else{//temp==NULL
+      break;
+    }
+
+    if(head->getPiece(head)==NULL){
+      current=head;
+    }else{
+      break;//there is a piece @ head; we cannot go through it
+    }
+
+
+  }
+    
+  return retval;
+}
+
 
 //return NULL if same color piece or if 
 LocationPtr checkLocation(LocationPtr lp,char *color){
