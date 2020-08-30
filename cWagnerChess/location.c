@@ -136,12 +136,11 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
     legalMovesLinkedList=kingMoves(p,location);
     break;
 
-    /*
   case PAWN:
     printf("pawn\n");
     legalMovesLinkedList=pawnMoves(p,location);
     break;
-   */ 
+
   }
   
   
@@ -167,6 +166,41 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
 
 }
 
+LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
+//head is the last added to the linked list
+  LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL;
+
+  printf("pawnMoves:\n");
+  if( strcmp( p->getColor(p) , "white") == 0){
+    //move NE
+    current = current->ne==NULL ? NULL:current->ne;
+    temp=checkLocation(current,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+  }
+  else{
+    //move SW
+    current = current->sw==NULL ? NULL:current->sw;
+    temp=checkLocation(current,p->getColor(p));
+    if (retval==NULL && temp!=NULL){
+      retval=temp;
+      head=temp;
+    }
+    else if(temp!=NULL){
+      head->nextLocation=temp;
+      head=temp;
+    }
+
+  }
+
+  return retval;
+}
 
 LocationPtr rookMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
 
