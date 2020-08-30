@@ -20,6 +20,16 @@ LocationPtr initLocation(LocationPtr lp, int i, int j){
   lp->setPiece=setPiece;
   lp->clearPiece=clearPiece;
   lp->getPiece=&getPiece;
+  lp->memory=&printInterconnections;
+
+  lp->n=NULL;
+  lp->nw=NULL;
+  lp->w=NULL;
+  lp->sw=NULL;
+  lp->s=NULL;
+  lp->se=NULL;
+  lp->e=NULL;
+  lp->ne=NULL;
   
   //printf("Location: %s@%x\n",lp->toString(lp),lp);
 
@@ -51,4 +61,39 @@ void clearPiece(LocationPtr lp){
 
 PiecePtr getPiece(LocationPtr lp){
   return lp->piece;
+}
+
+char* printInterconnections(LocationPtr lp){
+  char* ret=(char*)malloc(1024);
+  strcat(ret,"ret");
+  
+  char* n=lp->n==NULL ? "n":lp->n->toString(lp->n);
+  printf("\n>%s<\n",n);
+  
+  char* nw=lp->nw==NULL ? "nw":lp->nw->toString(lp->nw);
+  printf(">%s<\n",nw);
+  
+  char* w=lp->w==NULL ? "w":lp->w->toString(lp->w);
+  printf(">%s<\n",w);
+  
+  char* sw=lp->sw==NULL ? "sw":lp->sw->toString(lp->sw);
+  printf(">%s<\n",sw);
+  
+  char* s=lp->s==NULL ? "s":lp->s->toString(lp->s);
+  printf(">%s<\n",s);
+  
+  char* se=lp->se==NULL ? "se":lp->se->toString(lp->se);
+  printf(">%s<\n",se);
+  
+  char* e=lp->e==NULL ? "e":lp->e->toString(lp->e);
+  printf(">%s<\n",e);
+   
+  char* ne=lp->ne==NULL ? "ne":lp->ne->toString(lp->ne);
+  printf(">%s<\n",ne);
+
+  
+  printf("%X %X %X %X %X %X %X %X\n",lp->n,lp->nw,lp->w,lp->sw,lp->s,lp->se,lp->e,lp->ne);
+  //  sprintf(ret,"%s %s %s %s %s %s %s %s",n,nw,w,sw,s,se,e,ne);
+  
+  return ret;
 }

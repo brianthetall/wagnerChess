@@ -31,6 +31,7 @@ typedef struct location{
   void (*setPiece)(LocationPtr lp,PiecePtr p);
   void (*clearPiece)(LocationPtr lp);
   PiecePtr (*getPiece)(LocationPtr lp);
+  char* (*memory)(LocationPtr lp);
   
 } Location;
 
@@ -41,3 +42,4 @@ char* toStringLocation(LocationPtr);
 void setPiece(LocationPtr,PiecePtr);
 void clearPiece(LocationPtr);
 PiecePtr getPiece(LocationPtr);
+char* printInterconnections(LocationPtr);

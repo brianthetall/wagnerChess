@@ -12,9 +12,20 @@ BoardPtr initBoard(){
   for(i=0 ; i<=H ; i++){
     for(j=0 ; j<=h ; j++){
       b->locations[i][j] = initLocation( b->locations[i][j], i, j );
+      //printf("%d,%d@%X\n",i,j,b->locations[i][j]);
     }
   }
 
+  interconnectLocations(b);
+
+  /*
+  for(i=0 ; i<=H ; i++){
+    for(j=0 ; j<=h ; j++){
+      printf("Memory[%d][%d]: %s\n",i,j,b->locations[i][j]->memory(b->locations[i][j]));
+    }
+  }
+  */
+  
   //INIT PLAYERS:
   b->white = initPlayer("white");
   b->black = initPlayer("black");
@@ -22,6 +33,7 @@ BoardPtr initBoard(){
   PiecePtr* blacks = b->black->pieces;
   PiecePtr* whites = b->white->pieces;
 
+  //BLACKS
   b->locations[B][7]->setPiece(b->locations[B][7],blacks[KING]);
   b->locations[A][6]->setPiece(b->locations[A][6],blacks[QUEEN]);
   b->locations[A][5]->setPiece(b->locations[A][5],blacks[BISHOP]);
@@ -95,24 +107,106 @@ int move(BoardPtr b, char* loc, char* locNew,char* color){
 int getCol(char* loc){
   switch(loc[0]){
   case 'A':
-    return 0;
+    return A;
   case 'B':
-    return 1;
+    return B;
   case 'C':
-    return 2;
+    return C;
   case 'D':
-    return 3;
+    return D;
   case 'E':
-    return 4;
+    return E;
   case 'F':
-    return 5;
+    return F;
   case 'G':
-    return 6;
+    return G;
   case 'H':
-    return 7;
+    return H;
   }
 }
 
 int getRow(char* loc){
   return atoi(&loc[1]);
+}
+
+void interconnectLocations(BoardPtr bp){
+  int col,row;
+  LocationPtr lp;
+  
+  for(col=A;col<=H;col++){
+    //printf("Col=%d\n",col);
+    for(row=a;row<=h;row++){
+      //printf("Row=%d\n",row);
+      lp=bp->locations[col][row];
+      if(col==A){
+	if(row==a){
+	  lp->se = bp->locations[col+1][row+1];
+	  lp->e = bp->locations[col][row+1];
+	  lp->s = bp->locations[col+1][row];
+	  
+	}else if(row<h){//if not H
+	  lp->w = bp->locations[col][row-1];
+	  lp->sw = bp->locations[col+1][row-1];
+	  lp->s = bp->locations[col+1][row];
+	  lp->se = bp->locations[col+1][row+1];
+	  lp->e = bp->locations[col][row+1];
+	  
+	}else{//if h
+	  lp->w = bp->locations[col][row-1];
+	  lp->sw = bp->locations[col+1][row-1];
+	  lp->s = bp->locations[col+1][row];
+	}
+      }//end if A
+
+      else if(col<H){
+	if(row==a){
+	  lp->n = bp->locations[col-1][row];
+	  lp->s = bp->locations[col+1][row];
+	  lp->se = bp->locations[col+1][row+1];
+	  lp->e = bp->locations[col][row+1];
+	  lp->ne = bp->locations[col-1][row+1];
+
+	}else if(row<h){
+	  lp->n = bp->locations[col-1][row];
+	  lp->nw = bp->locations[col-1][row-1];
+	  lp->w = bp->locations[col][row-1];
+	  lp->sw = bp->locations[col+1][row-1];
+	  lp->s = bp->locations[col+1][row];
+	  lp->se = bp->locations[col+1][row+1];
+	  lp->e = bp->locations[col][row+1];
+	  lp->ne = bp->locations[col-1][row+1];
+	  
+	}else{
+	  lp->n = bp->locations[col-1][row];
+	  lp->nw = bp->locations[col-1][row-1];
+	  lp->w = bp->locations[col][row-1];
+	  lp->sw = bp->locations[col+1][row-1];
+	  lp->s = bp->locations[col+1][row];
+	  
+	}
+      }
+
+      else if(col==H){
+	if(row==a){
+	  lp->n = bp->locations[col-1][row];
+	  lp->ne = bp->locations[col-1][row+1];
+	  lp->e = bp->locations[col][row+1];
+	  
+	}else if(row<h){
+	  lp->w = bp->locations[col][row-1];
+	  lp->nw = bp->locations[col-1][row-1];
+	  lp->n = bp->locations[col-1][row];
+	  lp->ne = bp->locations[col-1][row+1];
+	  lp->e = bp->locations[col][row+1];
+	  
+	}else{
+	  lp->n = bp->locations[col-1][row];
+	  lp->nw = bp->locations[col-1][row-1];
+	  lp->w = bp->locations[col][row-1];
+	  
+	}
+
+      }
+    }
+  }
 }

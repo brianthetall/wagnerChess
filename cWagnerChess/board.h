@@ -38,6 +38,7 @@ typedef struct board{
 } Board;
 
 BoardPtr initBoard();
+void interconnectLocations(BoardPtr);
 char* toStringBoard(BoardPtr);
 int move(BoardPtr,char*,char*,char*);
 int getCol(char*);
