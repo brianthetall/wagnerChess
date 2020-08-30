@@ -30,6 +30,8 @@ LocationPtr initLocation(LocationPtr lp, int i, int j){
   lp->se=NULL;
   lp->e=NULL;
   lp->ne=NULL;
+
+  lp->nextLocation=NULL;//linked list for returning arbitrary # of locations
   
   //printf("Location: %s@%x\n",lp->toString(lp),lp);
 
@@ -96,4 +98,59 @@ char* printInterconnections(LocationPtr lp){
   //  sprintf(ret,"%s %s %s %s %s %s %s %s",n,nw,w,sw,s,se,e,ne);
   
   return ret;
+}
+
+//0false ;; 1true
+int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
+
+  int type=p->getType(p);
+  
+  
+  switch(type){
+  case ROOK:
+    LocationPtr legalMovesLinkedList=rookMoves(p,location);
+    break;
+  }
+
+  //traverse the linked list, see if 'locationNext' is one of them
+  while(1){
+    if(locationNext==legalMovesLinkedList)
+      return 1;
+    if(legalMovesLinkedList==NULL)
+      return 0;
+    legalMovesLinkedList = legalMovesLinkedList->nextLocation;
+  }
+
+  return 0;
+
+}
+
+LocationPtr rookMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
+
+  LocationPtr retval=NULL,head=NULL;//head is the last added to the linked list
+
+  //check NORTH
+  while(1){
+    if( lp->n == NULL )
+      break;
+    
+
+  }
+
+  //check WEST
+  while(1){
+
+  }
+
+  //check SOUTH
+
+  //CHECK EAST
+
+  return retval;
+
+}
+
+//return NULL if same color piece or if 
+LocationPtr checkLocation(LocationPtr lp){
+
 }

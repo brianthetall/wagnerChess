@@ -7,7 +7,8 @@ enum {KING,QUEEN,BISHOP,KNIGHT,ROOK,PAWN};
 typedef struct piece* PiecePtr;
 
 typedef struct piece{
-  int pieceType;//undefined
+
+  int pieceType;
   void* location;//LocPtr
   char* color;
 

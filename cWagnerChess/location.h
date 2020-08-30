@@ -24,6 +24,8 @@ typedef struct location{
   LocationPtr e;
   LocationPtr ne;
 
+  LocationPtr nextLocation;
+
   enum cols col;
   enum rows row;
 
@@ -44,5 +46,5 @@ void clearPiece(LocationPtr);
 PiecePtr getPiece(LocationPtr);
 char* printInterconnections(LocationPtr);
 int isMoveLegal(PiecePtr,LocationPtr,LocationPtr);
-LocationPtr* rookMoves(LocationPtr,LocationPtr,int*);
+LocationPtr rookMoves(LocationPtr);//return a list of LocationPtr linked
 
