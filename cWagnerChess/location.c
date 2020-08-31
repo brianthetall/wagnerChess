@@ -44,12 +44,12 @@ char* toStringLocation(LocationPtr lp){
 
   char* retval = (char*) calloc(sizeof(char),64);
   if(lp->piece==NULL)
-    sprintf(retval,"|" ANSI_COLOR_BLUE "%c%d" ANSI_COLOR_RESET,lp->col+65,lp->row);
+    sprintf(retval, ANSI_COLOR_BLUE "%c%d" ANSI_COLOR_RESET,lp->col+65,lp->row);
   else{
     if( strcmp( lp->piece->getColor(lp->piece), "black" ) == 0  )
-      sprintf(retval,"|" ANSI_COLOR_RED "%s" ANSI_COLOR_RESET,lp->piece->toString(lp->piece));
+      sprintf(retval, ANSI_COLOR_RED "%s" ANSI_COLOR_RESET,lp->piece->toString(lp->piece));
     else
-      sprintf(retval,"|" ANSI_COLOR_CYAN "%s" ANSI_COLOR_RESET,lp->piece->toString(lp->piece));
+      sprintf(retval, ANSI_COLOR_CYAN "%s" ANSI_COLOR_RESET,lp->piece->toString(lp->piece));
   }
   return retval;
 }
@@ -102,7 +102,7 @@ char* printInterconnections(LocationPtr lp){
 }
 
 //0false ;; 1true
-int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
+LocationPtr isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
 
   printf("isMoveLegal:\n");
   LocationPtr legalMovesLinkedList;
@@ -142,9 +142,7 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
     break;
 
   }
-  
-  
-  
+    
   LocationPtr temp=legalMovesLinkedList;
   while(temp != NULL){
     printf("isMoveLegal: %s\n",temp->toString(temp));
@@ -155,9 +153,9 @@ int isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
   //traverse the linked list, see if 'locationNext' is one of them
   while(1){
     if(locationNext==legalMovesLinkedList)
-      return 1;
+      return legalMovesLinkedList;
     if(legalMovesLinkedList==NULL)
-      return 0;
+      return NULL;
     legalMovesLinkedList = legalMovesLinkedList->nextLocation;
   }
   
@@ -310,7 +308,6 @@ LocationPtr rookMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   
   //check NORTH
   while(1){
-    printf("rookMoves:while\n");
     if( current->n == NULL )
       break;
     

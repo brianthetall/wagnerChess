@@ -80,6 +80,7 @@ char* toStringBoard(BoardPtr b){
   for(i=0 ; i<=H ; i++){
     for(j=0 ; j<=h ; j++){
       LocationPtr lp=b->locations[i][j];
+      s=mystrcat(s,"|");
       s=mystrcat(s, lp->toString(lp) );
     }
     s=mystrcat(s,"\n");
@@ -113,13 +114,16 @@ int move(BoardPtr b, char* loc, char* locNew,char* color){
     location->clearPiece(location);
     clearLinkedList(b);//clear the linked list pointers in ALL Locations
     //Look for CHECK
-    //if (check){
-    //p->unsex(p);
-    //}
+    if (inCheck(b,color)){
+      p->unsex(p);
+      location->setPiece(location,p);//move the piece back
+      locationNew->clearPiece(locationNew);
+      return IN_CHECK_EXCEPTION;
+    }
   }
   
   return LEGAL_MOVE;  
-  return IN_CHECK_EXCEPTION;
+
 
 }
 
@@ -237,4 +241,30 @@ void interconnectLocations(BoardPtr bp){
       }
     }
   }
+}
+
+//return 1 if char* player is now in check
+//else 0
+int inCheck(BoardPtr b, char* color){
+
+  PiecePtr king;
+  PiecePtr otherTeam[16];
+  int teamCounter=0;
+  
+    /*
+  LocationPtr king;
+  LocationPtr otherTeam;//linked list of location with opposing team
+    */
+    
+  int i,j;
+  for(i=0;i<H;i++){
+    for(j=0;j<h;j++){
+      b->locations[i][j]; //if this location
+    }
+  }
+
+  clearLinkedList(b);
+  return 0;
+  return 1;
+
 }

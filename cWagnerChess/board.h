@@ -44,3 +44,4 @@ int move(BoardPtr,char*,char*,char*);
 int getCol(char*);
 int getRow(char*);
 void clearLinkedList(BoardPtr);
+int inCheck(BoardPtr,char*);//char* is color
