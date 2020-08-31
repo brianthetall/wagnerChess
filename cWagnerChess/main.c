@@ -97,7 +97,19 @@ int main(int argc,char** argv){
       scanf("%s",input);
       loc=strtok(input,",");
       locNew=strtok(NULL,",");
-    
+
+      if(loc==NULL || locNew==NULL){
+	printf("INVALID_INPUT_EXCEPTION\n");
+	continue;
+      }
+      
+      if(checkInput(loc)==LEGAL_INPUT && checkInput(locNew)==LEGAL_INPUT)
+	printf("LegalInput\n");
+      else{
+	printf("INVALID_INPUT_EXCEPTION\n");
+	continue;
+      }
+          
       printf("%s %s",loc,locNew);
       moveResult=board->move(board,loc,locNew,"black");
       if (moveResult!=0){

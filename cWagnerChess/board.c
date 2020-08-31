@@ -250,16 +250,18 @@ int inCheck(BoardPtr b, char* color){
   LocationPtr lp,locations,current;//locations is a linked list
     
   int i,j;
-  for(i=0;i<H;i++){
-    for(j=0;j<h;j++){
+  for(i=0;i<=H;i++){
+    for(j=0;j<=h;j++){
       lp=b->locations[i][j];
+      //printf("Location=%s\n",lp->toString(lp));
+      
       p = lp->getPiece(lp);
       if( NULL != p && 0!=mystrcmp(p->getColor(p),color) ){
 	locations = lp->isMoveLegal(p,lp,lp);
 
 	current=locations;
 	while(current!=NULL){
-	  if( 0 == mystrcmp( current->toString(current) , "K" ) ){
+	  if( 0 == mystrcmp( current->toString(current) , "K " ) ){
 	    clearLinkedList(b);
 	    return 1;//in check
 	  }

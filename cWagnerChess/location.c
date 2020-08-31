@@ -104,40 +104,40 @@ char* printInterconnections(LocationPtr lp){
 //0false ;; 1true
 LocationPtr isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNext){
 
-  printf("isMoveLegal:\n");
+  //printf("isMoveLegal:\n");
   LocationPtr legalMovesLinkedList;
 
   
   int type=p->type(p);
   switch(type){
   case ROOK:
-    printf("rook:\n");
+    //printf("rook:\n");
     legalMovesLinkedList=rookMoves(p,location);
     break;
     
   case BISHOP:
-    printf("bishop\n");
+    //printf("bishop\n");
     legalMovesLinkedList=bishopMoves(p,location);
     break;
 
   
   case KNIGHT:
-    printf("knight\n");
+    //printf("knight\n");
     legalMovesLinkedList=knightMoves(p,location);
     break;
 
   case QUEEN:
-    printf("queen\n");
+    //printf("queen\n");
     legalMovesLinkedList=queenMoves(p,location);
     break;
 
   case KING:
-    printf("king\n");
+    //printf("king\n");
     legalMovesLinkedList=kingMoves(p,location);
     break;
 
   case PAWN:
-    printf("pawn\n");
+    //printf("pawn\n");
     legalMovesLinkedList=pawnMoves(p,location);
     break;
 
@@ -145,7 +145,7 @@ LocationPtr isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNe
     
   LocationPtr temp=legalMovesLinkedList;
   while(temp != NULL){
-    printf("isMoveLegal: %s\n",temp->toString(temp));
+    //printf("isMoveLegal: %s\n",temp->toString(temp));
     temp = temp->nextLocation;
   }
 
@@ -169,7 +169,7 @@ LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL;
   PiecePtr potentialEnemy=NULL;
 
-  printf("pawnMoves:\n");
+  //printf("pawnMoves:\n");
   if( strcmp( p->getColor(p) , "white") == 0){
 
     //move NE
@@ -304,7 +304,7 @@ LocationPtr rookMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   //head is the last added to the linked list
   LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL;
 
-  printf("rookMoves:\n");
+  //printf("rookMoves:\n");
   
   //check NORTH
   while(1){
@@ -423,11 +423,11 @@ LocationPtr bishopMoves(PiecePtr p, LocationPtr lp){//return a list of LocationP
   //head is the last added to the linked list
   LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL;
 
-  printf("bishopMoves:\n");
+  //printf("bishopMoves:\n");
   
   //check NORTHW
   while(1){
-    printf("bishopMoves:while\n");
+    //printf("bishopMoves:while\n");
     if( current->nw == NULL )
       break;
     
@@ -542,11 +542,11 @@ LocationPtr queenMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPt
   //head is the last added to the linked list
   LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL;
 
-  printf("queenMoves:\n");
+  //printf("queenMoves:\n");
   
   //check NORTH
   while(1){
-    printf("queenMoves:while\n");
+    //printf("queenMoves:while\n");
     if( current->n == NULL )
       break;
     
@@ -655,7 +655,7 @@ LocationPtr queenMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPt
   
   //check NORTHW
   while(1){
-    printf("bishopMoves:while\n");
+    //printf("bishopMoves:while\n");
     if( current->nw == NULL )
       break;
     
@@ -770,7 +770,7 @@ LocationPtr kingMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
   //head is the last added to the linked list
   LocationPtr retval=NULL,head=NULL,current=NULL,temp=NULL;
 
-  printf("kingMoves:\n");
+  //printf("kingMoves:\n");
   
   //check NORTH
   current=lp;
@@ -908,7 +908,7 @@ LocationPtr knightMoves(PiecePtr p, LocationPtr lp){//return a list of LocationP
   //head is the last added to the linked list
   LocationPtr retval=NULL,head=NULL,current=lp,temp=NULL,left=NULL,right=NULL;
 
-  printf("knightMoves:\n");
+  //printf("knightMoves:\n");
 
   //check NORTH
   current=lp;
