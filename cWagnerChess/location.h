@@ -30,11 +30,13 @@ typedef struct location{
   enum rows row;
 
   char* (*toString)(LocationPtr lp);
+  char* (*toStringPlain)(LocationPtr lp);
   void (*setPiece)(LocationPtr lp,PiecePtr p);
   void (*clearPiece)(LocationPtr lp);
   PiecePtr (*getPiece)(LocationPtr lp);
   char* (*memory)(LocationPtr lp);
   LocationPtr (*isMoveLegal)(PiecePtr p, LocationPtr location, LocationPtr locationNext);
+  LocationPtr (*possibleMoves)(PiecePtr p, LocationPtr location, LocationPtr locationNext);
   
 } Location;
 
@@ -42,11 +44,13 @@ typedef struct location{
 
 LocationPtr initLocation(LocationPtr,int,int);
 char* toStringLocation(LocationPtr);
+char* toStringPlain(LocationPtr);
 void setPiece(LocationPtr,PiecePtr);
 void clearPiece(LocationPtr);
 PiecePtr getPiece(LocationPtr);
 char* printInterconnections(LocationPtr);
 LocationPtr isMoveLegal(PiecePtr,LocationPtr,LocationPtr);
+LocationPtr possibleMoves(PiecePtr, LocationPtr, LocationPtr);
 LocationPtr rookMoves(PiecePtr,LocationPtr);//return a list of LocationPtr linked
 LocationPtr bishopMoves(PiecePtr,LocationPtr);
 LocationPtr knightMoves(PiecePtr,LocationPtr);

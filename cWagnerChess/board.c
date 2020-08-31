@@ -249,22 +249,27 @@ int inCheck(BoardPtr b, char* color){
   PiecePtr p;
   LocationPtr lp,locations,current;//locations is a linked list
     
-  int i,j;
+  int i,j,k;
+
+  printf("inCheck function\n");
   for(i=0;i<=H;i++){
     for(j=0;j<=h;j++){
       lp=b->locations[i][j];
-      //printf("Location=%s\n",lp->toString(lp));
+      //printf("Location=%s",lp->toString(lp));
       
       p = lp->getPiece(lp);
       if( NULL != p && 0!=mystrcmp(p->getColor(p),color) ){
-	locations = lp->isMoveLegal(p,lp,lp);
+
+     	locations = lp->possibleMoves(p,lp,lp);
 
 	current=locations;
 	while(current!=NULL){
-	  if( 0 == mystrcmp( current->toString(current) , "K " ) ){
+	  
+	  if( 0 == mystrcmp( current->toStringPlain(current) , "K " ) ){
 	    clearLinkedList(b);
 	    return 1;//in check
 	  }
+	  current = current->nextLocation;
 	}
       }
       

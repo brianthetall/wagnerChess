@@ -17,11 +17,13 @@ LocationPtr initLocation(LocationPtr lp, int i, int j){
   lp->row=j;
 
   lp->toString=&toStringLocation;
+  lp->toStringPlain=&toStringPlain;
   lp->setPiece=&setPiece;
   lp->clearPiece=&clearPiece;
   lp->getPiece=&getPiece;
   lp->memory=&printInterconnections;
   lp->isMoveLegal=&isMoveLegal;
+  lp->possibleMoves=&possibleMoves;
 
   lp->n=NULL;
   lp->nw=NULL;
@@ -50,6 +52,21 @@ char* toStringLocation(LocationPtr lp){
       sprintf(retval, ANSI_COLOR_RED "%s" ANSI_COLOR_RESET,lp->piece->toString(lp->piece));
     else
       sprintf(retval, ANSI_COLOR_CYAN "%s" ANSI_COLOR_RESET,lp->piece->toString(lp->piece));
+  }
+  return retval;
+}
+
+
+char* toStringPlain(LocationPtr lp){
+
+  char* retval = (char*) calloc(sizeof(char),64);
+  if(lp->piece==NULL)
+    sprintf(retval,"%c%d",lp->col+65,lp->row);
+  else{
+    if( strcmp( lp->piece->getColor(lp->piece), "black" ) == 0  )
+      sprintf(retval,"%s",lp->piece->toString(lp->piece));
+    else
+      sprintf(retval,"%s",lp->piece->toString(lp->piece));
   }
   return retval;
 }
@@ -163,6 +180,58 @@ LocationPtr isMoveLegal(PiecePtr p, LocationPtr location, LocationPtr locationNe
   return 0;
 
 }
+
+//NEW: used for CHECK checking:
+LocationPtr possibleMoves(PiecePtr p, LocationPtr location, LocationPtr locationNext){
+
+  //printf("isMoveLegal:\n");
+  LocationPtr legalMovesLinkedList;
+
+  
+  int type=p->type(p);
+  switch(type){
+  case ROOK:
+    //printf("rook:\n");
+    legalMovesLinkedList=rookMoves(p,location);
+    break;
+    
+  case BISHOP:
+    //printf("bishop\n");
+    legalMovesLinkedList=bishopMoves(p,location);
+    break;
+
+  
+  case KNIGHT:
+    //printf("knight\n");
+    legalMovesLinkedList=knightMoves(p,location);
+    break;
+
+  case QUEEN:
+    //printf("queen\n");
+    legalMovesLinkedList=queenMoves(p,location);
+    break;
+
+  case KING:
+    //printf("king\n");
+    legalMovesLinkedList=kingMoves(p,location);
+    break;
+
+  case PAWN:
+    //printf("pawn\n");
+    legalMovesLinkedList=pawnMoves(p,location);
+    break;
+
+  }
+    
+  LocationPtr temp=legalMovesLinkedList;
+  while(temp != NULL){
+    //printf("isMoveLegal: %s\n",temp->toString(temp));
+    temp = temp->nextLocation;
+  }
+
+  return legalMovesLinkedList;
+}
+
 
 LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr linked
 //head is the last added to the linked list
