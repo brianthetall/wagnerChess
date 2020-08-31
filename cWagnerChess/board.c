@@ -105,8 +105,7 @@ int move(BoardPtr b, char* loc, char* locNew,char* color){
   if(p==NULL || mystrcmp(color,p->getColor(p))!=0 )
     return NOT_YOUR_PIECE;
 
-  printf("Move:isMoveLegal %X %X %X\n",p,location,locationNew);
-  if ( !(location->isMoveLegal(p,location,locationNew)))
+  if ( NULL==(location->isMoveLegal(p,location,locationNew)))
     return ILLEGAL_MOVE_EXCEPTION;
   else{//execute the move
     locationNew->setPiece(locationNew,p);
@@ -247,24 +246,28 @@ void interconnectLocations(BoardPtr bp){
 //else 0
 int inCheck(BoardPtr b, char* color){
 
-  PiecePtr king;
-  PiecePtr otherTeam[16];
-  int teamCounter=0;
-  
-    /*
-  LocationPtr king;
-  LocationPtr otherTeam;//linked list of location with opposing team
-    */
+  PiecePtr p;
+  LocationPtr lp,locations,current;//locations is a linked list
     
   int i,j;
   for(i=0;i<H;i++){
     for(j=0;j<h;j++){
-      b->locations[i][j]; //if this location
+      lp=b->locations[i][j];
+      p = lp->getPiece(lp);
+      if( NULL != p && 0!=mystrcmp(p->getColor(p),color) ){
+	locations = lp->isMoveLegal(p,lp,lp);
+
+	current=locations;
+	while(current!=NULL){
+	  if( 0 == mystrcmp( current->toString(current) , "K" ) ){
+	    clearLinkedList(b);
+	    return 1;//in check
+	  }
+	}
+      }
+      
+      clearLinkedList(b);
     }
   }
-
-  clearLinkedList(b);
-  return 0;
-  return 1;
-
+  return 0;//not in check
 }
