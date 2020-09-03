@@ -128,8 +128,8 @@ int move(BoardPtr b, char* loc, char* locNew,char* color){
 
 void clearLinkedList(BoardPtr b){
   int i,j;
-  for (i=0;i<H;i++){
-    for(j=0;j<h;j++){
+  for (i=0;i<=H;i++){
+    for(j=0;j<=h;j++){
       b->locations[i][j]->nextLocation=NULL;
     }
   }
@@ -255,17 +255,20 @@ int inCheck(BoardPtr b, char* color){
   for(i=0;i<=H;i++){
     for(j=0;j<=h;j++){
       lp=b->locations[i][j];
-      //printf("Location=%s",lp->toString(lp));
+      //printf("Location=%s\n",lp->toString(lp));
       
       p = lp->getPiece(lp);
+            
       if( NULL != p && 0!=mystrcmp(p->getColor(p),color) ){
-
+	clearLinkedList(b);
      	locations = lp->possibleMoves(p,lp,lp);
 
 	current=locations;
 	while(current!=NULL){
+	  //printf("CurrentLocation=%s\n",current->toString(current));
 	  
 	  if( 0 == mystrcmp( current->toStringPlain(current) , "K " ) ){
+	    printf("\nCheck Found\n");
 	    clearLinkedList(b);
 	    return 1;//in check
 	  }

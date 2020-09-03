@@ -133,7 +133,7 @@ int main(int argc,char** argv){
   
   while(1){
     while(1){
-      printf("%s",board->toString(board));
+      printf("\n%s",board->toString(board));
       printf("White Move:");
 
       if(mode==SERVER){
