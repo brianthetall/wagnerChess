@@ -244,7 +244,7 @@ LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
     //move NE
     current = current->ne==NULL ? NULL:current->ne;
     if(current!=NULL && current->getPiece(current)!=NULL)
-      temp==NULL;
+      temp=NULL;
     else
       temp=checkLocation(current,p->getColor(p));
     
@@ -311,7 +311,7 @@ LocationPtr pawnMoves(PiecePtr p, LocationPtr lp){//return a list of LocationPtr
     //move SW
     current = current->sw==NULL ? NULL:current->sw;
     if(current!=NULL && current->getPiece(current)!=NULL)
-      temp==NULL;
+      temp=NULL;
     else
       temp=checkLocation(current,p->getColor(p));
     if (retval==NULL && temp!=NULL){
