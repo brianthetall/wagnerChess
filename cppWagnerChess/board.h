@@ -16,7 +16,7 @@ enum rows{A,B,C,D,E,F,G,H};
 class Board{
 
   unordered_map<string,Player> player;
-  unordered_map<string,Coordinate> locations;
+  unordered_map<string,Location> locations;
 
  public:
   Board();

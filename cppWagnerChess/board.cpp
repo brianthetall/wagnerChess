@@ -12,13 +12,18 @@ Board::Board(){
   for( ; alpha <= 'H' ; alpha++){
     for(i=0 ; i <= H ; i++){
       oss<<alpha<<i;
-      locations[ oss.str() ]={Coordinate{alpha,i}};
+      locations[ oss.str() ]={Location{Coordinate{alpha,i}}};
       oss.str("");//clear the stream
     }
   }
 
   //Interconnect the locations
-  
+  for(alpha='A' ; alpha <= 'H' ; alpha++){
+    for(i=0 ; i <= H ; i++){
+      oss<<alpha<<i;
+      locations[ oss.str() ].connectToNeighbors(locations);
+    }
+  }
 
 }
 

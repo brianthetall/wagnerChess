@@ -11,7 +11,7 @@ class Coordinate{
  public:
 
   Coordinate(){};
-  Coordinate(char row,int col):row{row},col{col}{cout<<toString();};
+  Coordinate(char row,int col):row{row},col{col}{/*cout<<toString();*/};
   string toString() const;
   
 };
