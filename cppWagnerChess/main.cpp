@@ -4,5 +4,9 @@
 
 int main(int argc, char** argv){
 
+  Board b{};
+
+  cout << b.toString();
+  
   return 0;
 }
