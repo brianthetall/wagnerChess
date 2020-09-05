@@ -1,7 +1,7 @@
 #include "location.h"
 #include "piece.h"
 
-Location::Location(Coordinate c){
+Location::Location(Coordinate c={'A',69}){
   this->c=c;
 }
 

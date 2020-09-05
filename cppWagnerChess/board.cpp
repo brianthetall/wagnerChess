@@ -1,19 +1,28 @@
 #include "board.h"
 
 Board::Board(){
+  player["white"]=Player("white");
+  player["black"]=Player("black");
 
-  player.insert( make_pair("white", Player("white") ));
-  //player["white"]=Player("white");
+  //Create Coordinates:
+  int i=0;
+  char alpha='A', digit[2];
+  ostringstream oss{""};//,ios::ate to write at end
+  
+  for( ; alpha <= 'H' ; alpha++){
+    for(i=0 ; i <= H ; i++){
+      oss<<alpha<<i;
+      locations[ oss.str() ]={Coordinate{alpha,i}};
+      oss.str("");//clear the stream
+    }
+  }
+
+  //Interconnect the locations
+  
+
 }
 
 string Board::toString() {
 
-  /*
-  auto white=player["white"];
-  cout<<sizeof(white);
-  cout << &white;
-  cout << white.toString();
-  */
-
-  return "board.toString:" + player["white"].toString();
+  return "board.toString:" + player["white"].toString() + " " + player["black"].toString();
 }

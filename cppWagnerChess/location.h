@@ -1,5 +1,5 @@
 #include "coordinate.h"
-#include <bits/unique_ptr.h>
+//#include <bits/unique_ptr.h>
 
 using namespace std;
 
@@ -13,4 +13,6 @@ class Location{
   Location(Coordinate c);
   Location& setPiece(Piece* p);
   Location& clearPiece();
+
+  
 };

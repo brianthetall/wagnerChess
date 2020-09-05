@@ -1,12 +1,9 @@
 #include "coordinate.h"
 
+string Coordinate::toString() const{
 
-Coordinate::Coordinate(){
-  row='A';
-  col=0;
-}
-
-Coordinate::Coordinate(char row,int col){
-  this->row=row;
-  this->col=col;
+  ostringstream oss{""};
+  oss<<"Row: "<<row<<" Column: "<<col<<'\n';
+  return oss.str();
+  
 }
