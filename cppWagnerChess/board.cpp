@@ -29,5 +29,5 @@ Board::Board(){
 
 string Board::toString() {
 
-  return "board.toString:" + player["white"].toString() + " " + player["black"].toString();
+  return "board.toString:" + player["white"].toString() + " " + player["black"].toString() + '\n';
 }

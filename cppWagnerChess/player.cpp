@@ -2,5 +2,5 @@
 
 
 string Player::toString() const{
-  return "Player: " + color + '\n';
+  return "Player: " + color;
 }
