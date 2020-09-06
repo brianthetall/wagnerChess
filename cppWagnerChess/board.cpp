@@ -1,35 +1,51 @@
 #include "board.h"
 
-Board::Board(){
+Board::Board():player{2},locations{64}{
 
   //Create Coordinates:
   int i=0;
   char alpha='A', digit[2];
   ostringstream oss{""};//,ios::ate to write at end
-  
+
   for( ; alpha <= 'H' ; alpha++){
     for(i=0 ; i <= H ; i++){
       oss<<alpha<<i;
-      locations[ oss.str() ]={Location{Coordinate{alpha,i}}};
+      locations[ oss.str() ]={new Location{new Coordinate{alpha,i}}};
       oss.str("");//clear the stream
     }
   }
 
+  
   //Interconnect the locations
   for(alpha='A' ; alpha <= 'H' ; alpha++){
     for(i=0 ; i <= H ; i++){
       oss<<alpha<<i;
-      locations[ oss.str() ].connectToNeighbors(locations);
+      locations[ oss.str() ]->connectToNeighbors(locations);
+      oss.str("");
     }
   }
 
   
-  player["white"]=Player("white",locations);
-  player["black"]=Player("black",locations);
-
+  player["white"]=new Player("white",locations);
+  player["black"]=new Player("black",locations);
+  
 }
 
 string Board::toString() {
 
-  return "board.toString:" + player["white"].toString() + " " + player["black"].toString() + '\n';
+  ostringstream oss{""},oss2{""};
+  oss << "board.toString:\n";
+  int i;
+  char alpha;
+  for( alpha='A' ; alpha <= 'H' ; alpha++){
+    for(i=0 ; i <= H ; i++){
+      oss2<<alpha<<i;
+      oss << locations[ oss2.str() ]->toString();
+      oss2.str("");//clear the stream
+    }
+    oss<<'\n';
+  }
+
+  
+  return oss.str();
 }

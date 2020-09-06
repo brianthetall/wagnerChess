@@ -14,12 +14,12 @@ enum rows{A,B,C,D,E,F,G,H};
 
 class Board{
 
-  unordered_map<string,Player> player;
-  unordered_map<string,Location> locations;
+  unordered_map<string,Player*> player;
+  unordered_map<string,Location*> locations;
 
  public:
   Board();
-  MoveOutcome move(Location l,Location lnew,string);
+  //MoveOutcome move(Location l,Location lnew,string);
   string toString();
 
 };

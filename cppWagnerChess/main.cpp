@@ -4,9 +4,15 @@
 
 int main(int argc, char** argv){
 
-  Board b{};
+  cout<<"MAIN\n";
+  
+  Board *b=new Board{};
 
-  cout << b.toString();
+  cout << "Board Made\n";
+  
+  cout << b->toString();
+
+  delete b;
   
   return 0;
 }

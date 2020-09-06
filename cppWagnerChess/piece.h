@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include "location.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ private:
 
 public:
   Piece(){};
-  Piece(PieceType pt,Location& l);
+  Piece(PieceType pt,Location* l);
   string toString() const{return name;}
 
   virtual vector<Location> getMoves()=0;

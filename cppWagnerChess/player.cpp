@@ -1,6 +1,6 @@
 #include "player.h"
 
-Player::Player(string c,unordered_map<string,Location> locs):color{c},locations{locs}{
+Player::Player(string c,unordered_map<string,Location*> locs):color{c},locations{locs}{
 
   if(color=="white"){
     pieces["king"]=unique_ptr<Piece>{new King(PieceType::KING,locations["H1"])};
@@ -46,7 +46,7 @@ Player::Player(string c,unordered_map<string,Location> locs):color{c},locations{
 
   }
   
-    cout<<toString();
+  cout<<"COMPLETED SETUP OF "<<toString()<<'\n';
     
   };
 

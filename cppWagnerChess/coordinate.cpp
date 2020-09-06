@@ -3,7 +3,7 @@
 string Coordinate::toString() const{
 
   ostringstream oss{""};
-  oss<<"Row: "<<row<<" Column: "<<col<<'\n';
+  oss<<""<<row<<col<<" ";//doesn't work w/o the leading pair of ""... wtf
   return oss.str();
   
 }
