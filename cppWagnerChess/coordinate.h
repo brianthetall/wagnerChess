@@ -13,5 +13,6 @@ class Coordinate{
   Coordinate(){};
   Coordinate(char row,int col):row{row},col{col}{/*cout<<toString();*/};
   string toString() const;
-  
+  char getRow() const;
+  int getCol() const;
 };

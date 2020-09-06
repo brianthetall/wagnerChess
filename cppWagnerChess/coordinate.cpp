@@ -7,3 +7,6 @@ string Coordinate::toString() const{
   return oss.str();
   
 }
+
+char Coordinate::getRow() const {return row;}
+int Coordinate::getCol() const {return col;}

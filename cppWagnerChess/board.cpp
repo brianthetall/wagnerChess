@@ -4,7 +4,7 @@ Board::Board():player{2},locations{64}{
 
   //Create Coordinates:
   int i=0;
-  char alpha='A', digit[2];
+  char alpha='A';
   ostringstream oss{""};//,ios::ate to write at end
 
   for( ; alpha <= 'H' ; alpha++){
@@ -21,6 +21,7 @@ Board::Board():player{2},locations{64}{
     for(i=0 ; i <= H ; i++){
       oss<<alpha<<i;
       locations[ oss.str() ]->connectToNeighbors(locations);
+      cout<<locations[ oss.str() ]->toString()<<":"<< locations[ oss.str() ]->toStringNeighbors()<<"\n";
       oss.str("");
     }
   }
