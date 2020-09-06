@@ -22,12 +22,7 @@ class Player{
 public:
 
   Player(){};
- Player(string c,unordered_map<string,Location> locs):color{c},locations{locs}{
-
-    pieces["king"]=unique_ptr<Piece>{new King(PieceType::KING)};
-    cout<<toString();
-    
-  };
+  Player(string c,unordered_map<string,Location> locs);
 
 
   string toString() const;
