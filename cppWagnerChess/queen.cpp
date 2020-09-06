@@ -3,9 +3,9 @@
 
 using namespace std;
 
-vector<Location>Queen::getMoves(){
+vector<Location*>Queen::getMoves(){
 
-  vector<Location> moves{};
+  vector<Location*> moves{};
 
   return moves;
 

@@ -16,15 +16,18 @@ class Piece{
 
 private:
   string name;
-  Location* location;
   PieceType type;
   Color color;
 
+protected:
+  Location* location;
+  
 public:
   Piece(){};
   Piece(PieceType pt,Color c,Location* l);
   string toString() const;
-
-  virtual vector<Location> getMoves()=0;
+  Location* checkIfValid(Location* l);//return nullptr if not
+  Color getColor(){return color;}
+  virtual vector<Location*> getMoves()=0;
   virtual ~Piece(){}
 };

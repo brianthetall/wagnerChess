@@ -3,9 +3,9 @@
 
 using namespace std;
 
-vector<Location>Pawn::getMoves(){
+vector<Location*>Pawn::getMoves(){
 
-  vector<Location> moves{};
+  vector<Location*> moves{};
 
   return moves;
 

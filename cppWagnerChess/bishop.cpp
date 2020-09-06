@@ -3,9 +3,9 @@
 
 using namespace std;
 
-vector<Location>Bishop::getMoves(){
+vector<Location*>Bishop::getMoves(){
 
-  vector<Location> moves{};
+  vector<Location*> moves{};
 
   return moves;
 

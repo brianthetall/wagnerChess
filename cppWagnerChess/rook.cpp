@@ -3,9 +3,9 @@
 
 using namespace std;
 
-vector<Location>Rook::getMoves(){
+vector<Location*>Rook::getMoves(){
 
-  vector<Location> moves{};
+  vector<Location*> moves{};
 
   return moves;
 

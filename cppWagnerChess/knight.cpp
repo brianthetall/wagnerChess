@@ -3,9 +3,9 @@
 
 using namespace std;
 
-vector<Location>Knight::getMoves(){
+vector<Location*>Knight::getMoves(){
 
-  vector<Location> moves{};
+  vector<Location*> moves{};
 
   return moves;
 

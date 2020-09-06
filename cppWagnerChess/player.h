@@ -16,7 +16,7 @@ using namespace std;
 
 class Player{
   string color;
-  map<string,unique_ptr<Piece>> pieces;//map of pieces: cannot have map of abstract class
+  map<string,shared_ptr<Piece>> pieces;//map of pieces: cannot have map of abstract class
   unordered_map<string,Location*> locations;
   
 public:
@@ -25,5 +25,5 @@ public:
   Player(string c,unordered_map<string,Location*> locs);
 
 
-  string toString() const;
+  string toString();
 };
