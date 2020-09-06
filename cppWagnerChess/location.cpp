@@ -6,8 +6,8 @@ Location::Location(Coordinate c={'A',0}){
   cout << "Location@ " << this->c.toString();
 }
 
-Location& Location::setPiece(Piece* p){
-  this->p=p;
+Location& Location::setPiece(Piece& p){
+  this->p=&p;
   return *this;
 }
 

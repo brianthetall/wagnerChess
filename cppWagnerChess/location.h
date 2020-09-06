@@ -19,7 +19,7 @@ class Location{
  public:
   Location(){};
   Location(Coordinate c);
-  Location& setPiece(Piece* p);
+  Location& setPiece(Piece& p);
   Location& clearPiece();
   void connectToNeighbors(unordered_map<string,Location> locations);
   
