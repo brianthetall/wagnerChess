@@ -1,8 +1,6 @@
 #include "board.h"
 
 Board::Board(){
-  player["white"]=Player("white");
-  player["black"]=Player("black");
 
   //Create Coordinates:
   int i=0;
@@ -24,6 +22,10 @@ Board::Board(){
       locations[ oss.str() ].connectToNeighbors(locations);
     }
   }
+
+  
+  player["white"]=Player("white",locations);
+  player["black"]=Player("black",locations);
 
 }
 
