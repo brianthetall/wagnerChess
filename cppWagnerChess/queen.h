@@ -3,7 +3,7 @@
 class Queen : public Piece{
 
 public:
-  Queen(PieceType pt,Location* l):Piece{pt,l}{}
+ Queen(PieceType pt,Color c,Location* l):Piece{pt,c,l}{}
   ~Queen(){}
   vector<Location> getMoves() override;  
 

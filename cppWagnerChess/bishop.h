@@ -3,7 +3,7 @@
 class Bishop : public Piece{
 
 public:
-  Bishop(PieceType pt,Location* l):Piece{pt,l}{}
+ Bishop(PieceType pt,Color c,Location* l):Piece{pt,c,l}{}
   ~Bishop(){}
   vector<Location> getMoves() override;  
 
