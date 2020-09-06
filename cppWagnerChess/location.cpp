@@ -25,6 +25,8 @@ void Location::connectToNeighbors(unordered_map<string,Location*> locations ){
 
   int i=c->getCol();
   char alpha=c->getRow();
+  char alphaPlus=alpha+1;
+  char alphaMinus=alpha-1;
   ostringstream target{""};
 
   if(alpha=='A'){
@@ -35,11 +37,11 @@ void Location::connectToNeighbors(unordered_map<string,Location*> locations ){
     }else if(i<7){
       target<<alpha<<i-1;
       neighbors["w"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i-1;
+      target<<alphaPlus<<i-1;
       neighbors["sw"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i;
+      target<<alphaPlus<<i;
       neighbors["s"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i+1;
+      target<<alphaPlus<<i+1;
       neighbors["se"]=locations[target.str()]; target.str("");
       target<<alpha<<i+1;
       neighbors["e"]=locations[target.str()]; target.str("");
@@ -52,44 +54,44 @@ void Location::connectToNeighbors(unordered_map<string,Location*> locations ){
   }
   else if(alpha<'H'){
     if(i==0){
-      target<<alpha-1<<i;
+      target<<alphaMinus<<i;
       neighbors["n"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i;
+      target<<alphaPlus<<i;
       neighbors["s"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i+1;
+      target<<alphaPlus<<i+1;
       neighbors["se"]=locations[target.str()]; target.str("");
       target<<alpha<<i+1;
       neighbors["e"]=locations[target.str()]; target.str("");
-      target<<alpha-1<<i+1;
+      target<<alphaMinus<<i+1;
       neighbors["ne"]=locations[target.str()]; target.str("");
 
     }else if(i<7){
-      target<<alpha-1<<i;
+      target<<alphaMinus<<i;
       neighbors["n"]=locations[target.str()]; target.str("");
-      target<<alpha-1<<i-1;
+      target<<alphaMinus<<i-1;
       neighbors["nw"]=locations[target.str()]; target.str("");
       target<<alpha<<i-1;
       neighbors["w"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i-1;
+      target<<alphaPlus<<i-1;
       neighbors["sw"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i;
+      target<<alphaPlus<<i;
       neighbors["s"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i+1;
+      target<<alphaPlus<<i+1;
       neighbors["se"]=locations[target.str()]; target.str("");
       target<<alpha<<i+1;
       neighbors["e"]=locations[target.str()]; target.str("");
-      target<<alpha-1<<i+1;
+      target<<alphaMinus<<i+1;
       neighbors["ne"]=locations[target.str()]; target.str("");
     }else{
-      target<<alpha-1<<i;
+      target<<alphaMinus<<i;
       neighbors["n"]=locations[target.str()]; target.str("");
-      target<<alpha-1<<i-1;
+      target<<alphaMinus<<i-1;
       neighbors["nw"]=locations[target.str()]; target.str("");
       target<<alpha<<i-1;
       neighbors["w"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i-1;
+      target<<alphaPlus<<i-1;
       neighbors["sw"]=locations[target.str()]; target.str("");
-      target<<alpha+1<<i;
+      target<<alphaPlus<<i;
       neighbors["s"]=locations[target.str()]; target.str("");
     }
   }
@@ -101,11 +103,11 @@ void Location::connectToNeighbors(unordered_map<string,Location*> locations ){
     }else if(i<7){
       target<<alpha<<i-1;
       neighbors["w"]=locations[target.str()]; target.str("");
-      target<<alpha-1<<i-1;
+      target<<alphaMinus<<i-1;
       neighbors["nw"]=locations[target.str()]; target.str("");
-      target<<alpha-1<<i;
+      target<<alphaMinus<<i;
       neighbors["n"]=locations[target.str()]; target.str("");
-      target<<alpha-1<<i+1;
+      target<<alphaMinus<<i+1;
       neighbors["ne"]=locations[target.str()]; target.str("");
       target<<alpha<<i+1;
       neighbors["e"]=locations[target.str()]; target.str("");
