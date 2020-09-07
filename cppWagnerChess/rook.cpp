@@ -15,8 +15,6 @@ vector<Location*>Rook::getMoves(){
     cout <<"\nRook Direction: "<<dir;
     while(true){//keep going that direction until...
       
-      //cout << "."<<dir<<current->toString()<<" ";
-      
       current = checkIfValid (current->neighbors[dir] );
       if(current!=nullptr){
 	moves.push_back(current);
