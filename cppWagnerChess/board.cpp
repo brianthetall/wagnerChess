@@ -53,3 +53,25 @@ string Board::toString() {
   
   return oss.str();
 }
+
+MoveOutcome Board::move(string l,string lnew,string color){
+
+  Location *start,*dest;
+
+  cout<<"MOVE:"<<endl;
+  
+  try{
+    start=locations[l];
+    dest=locations[lnew];
+    if(start==nullptr || dest==nullptr)
+      throw InvalidLocation{};
+  }
+  catch(InvalidLocation e){
+    cout<<e.print()<<endl;
+    return MoveOutcome::ILLEGAL_MOVE;
+  }
+
+
+  return MoveOutcome::ACCEPTED;
+
+}

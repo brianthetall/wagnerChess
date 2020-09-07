@@ -6,10 +6,11 @@
 #include "piece.h"
 #include "coordinate.h"
 #include "player.h"
+#include "invalidLocation.h"
 
 using namespace std;
 
-enum MoveOutcome{ACCEPTED,NOT_YOUR_PIECE,ILLEGAL_MOVE,IN_CHECK};
+enum class MoveOutcome{ACCEPTED,NOT_YOUR_PIECE,ILLEGAL_MOVE,IN_CHECK};
 enum rows{A,B,C,D,E,F,G,H};
 
 class Board{
@@ -19,7 +20,7 @@ class Board{
 
  public:
   Board();
-  //MoveOutcome move(Location l,Location lnew,string);
+  MoveOutcome move(string l,string lnew,string color);
   string toString();
 
 };
