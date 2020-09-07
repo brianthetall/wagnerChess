@@ -19,6 +19,7 @@ protected:
   PieceType type;
   Color color;
   Location* location;
+  bool virgin;
   
 public:
   Piece(){};
@@ -26,6 +27,8 @@ public:
   string toString() const;
   Location* checkIfValid(Location* l);//return nullptr if not
   Color getColor(){return color;}
+  void sex(){virgin=false;}
+  void unsex(){virgin=true;}
   virtual vector<Location*> getMoves()=0;
   virtual ~Piece(){}
 };

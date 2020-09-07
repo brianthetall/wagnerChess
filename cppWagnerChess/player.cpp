@@ -57,5 +57,35 @@ string Player::toString() {
   for( auto& move : pieces["knight1"]->getMoves()){
     cout<<move->toString()<<",";
   }cout<<endl;
+  for( auto& move : pieces["pawn1"]->getMoves()){
+    cout<<"Pawn Move: "<<move->toString()<<",";
+  }cout<<endl;
+  for( auto& move : pieces["pawn2"]->getMoves()){
+    cout<<"Pawn Move: "<<move->toString()<<",";
+  }cout<<endl;
+
+  for( auto& move : pieces["pawn3"]->getMoves()){
+    cout<<"Pawn Move: "<<move->toString()<<",";
+  }cout<<endl;
+
+  for( auto& move : pieces["pawn4"]->getMoves()){
+    cout<<"Pawn Move: "<<move->toString()<<",";
+  }cout<<endl;
+
+  for( auto& move : pieces["pawn5"]->getMoves()){
+    cout<<"Pawn Move: "<<move->toString()<<",";
+  }cout<<endl;
+
+  for( auto& move : pieces["pawn6"]->getMoves()){
+    cout<<"Pawn Move: "<<move->toString()<<",";
+  }cout<<endl;
+
+  for( auto& move : pieces["pawn7"]->getMoves()){
+    cout<<"Pawn Move: "<<move->toString()<<",";
+  }cout<<endl;
+  for( auto& move : pieces["pawn8"]->getMoves()){
+    cout<<"Pawn Move: "<<move->toString()<<",";
+  }cout<<endl;
+  
   return "Player: " + color;
 }
