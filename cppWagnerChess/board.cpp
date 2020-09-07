@@ -29,6 +29,9 @@ Board::Board():player{2},locations{64}{
   
   player["white"]=new Player("white",locations);
   player["black"]=new Player("black",locations);
+
+  cout<<player["white"]->toString();
+  cout<<player["black"]->toString();
   
 }
 

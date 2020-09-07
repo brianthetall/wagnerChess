@@ -14,12 +14,10 @@ enum class Color{BLACK,WHITE};
 
 class Piece{
 
-private:
+protected:
   string name;
   PieceType type;
   Color color;
-
-protected:
   Location* location;
   
 public:

@@ -45,12 +45,11 @@ Player::Player(string c,unordered_map<string,Location*> locs):color{c},locations
 
 
   }
-  
-  cout<<"COMPLETED SETUP OF "<<toString()<<'\n';
-    
+      
   };
 
 
 string Player::toString() {
+  pieces["rook1"]->getMoves();
   return "Player: " + color;
 }

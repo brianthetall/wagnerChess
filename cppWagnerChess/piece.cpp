@@ -48,7 +48,7 @@ Location* Piece::checkIfValid(Location* l){
   Piece *p = l->getPiece();
   if( p == nullptr )
     return l;
-
+	      
   return color==p->getColor() ? nullptr : l;
       
 }
