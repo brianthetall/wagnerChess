@@ -12,7 +12,7 @@ vector<Location*>Bishop::getMoves(){
   for(auto dir : {"ne","se","nw","sw"}){
 
     current=location;//reset
-    cout <<"\nRook Direction: "<<dir;
+    cout <<"\nBishop Direction: "<<dir;
     while(true){//keep going that direction until...
       
       current = checkIfValid (current->neighbors[dir] );

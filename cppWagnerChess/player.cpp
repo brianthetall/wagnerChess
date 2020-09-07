@@ -50,6 +50,9 @@ Player::Player(string c,unordered_map<string,Location*> locs):color{c},locations
 
 
 string Player::toString() {
+  pieces["king"]->getMoves();
+  pieces["queen"]->getMoves();
   pieces["bishop1"]->getMoves();
+  pieces["rook1"]->getMoves();
   return "Player: " + color;
 }
