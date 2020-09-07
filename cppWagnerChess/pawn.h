@@ -7,5 +7,6 @@ public:
   ~Pawn(){}
   vector<Location*> getMoves() override;
   Location* checkIfValid(Location* l);
+  Location* checkForAttack(Location* l);
 
 };
