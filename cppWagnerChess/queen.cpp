@@ -5,7 +5,7 @@ using namespace std;
 
 vector<Location*>Queen::getMoves(){
 
-  Location *temp,*current;
+  Location *current;
   Piece *p;
   vector<Location*> moves{};
     
