@@ -29,6 +29,7 @@ public:
   Color getColor(){return color;}
   void sex(){virgin=false;}
   void unsex(){virgin=true;}
+  void setLocation(Location* l){location=l;}
   virtual vector<Location*> getMoves()=0;
   virtual ~Piece(){}
 };

@@ -59,6 +59,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
   Color movingColor = color=="white" ? Color::WHITE : Color::BLACK;
   Location *start,*dest;
   Piece* piece;
+  vector<Location*> destinations;
   
   try{
     start=locations[l];
@@ -82,6 +83,20 @@ MoveOutcome Board::move(string l,string lnew,string color){
     return MoveOutcome::NOT_YOUR_PIECE;
   }
 
-  return MoveOutcome::ACCEPTED;
+  destinations = piece->getMoves();
+  for(auto& d : destinations){
+    cout<<d->toString()<<endl;
+    if(d==dest){
+      //move the piece
+      dest->setPiece(piece);
+      start->clearPiece();
+      piece->setLocation(dest);
+      piece->sex();
+      return MoveOutcome::ACCEPTED;
+    }
+  }
+
+  cout<<"Illegal Move!"<<endl;
+  return MoveOutcome::ILLEGAL_MOVE;
 
 }
