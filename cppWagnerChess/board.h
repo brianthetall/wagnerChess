@@ -7,6 +7,7 @@
 #include "coordinate.h"
 #include "player.h"
 #include "invalidLocation.h"
+#include "notYourPiece.h"
 
 using namespace std;
 

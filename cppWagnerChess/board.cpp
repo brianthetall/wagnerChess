@@ -56,9 +56,9 @@ string Board::toString() {
 
 MoveOutcome Board::move(string l,string lnew,string color){
 
+  Color movingColor = color=="white" ? Color::WHITE : Color::BLACK;
   Location *start,*dest;
-
-  cout<<"MOVE:"<<endl;
+  Piece* piece;
   
   try{
     start=locations[l];
@@ -71,6 +71,16 @@ MoveOutcome Board::move(string l,string lnew,string color){
     return MoveOutcome::ILLEGAL_MOVE;
   }
 
+  try{
+    piece = start->getPiece();
+    if(piece==nullptr)
+      throw NotYourPiece{};
+    if (piece->getColor()!=movingColor)
+      throw NotYourPiece{};
+  }catch(NotYourPiece e){
+    cout<<e.print()<<endl;
+    return MoveOutcome::NOT_YOUR_PIECE;
+  }
 
   return MoveOutcome::ACCEPTED;
 
