@@ -59,6 +59,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
   Color movingColor = color=="white" ? Color::WHITE : Color::BLACK;
   Location *start,*dest;
   Piece* piece;
+  Piece* temp;
   vector<Location*> destinations;
   
   try{
@@ -88,15 +89,33 @@ MoveOutcome Board::move(string l,string lnew,string color){
     cout<<d->toString()<<endl;
     if(d==dest){
       //move the piece
+      temp = dest->getPiece()==nullptr?nullptr:dest->getPiece();//backup if event of check
       dest->setPiece(piece);
       start->clearPiece();
       piece->setLocation(dest);
       piece->sex();
-      return MoveOutcome::ACCEPTED;
+
     }
   }
 
-  cout<<"Illegal Move!"<<endl;
-  return MoveOutcome::ILLEGAL_MOVE;
+  //need to look for Check....
+  try{
+    if(isInCheck(movingColor)){
+      throw InCheck{};
+    }
+  }catch(InCheck e){
+      cout << e.print() << endl;
+      start->setPiece(piece);
+      dest->setPiece(temp);
+      if(temp!=nullptr)
+	temp->setLocation(dest);
+      piece->setLocation(start);
+      if(!piece.isWhore())//whore is set after the second move; it is a latch
+	piece->unsex();
 
+      return MoveOutcome::IN_CHECK;
+
+    }
+    
+  return MoveOutcome::ACCEPTED;
 }

@@ -1,7 +1,7 @@
 #include "piece.h"
 #include "location.h"
 
-Piece::Piece(PieceType pt,Color c,Location* l):type{pt},color{c},location{l},virgin{true}{
+Piece::Piece(PieceType pt,Color c,Location* l):type{pt},color{c},location{l},virgin{true},whore{false}{
 
   
   switch(pt){
