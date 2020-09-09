@@ -97,7 +97,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
 
     }
   }
-
+  
   //need to look for Check....
   try{
     if(isInCheck(movingColor)){
@@ -110,7 +110,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
       if(temp!=nullptr)
 	temp->setLocation(dest);
       piece->setLocation(start);
-      if(!piece.isWhore())//whore is set after the second move; it is a latch
+      if(!piece->isWhore())//whore is set after the second move; it is a latch
 	piece->unsex();
 
       return MoveOutcome::IN_CHECK;
@@ -118,4 +118,43 @@ MoveOutcome Board::move(string l,string lnew,string color){
     }
     
   return MoveOutcome::ACCEPTED;
+}
+
+
+bool Board::isInCheck(Color c){
+  
+  vector<Piece*> enemyPieces{};//max number of pieces
+  Piece* king;
+  Piece* p;//temp pointer
+  
+  for(auto& l : locations){
+
+    if(l.second->getPiece()!=nullptr){
+
+      p=l.second->getPiece();
+      
+      if ( p->getColor() != c ){
+	enemyPieces.push_back( p );//store the piece in the vector
+      }else if ( p->pieceType() == PieceType::KING ){
+	king = p;
+      }
+    }
+  }
+
+  cout<<"enemy piece vector size="<<enemyPieces.size()<<endl;
+  
+  for(Piece* piece : enemyPieces){
+    vector<Location*> moves=piece->getMoves();
+    cout<<"piece===="<<piece->toString();
+    for(auto& l : moves){
+
+      if ( l == king->getLocation() )
+	return true;
+
+    }
+    
+  }
+  cout<<"King: "<<king->toString()<<endl;
+
+  return false;
 }

@@ -12,14 +12,14 @@ vector<Location*>Rook::getMoves(){
   for(auto dir : {"n","s","e","w"}){
 
     current=location;//reset
-    cout <<"\nRook Direction: "<<dir;
+    //cout <<"\nRook Direction: "<<dir;
     while(true){//keep going that direction until...
       
       current = checkIfValid (current->neighbors[dir] );
       if(current!=nullptr){
 	moves.push_back(current);
 	p=current->getPiece();
-	cout << "currentLoc="<<current->toString();
+	//cout << "currentLoc="<<current->toString();
 	if(p!=nullptr){
 	  if(p->getColor() != color)
 	    break;

@@ -8,6 +8,7 @@
 #include "player.h"
 #include "invalidLocation.h"
 #include "notYourPiece.h"
+#include "inCheck.h"
 
 using namespace std;
 
@@ -23,5 +24,6 @@ class Board{
   Board();
   MoveOutcome move(string l,string lnew,string color);
   string toString();
+  bool isInCheck(Color c);
 
 };

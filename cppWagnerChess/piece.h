@@ -35,6 +35,8 @@ public:
   bool isWhore(){ return whore; }
   void unsex(){virgin=true;}
   void setLocation(Location* l){location=l;}
+  PieceType pieceType(void){ return type; }
+  Location* getLocation(void){ return location; }
   virtual vector<Location*> getMoves()=0;
   virtual ~Piece(){}
 };
