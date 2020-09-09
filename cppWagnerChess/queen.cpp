@@ -12,14 +12,14 @@ vector<Location*>Queen::getMoves(){
   for(auto dir : {"n","s","e","w","ne","se","nw","sw"}){
 
     current=location;//reset
-    cout <<"\nQueen Direction: "<<dir;
+    //cout <<"\nQueen Direction: "<<dir;
     while(true){//keep going that direction until...
       
       current = checkIfValid (current->neighbors[dir] );
       if(current!=nullptr){
 	moves.push_back(current);
 	p=current->getPiece();
-	cout << "currentLoc="<<current->toString();
+	//cout << "currentLoc="<<current->toString();
 	if(p!=nullptr){
 	  if(p->getColor() != color)
 	    break;

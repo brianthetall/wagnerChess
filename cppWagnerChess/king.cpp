@@ -12,7 +12,7 @@ vector<Location*> King::getMoves(){
   //keys are 'n' 'nw', etc
 
   for(auto& n:location->neighbors){
-    cout << "KING: "<<n.first<<'\n';
+    //cout << "KING: "<<n.first<<'\n';
     temp=checkIfValid( n.second );
     if(temp!=nullptr){ moves.push_back(temp); }
   }

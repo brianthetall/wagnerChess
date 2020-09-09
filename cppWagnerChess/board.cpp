@@ -21,7 +21,7 @@ Board::Board():player{2},locations{64}{
     for(i=0 ; i <= H ; i++){
       oss<<alpha<<i;
       locations[ oss.str() ]->connectToNeighbors(locations);
-      cout<<locations[ oss.str() ]->toString()<<":"<< locations[ oss.str() ]->toStringNeighbors()<<"\n";
+      //      cout<<locations[ oss.str() ]->toString()<<":"<< locations[ oss.str() ]->toStringNeighbors()<<"\n";
       oss.str("");
     }
   }
@@ -86,7 +86,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
 
   destinations = piece->getMoves();
   for(auto& d : destinations){
-    cout<<d->toString()<<endl;
+    //cout<<d->toString()<<endl;
     if(d==dest){
       //move the piece
       temp = dest->getPiece()==nullptr?nullptr:dest->getPiece();//backup if event of check
@@ -140,12 +140,10 @@ bool Board::isInCheck(Color c){
       }
     }
   }
-
-  cout<<"enemy piece vector size="<<enemyPieces.size()<<endl;
   
   for(Piece* piece : enemyPieces){
     vector<Location*> moves=piece->getMoves();
-    cout<<"piece===="<<piece->toString();
+
     for(auto& l : moves){
 
       if ( l == king->getLocation() )
@@ -154,7 +152,6 @@ bool Board::isInCheck(Color c){
     }
     
   }
-  cout<<"King: "<<king->toString()<<endl;
 
   return false;
 }

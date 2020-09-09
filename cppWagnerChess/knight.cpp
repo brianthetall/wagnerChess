@@ -19,8 +19,8 @@ vector<Location*>Knight::getMoves(){
   dirs["w"]=ns;
 
   for(auto& dir : dirs){
-    cout<<"\nfirst="<<dir.first;
-    cout<<" second="<<dir.second[0]<<","<<dir.second[1]<<endl;
+    //cout<<"\nfirst="<<dir.first;
+    //cout<<" second="<<dir.second[0]<<","<<dir.second[1]<<endl;
     current=location;
     current=location->neighbors[dir.first];
     if (current!=nullptr){

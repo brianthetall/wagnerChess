@@ -54,6 +54,7 @@ string Player::toString() {
   pieces["queen"]->getMoves();
   pieces["bishop1"]->getMoves();
   pieces["rook1"]->getMoves();
+  /*
   for( auto& move : pieces["knight1"]->getMoves()){
     cout<<move->toString()<<",";
   }cout<<endl;
@@ -86,6 +87,7 @@ string Player::toString() {
   for( auto& move : pieces["pawn8"]->getMoves()){
     cout<<"Pawn Move8: "<<move->toString()<<",";
   }cout<<endl;
+  */
   
   return "Player: " + color;
 }
