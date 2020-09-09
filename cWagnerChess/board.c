@@ -93,6 +93,7 @@ char* toStringBoard(BoardPtr b){
 
 int move(BoardPtr b, char* loc, char* locNew,char* color){
   PiecePtr p=b->locations[getCol(loc)][getRow(loc)]->getPiece(b->locations[getCol(loc)][getRow(loc)]);
+  PiecePtr temp;
   LocationPtr location=b->locations[getCol(loc)][getRow(loc)];
   LocationPtr locationNew=b->locations[getCol(locNew)][getRow(locNew)];
   
@@ -108,6 +109,10 @@ int move(BoardPtr b, char* loc, char* locNew,char* color){
   if ( NULL==(location->isMoveLegal(p,location,locationNew)))
     return ILLEGAL_MOVE_EXCEPTION;
   else{//execute the move
+
+    if(locationNew->getPiece(locationNew)!=NULL)
+      temp=locationNew->getPiece(locationNew);//use to restore if a Check is found
+    
     locationNew->setPiece(locationNew,p);
     p->sex(p);//remove piece virginity
     location->clearPiece(location);
@@ -116,7 +121,8 @@ int move(BoardPtr b, char* loc, char* locNew,char* color){
     if (inCheck(b,color)){
       p->unsex(p);
       location->setPiece(location,p);//move the piece back
-      locationNew->clearPiece(locationNew);
+      locationNew->setPiece(locationNew,temp);
+      //locationNew->clearPiece(locationNew);
       return IN_CHECK_EXCEPTION;
     }
   }
