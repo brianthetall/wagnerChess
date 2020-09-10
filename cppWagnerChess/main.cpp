@@ -53,7 +53,7 @@ int main(int argc, char** argv){
     while(true){
 
       cout << b->toString()<<endl;
-      cout << "White Move: ";
+      cout << "White Move: \a";
       if(mode==Type::SERVER){
 	cin >> moveString;
 	socket.sendString(moveString);
@@ -74,7 +74,7 @@ int main(int argc, char** argv){
     while(true){
 
       cout << b->toString()<<endl;
-      cout << "Black Move: ";
+      cout << "Black Move: \a";
 
       if(mode==Type::CLIENT){
 	cin >> moveString;
