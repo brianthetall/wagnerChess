@@ -85,17 +85,25 @@ MoveOutcome Board::move(string l,string lnew,string color){
   }
 
   destinations = piece->getMoves();
-  for(auto& d : destinations){
-    //cout<<d->toString()<<endl;
-    if(d==dest){
+
+  try{
+    if (find(destinations.begin(), destinations.end(), dest)!=destinations.end()){
+      
       //move the piece
       temp = dest->getPiece()==nullptr?nullptr:dest->getPiece();//backup if event of check
       dest->setPiece(piece);
       start->clearPiece();
       piece->setLocation(dest);
       piece->sex();
-
+      
     }
+    else{
+      //throw exception
+      throw InvalidLocation{};
+    }
+  }catch(InvalidLocation e){
+    cout << e.print() << endl;
+    return MoveOutcome::ILLEGAL_MOVE;
   }
   
   //need to look for Check....

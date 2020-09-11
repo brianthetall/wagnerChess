@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unordered_map>
 #include <iostream>
+#include <algorithm>
 #include "location.h"
 #include "piece.h"
 #include "coordinate.h"
