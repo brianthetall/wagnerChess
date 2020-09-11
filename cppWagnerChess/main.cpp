@@ -8,7 +8,7 @@
 #include "board.h"
 #include "mySocket.h"
 
-#define BUFFER 16
+#define BUFFER 256
 #define PORT 2599
 
 int main(int argc, char** argv){
@@ -54,6 +54,7 @@ int main(int argc, char** argv){
 
       cout << b->toString()<<endl;
       cout << "White Move: \a";
+      
       if(mode==Type::SERVER){
 	cin >> moveString;
 	socket.sendString(moveString);

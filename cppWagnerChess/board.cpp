@@ -63,16 +63,18 @@ MoveOutcome Board::move(string l,string lnew,string color){
   vector<Location*> destinations;
   
   try{
-    start=locations[l];
-    dest=locations[lnew];
+    start=locations.at(l);//use map::at else a default constructed element will be added is the key doesn't already exist..... wtf C++
+    dest=locations.at(lnew);
     if(start==nullptr || dest==nullptr)
       throw InvalidLocation{};
   }
   catch(InvalidLocation e){
     cout<<e.print()<<endl;
     return MoveOutcome::ILLEGAL_MOVE;
+  }catch(...){
+    return MoveOutcome::ILLEGAL_MOVE;
   }
-
+  
   try{
     piece = start->getPiece();
     if(piece==nullptr)
@@ -83,12 +85,11 @@ MoveOutcome Board::move(string l,string lnew,string color){
     cout<<e.print()<<endl;
     return MoveOutcome::NOT_YOUR_PIECE;
   }
-
+  
   destinations = piece->getMoves();
 
   try{
     if (find(destinations.begin(), destinations.end(), dest)!=destinations.end()){
-      
       //move the piece
       temp = dest->getPiece()==nullptr?nullptr:dest->getPiece();//backup if event of check
       dest->setPiece(piece);
@@ -153,7 +154,7 @@ bool Board::isInCheck(Color c){
     vector<Location*> moves=piece->getMoves();
 
     for(auto& l : moves){
-
+      
       if ( l == king->getLocation() )
 	return true;
 
