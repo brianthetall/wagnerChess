@@ -1,3 +1,4 @@
+#include <boost/algorithm/string.hpp>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
@@ -57,6 +58,7 @@ int main(int argc, char** argv){
       
       if(mode==Type::SERVER){
 	cin >> moveString;
+	boost::to_upper(moveString);
 	socket.sendString(moveString);
       }else if(mode==Type::CLIENT){
 	moveString=socket.readString();
@@ -79,6 +81,7 @@ int main(int argc, char** argv){
 
       if(mode==Type::CLIENT){
 	cin >> moveString;
+	boost::to_upper(moveString);
 	socket.sendString(moveString);
       }else if ( mode == Type::SERVER){
 	moveString=socket.readString();
