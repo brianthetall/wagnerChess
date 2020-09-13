@@ -41,12 +41,21 @@ string Board::toString() {
   oss << "board.toString:\n";
   int i;
   char alpha;
+  char row='A';//increment every row & print
+
+  oss<<"   ";
+  for(i=0;i<8;i++)
+    oss<<i<<"  ";
+  oss<<endl;
+  
   for( alpha='A' ; alpha <= 'H' ; alpha++){
+    oss<<row<<"  ";
     for(i=0 ; i <= H ; i++){
       oss2<<alpha<<i;
       oss << locations[ oss2.str() ]->toString();
       oss2.str("");//clear the stream
     }
+    row++;
     oss<<'\n';
   }
 
