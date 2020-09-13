@@ -43,22 +43,26 @@ string Board::toString() {
   char alpha;
   char row='A';//increment every row & print
 
-  oss<<"   ";
+  oss<<"   ";//put numbers at top
   for(i=0;i<8;i++)
     oss<<i<<"  ";
   oss<<endl;
   
   for( alpha='A' ; alpha <= 'H' ; alpha++){
-    oss<<row<<"  ";
+    oss<<row<<"  ";//put letter at left side
     for(i=0 ; i <= H ; i++){
       oss2<<alpha<<i;
       oss << locations[ oss2.str() ]->toString();
       oss2.str("");//clear the stream
     }
+    oss<<" "<<row<<endl;//put Letter at right side
     row++;
-    oss<<'\n';
   }
 
+  oss<<"   ";//put numbers at bottom
+  for(i=0;i<8;i++)
+    oss<<i<<"  ";
+  oss<<endl;
   
   return oss.str();
 }
