@@ -1,3 +1,4 @@
+#include <fstream>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
@@ -49,6 +50,10 @@ int main(int argc, char** argv){
 
   //the game:
   Board *b=new Board{};
+    
+  ofstream debug;
+  debug.open("mainDebug");
+
   
   while(true){
     while(true){
@@ -57,8 +62,11 @@ int main(int argc, char** argv){
       //cout << "White Move: \a";
       
       if(mode==Type::SERVER){
-	b->guiUpdate(true);
-	cin >> moveString;
+	moveString=b->guiUpdate(true);
+
+	debug<<moveString<<endl;
+	
+	//cin >> moveString;
 	socket.sendString(moveString);
       }else if(mode==Type::CLIENT){
 	b->guiUpdate(false);
@@ -81,8 +89,11 @@ int main(int argc, char** argv){
       //cout << "Black Move: \a";
             
       if(mode==Type::CLIENT){
-	b->guiUpdate(true);
-	cin >> moveString;
+	moveString=b->guiUpdate(true);
+
+	debug<<moveString<<endl;
+	
+	//cin >> moveString;
 	socket.sendString(moveString);
       }else if ( mode == Type::SERVER){
 	b->guiUpdate(false);

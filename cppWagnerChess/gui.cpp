@@ -7,7 +7,7 @@ Gui::Gui(){
   cbreak();                   /* immediate char return */
   //noecho();                   /* no immediate echo */
   boardwin = newwin(BDEPTH * 2 + 1, BWIDTH * 4 + 1, BOARDY, BOARDX);
-  movewin = newwin(1, INSTRX - 1, NOTIFYY, 0);
+  movewin = newwin(1,30,21,0);
   scrollok(movewin, TRUE);
   keypad(movewin, TRUE);
 
@@ -94,7 +94,7 @@ void Gui::dosquares(void)
     waddch(boardwin, ACS_LRCORNER);
 }
 
-void Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
+string Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
 
   dosquares();
   
@@ -142,10 +142,17 @@ void Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
 
   if(isTurn){
     mvwaddstr(movewin,0,0,"Enter Move: ");
-    char move[16];
-    getnstr(&move[0], 16);
-    debug << "move=" << move << endl;
-  }
+    refresh();
+    wrefresh(movewin);
 
+    char move[16];
+    mvwgetnstr(movewin,0,12,&move[0], 16);
+    debug<<"asshat"<<endl;
+    debug << "move=" << move << endl;
+    return string{move};
+  }
+  
   debug.close();
+  return string{""};//if not isTurn
+
 }

@@ -65,7 +65,7 @@ string Board::toString() {
   return oss.str();
 }
 
-void Board::guiUpdate(bool isTurn){
+string Board::guiUpdate(bool isTurn){
 
   map<Coordinate*,Piece*> pieces{};
   for(auto& l : locations){
@@ -76,7 +76,7 @@ void Board::guiUpdate(bool isTurn){
 
   }
   
-  gui->update(pieces,isTurn);//send the pieces? as a map
+  return gui->update(pieces,isTurn);//send the pieces? as a map
 }
 
 MoveOutcome Board::move(string l,string lnew,string color){

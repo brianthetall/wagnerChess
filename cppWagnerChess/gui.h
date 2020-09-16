@@ -1,3 +1,4 @@
+#include <string>
 #include <ncurses.h>
 #include <map>
 #include "piece.h"
@@ -36,6 +37,6 @@ class Gui{
  public:
   Gui();
   void dosquares();
-  void update(map<Coordinate*,Piece*> pieces, bool isTurn);
+  string update(map<Coordinate*,Piece*> pieces, bool isTurn);
 
 };
