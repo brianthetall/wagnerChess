@@ -21,6 +21,7 @@ class Location{
   Location& setPiece(Piece* p);
   Piece* getPiece();
   Location& clearPiece();
+  Coordinate* getCoordinate(){return c;}
   void connectToNeighbors(unordered_map<string,Location*> locations);
   string toString(void) const;
 

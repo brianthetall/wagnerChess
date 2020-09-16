@@ -49,18 +49,20 @@ int main(int argc, char** argv){
 
   //the game:
   Board *b=new Board{};
+  
   while(true){
     while(true){
 
-      cout << b->toString()<<endl;
-      cout << "White Move: \a";
+      //cout << b->toString()<<endl;
+      //cout << "White Move: \a";
+      b->guiUpdate();
       
       if(mode==Type::SERVER){
 	cin >> moveString;
 	socket.sendString(moveString);
       }else if(mode==Type::CLIENT){
 	moveString=socket.readString();
-	cout<<"Client RX'ed: "<<moveString<<endl;
+	//cout<<"Client RX'ed: "<<moveString<<endl;
       }
       stringstream ss{moveString};
       getline(ss, temp, ',');
@@ -74,15 +76,16 @@ int main(int argc, char** argv){
 
     while(true){
 
-      cout << b->toString()<<endl;
-      cout << "Black Move: \a";
-
+      //cout << b->toString()<<endl;
+      //cout << "Black Move: \a";
+      b->guiUpdate();
+      
       if(mode==Type::CLIENT){
 	cin >> moveString;
 	socket.sendString(moveString);
       }else if ( mode == Type::SERVER){
 	moveString=socket.readString();
-	cout<<"Server RX'ed: "<<moveString<<endl;
+	//cout<<"Server RX'ed: "<<moveString<<endl;
       }
       stringstream ss{moveString};
       getline(ss, temp, ',');

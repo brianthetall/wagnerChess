@@ -2,6 +2,8 @@
 
 Board::Board():player{2},locations{64}{
 
+  gui=new Gui{};
+  
   //Create Coordinates:
   int i=0;
   char alpha='A';
@@ -30,8 +32,8 @@ Board::Board():player{2},locations{64}{
   player["white"]=new Player("white",locations);
   player["black"]=new Player("black",locations);
 
-  cout<<player["white"]->toString();
-  cout<<player["black"]->toString();
+  //cout<<player["white"]->toString();
+  //cout<<player["black"]->toString();
   
 }
 
@@ -61,6 +63,20 @@ string Board::toString() {
 
   
   return oss.str();
+}
+
+void Board::guiUpdate(){
+
+  map<Coordinate*,Piece*> pieces{};
+  for(auto& l : locations){
+
+    if(l.second->getPiece()!=nullptr){
+      pieces[l.second->getCoordinate()]=l.second->getPiece();
+    }
+
+  }
+  
+  gui->update(pieces);//send the pieces? as a map
 }
 
 MoveOutcome Board::move(string l,string lnew,string color){
