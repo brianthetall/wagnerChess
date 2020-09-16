@@ -1,3 +1,4 @@
+#include <boost/algorithm/string.hpp>
 #include <fstream>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -63,7 +64,7 @@ int main(int argc, char** argv){
       
       if(mode==Type::SERVER){
 	moveString=b->guiUpdate(true);
-
+	boost::to_upper(moveString);
 	debug<<moveString<<endl;
 	
 	//cin >> moveString;
@@ -90,7 +91,7 @@ int main(int argc, char** argv){
             
       if(mode==Type::CLIENT){
 	moveString=b->guiUpdate(true);
-
+	boost::to_upper(moveString);
 	debug<<moveString<<endl;
 	
 	//cin >> moveString;

@@ -96,6 +96,8 @@ void Gui::dosquares(void)
 
 string Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
 
+  werase(boardwin);
+  
   dosquares();
   
   ofstream debug;
