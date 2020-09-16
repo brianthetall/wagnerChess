@@ -104,9 +104,6 @@ void Gui::update(map<Coordinate*,Piece*> pieces){
   for(auto& element : pieces){
     
     Coordinate *c=element.first;
-
-    //debug<<c->toString()<<endl;
-    
     Piece *p=element.second;
 
     debug<<p->toString()<<endl;
@@ -121,9 +118,19 @@ void Gui::update(map<Coordinate*,Piece*> pieces){
     const char *s=p->toString().data();
 
     debug<<"Adding s[0]="<<s[0]<<endl;
+
+    start_color();
+    init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(2, COLOR_RED, COLOR_BLACK);
+
+    if(p->getColor()==Color::WHITE)
+      wattron(boardwin,COLOR_PAIR(1));
+    else
+      wattron(boardwin,COLOR_PAIR(2));
     
     waddch(boardwin,s[0]);
-    
+    attroff(COLOR_PAIR(1));
+    attroff(COLOR_PAIR(2));
 
   }
 
@@ -134,7 +141,5 @@ void Gui::update(map<Coordinate*,Piece*> pieces){
   refresh();
   wrefresh(boardwin);
   //wrefresh(movewin);
-  
-  
-  //while(1){}
+
 }
