@@ -94,7 +94,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
       throw InvalidLocation{};
   }
   catch(InvalidLocation e){
-    cout<<e.print()<<endl;
+    //cout<<e.print()<<endl;
     return MoveOutcome::ILLEGAL_MOVE;
   }catch(...){
     return MoveOutcome::ILLEGAL_MOVE;
@@ -107,7 +107,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
     if (piece->getColor()!=movingColor)
       throw NotYourPiece{};
   }catch(NotYourPiece e){
-    cout<<e.print()<<endl;
+    //cout<<e.print()<<endl;
     return MoveOutcome::NOT_YOUR_PIECE;
   }
   
@@ -128,7 +128,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
       throw InvalidLocation{};
     }
   }catch(InvalidLocation e){
-    cout << e.print() << endl;
+    //cout << e.print() << endl;
     return MoveOutcome::ILLEGAL_MOVE;
   }
   
@@ -138,19 +138,19 @@ MoveOutcome Board::move(string l,string lnew,string color){
       throw InCheck{};
     }
   }catch(InCheck e){
-      cout << e.print() << endl;
-      start->setPiece(piece);
-      dest->setPiece(temp);
-      if(temp!=nullptr)
-	temp->setLocation(dest);
-      piece->setLocation(start);
-      if(!piece->isWhore())//whore is set after the second move; it is a latch
-	piece->unsex();
-
-      return MoveOutcome::IN_CHECK;
-
-    }
+    //cout << e.print() << endl;
+    start->setPiece(piece);
+    dest->setPiece(temp);
+    if(temp!=nullptr)
+      temp->setLocation(dest);
+    piece->setLocation(start);
+    if(!piece->isWhore())//whore is set after the second move; it is a latch
+      piece->unsex();
     
+    return MoveOutcome::IN_CHECK;
+    
+  }
+  
   return MoveOutcome::ACCEPTED;
 }
 
