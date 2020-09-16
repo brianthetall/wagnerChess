@@ -94,7 +94,7 @@ void Gui::dosquares(void)
     waddch(boardwin, ACS_LRCORNER);
 }
 
-void Gui::update(map<Coordinate*,Piece*> pieces){
+void Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
 
   dosquares();
   
@@ -135,11 +135,12 @@ void Gui::update(map<Coordinate*,Piece*> pieces){
   }
 
   debug.close();
-    
-  //mvwaddstr(movewin,0,0,"Enter Move: ");
+
+  if(isTurn)
+    mvwaddstr(movewin,0,0,"Enter Move: ");
 
   refresh();
   wrefresh(boardwin);
-  //wrefresh(movewin);
+  wrefresh(movewin);
 
 }

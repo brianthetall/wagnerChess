@@ -28,7 +28,7 @@ class Board{
   Board();
   MoveOutcome move(string l,string lnew,string color);
   string toString();
-  void guiUpdate();
+  void guiUpdate(bool isTurn);
   bool isInCheck(Color c);
 
 };

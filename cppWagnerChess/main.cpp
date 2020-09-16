@@ -55,12 +55,13 @@ int main(int argc, char** argv){
 
       //cout << b->toString()<<endl;
       //cout << "White Move: \a";
-      b->guiUpdate();
       
       if(mode==Type::SERVER){
+	b->guiUpdate(true);
 	cin >> moveString;
 	socket.sendString(moveString);
       }else if(mode==Type::CLIENT){
+	b->guiUpdate(false);
 	moveString=socket.readString();
 	//cout<<"Client RX'ed: "<<moveString<<endl;
       }
@@ -78,12 +79,13 @@ int main(int argc, char** argv){
 
       //cout << b->toString()<<endl;
       //cout << "Black Move: \a";
-      b->guiUpdate();
-      
+            
       if(mode==Type::CLIENT){
+	b->guiUpdate(true);
 	cin >> moveString;
 	socket.sendString(moveString);
       }else if ( mode == Type::SERVER){
+	b->guiUpdate(false);
 	moveString=socket.readString();
 	//cout<<"Server RX'ed: "<<moveString<<endl;
       }

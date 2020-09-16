@@ -36,6 +36,6 @@ class Gui{
  public:
   Gui();
   void dosquares();
-  void update(map<Coordinate*,Piece*> pieces);
+  void update(map<Coordinate*,Piece*> pieces, bool isTurn);
 
 };
