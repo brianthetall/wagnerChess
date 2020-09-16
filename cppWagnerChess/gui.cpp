@@ -35,6 +35,9 @@ void Gui::dosquares(void)
 
     }
 
+    //    init_pair(3, COLOR_WHITE, COLOR_BLACK);
+    
+    
     move(BOARDY, BOARDX);
     waddch(boardwin, ACS_ULCORNER);
     for (j = 0; j < 7; j++) {
@@ -131,8 +134,8 @@ string Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
       wattron(boardwin,COLOR_PAIR(2));
     
     waddch(boardwin,s[0]);
-    attroff(COLOR_PAIR(1));
-    attroff(COLOR_PAIR(2));
+    wattroff(boardwin,COLOR_PAIR(1));
+    wattroff(boardwin,COLOR_PAIR(2));
 
   }
 
