@@ -24,10 +24,10 @@ void Gui::dosquares(void)
     int i, j;
 
     mvaddstr(0, 13, "Wagner Chess");
-    mvaddstr(1,4,"A   B   C   D   E   F   G   H");
-    mvaddstr(19,4,"A   B   C   D   E   F   G   H");
+    mvaddstr(1,4,"0   1   2   3   4   5   6   7");
+    mvaddstr(19,4,"0   1   2   3   4   5   6   7");
 
-    char c='0';
+    char c='A';
     for(i=0;i<=7;i++){
 
       mvaddch(3+i*2,1,c);
@@ -134,13 +134,18 @@ void Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
 
   }
 
-  debug.close();
 
-  if(isTurn)
-    mvwaddstr(movewin,0,0,"Enter Move: ");
 
   refresh();
   wrefresh(boardwin);
   wrefresh(movewin);
 
+  if(isTurn){
+    mvwaddstr(movewin,0,0,"Enter Move: ");
+    char move[16];
+    getnstr(&move[0], 16);
+    debug << "move=" << move << endl;
+  }
+
+  debug.close();
 }
