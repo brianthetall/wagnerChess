@@ -33,7 +33,6 @@ int Gui::graveyard(Piece *p, Player *player,Player *attacker){
     werase(gravewin);
     mvwaddstr(gravewin,0,0,"Grave Yard: ");
 
-
     if(player->toString() == "white")
       wattron(gravewin,COLOR_PAIR(1));
     else
@@ -44,8 +43,8 @@ int Gui::graveyard(Piece *p, Player *player,Player *attacker){
     for(auto& piece : player->getDeadPieces()){
       mvwaddstr(gravewin,i++,4,piece->toString().data());
     }
-    wattroff(boardwin,COLOR_PAIR(1));
-    wattroff(boardwin,COLOR_PAIR(2));
+    wattroff(gravewin,COLOR_PAIR(1));
+    wattroff(gravewin,COLOR_PAIR(2));
 
     
     if(attacker->toString() == "white")
@@ -58,8 +57,8 @@ int Gui::graveyard(Piece *p, Player *player,Player *attacker){
     for(auto& piece : attacker->getDeadPieces()){
       mvwaddstr(gravewin,i++,12,piece->toString().data());
     }
-    wattroff(boardwin,COLOR_PAIR(1));
-    wattroff(boardwin,COLOR_PAIR(2));
+    wattroff(gravewin,COLOR_PAIR(1));
+    wattroff(gravewin,COLOR_PAIR(2));
     
 
   }else{return -1;}
