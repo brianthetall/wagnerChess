@@ -8,7 +8,7 @@ Gui::Gui(){
   //noecho();                   /* no immediate echo */
   boardwin = newwin(BDEPTH * 2 + 1, BWIDTH * 4 + 1, BOARDY, BOARDX);
   movewin = newwin(1,30,21,0);
-  gravewin = newwin(16,10,BOARDY,BOARDX+4*8+3);
+  gravewin = newwin(18,14,BOARDY-2,BOARDX+4*8+3);
   scrollok(movewin, TRUE);
   keypad(movewin, TRUE);
 
@@ -20,13 +20,53 @@ Gui::Gui(){
 
 }
 
-void Gui::graveyard(Piece *p, Player *player){
+int Gui::graveyard(Piece *p, Player *player,Player *attacker){
 
   if ( p!= nullptr && player!=nullptr){
     //add this piece to the player's graveyard
-    //refresh the gravewin from gui
+    player->addToGraveyard(p);
 
-  }else{}
+    init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(2, COLOR_RED, COLOR_BLACK);
+
+    //refresh the gravewin from gui
+    werase(gravewin);
+    mvwaddstr(gravewin,0,0,"Grave Yard: ");
+
+
+    if(player->toString() == "white")
+      wattron(gravewin,COLOR_PAIR(1));
+    else
+      wattron(gravewin,COLOR_PAIR(2));
+    
+    int i=2;
+    mvwaddstr(gravewin,1,0,player->toString().data());
+    for(auto& piece : player->getDeadPieces()){
+      mvwaddstr(gravewin,i++,4,piece->toString().data());
+    }
+    wattroff(boardwin,COLOR_PAIR(1));
+    wattroff(boardwin,COLOR_PAIR(2));
+
+    
+    if(attacker->toString() == "white")
+      wattron(gravewin,COLOR_PAIR(1));
+    else
+      wattron(gravewin,COLOR_PAIR(2));
+
+    i=2;
+    mvwaddstr(gravewin,1,8,attacker->toString().data());
+    for(auto& piece : attacker->getDeadPieces()){
+      mvwaddstr(gravewin,i++,12,piece->toString().data());
+    }
+    wattroff(boardwin,COLOR_PAIR(1));
+    wattroff(boardwin,COLOR_PAIR(2));
+    
+
+  }else{return -1;}
+
+  refresh();
+  wrefresh(gravewin);
+  return 0;
 
 }
 

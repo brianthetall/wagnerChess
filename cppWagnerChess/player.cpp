@@ -89,7 +89,7 @@ string Player::toString() {
   }cout<<endl;
   */
   
-  return "Player: " + color;
+  return color;
 }
 
 int Player::addToGraveyard(Piece *p){
@@ -98,7 +98,7 @@ int Player::addToGraveyard(Piece *p){
     return -1;
 
   //Add to the graveYard map:
-  deadPieces[p->toString()]=p;
+  deadPieces.push_back(p);
 
   return 0;
 

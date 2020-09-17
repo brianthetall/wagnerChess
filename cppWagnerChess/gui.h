@@ -37,7 +37,7 @@ class Gui{
 
  public:
   Gui();
-  void graveyard(void);
+  int graveyard(Piece *p, Player *player, Player *attacker);
   void dosquares(void);
   string update(map<Coordinate*,Piece*> pieces, bool isTurn);
 

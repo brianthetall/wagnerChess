@@ -82,6 +82,7 @@ string Board::guiUpdate(bool isTurn){
 MoveOutcome Board::move(string l,string lnew,string color){
 
   Color movingColor = color=="white" ? Color::WHITE : Color::BLACK;
+  Color enemyColor = color=="black" ? Color::WHITE : Color::BLACK;
   Location *start,*dest;
   Piece* piece;
   Piece* temp;
@@ -151,7 +152,9 @@ MoveOutcome Board::move(string l,string lnew,string color){
     
   }
 
-  gui->graveyard( temp==nullptr ? nullptr : temp );
+  Player *playerLosingPiece = enemyColor==Color::WHITE ? player["white"] : player["black"];
+  Player *attacker = enemyColor==Color::BLACK ? player["white"] : player["black"];
+  gui->graveyard( temp,playerLosingPiece,attacker );//safe to send nullptr for temp
   
   return MoveOutcome::ACCEPTED;
 }
