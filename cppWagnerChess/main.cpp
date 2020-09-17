@@ -63,6 +63,7 @@ int main(int argc, char** argv){
       //cout << "White Move: \a";
       
       if(mode==Type::SERVER){
+	cout<<'\a'<<flush;
 	moveString=b->guiUpdate(true);
 	boost::to_upper(moveString);
 	debug<<moveString<<endl;
@@ -90,6 +91,7 @@ int main(int argc, char** argv){
       //cout << "Black Move: \a";
             
       if(mode==Type::CLIENT){
+	cout<<'\a'<<flush;
 	moveString=b->guiUpdate(true);
 	boost::to_upper(moveString);
 	debug<<moveString<<endl;
