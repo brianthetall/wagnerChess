@@ -8,6 +8,7 @@ Gui::Gui(){
   //noecho();                   /* no immediate echo */
   boardwin = newwin(BDEPTH * 2 + 1, BWIDTH * 4 + 1, BOARDY, BOARDX);
   movewin = newwin(1,30,21,0);
+  gravewin = newwin(16,10,BOARDY,BOARDX+4*8+3);
   scrollok(movewin, TRUE);
   keypad(movewin, TRUE);
 
@@ -19,82 +20,91 @@ Gui::Gui(){
 
 }
 
-void Gui::dosquares(void)
-{
-    int i, j;
+void Gui::graveyard(Piece *p, Player *player){
 
-    mvaddstr(0, 13, "Wagner Chess");
-    mvaddstr(1,4,"0   1   2   3   4   5   6   7");
-    mvaddstr(19,4,"0   1   2   3   4   5   6   7");
+  if ( p!= nullptr && player!=nullptr){
+    //add this piece to the player's graveyard
+    //refresh the gravewin from gui
 
-    char c='A';
-    for(i=0;i<=7;i++){
+  }else{}
 
-      mvaddch(3+i*2,1,c);
-      mvaddch(3+i*2,35,c++);
+}
 
-    }
+void Gui::dosquares(void){
+  int i, j;
 
-    //    init_pair(3, COLOR_WHITE, COLOR_BLACK);
+  mvaddstr(0, 13, "Wagner Chess");
+  mvaddstr(1,4,"0   1   2   3   4   5   6   7");
+  mvaddstr(19,4,"0   1   2   3   4   5   6   7");
+
+  char c='A';
+  for(i=0;i<=7;i++){
+
+    mvaddch(3+i*2,1,c);
+    mvaddch(3+i*2,35,c++);
+
+  }
+
+  //    init_pair(3, COLOR_WHITE, COLOR_BLACK);
     
     
-    move(BOARDY, BOARDX);
-    waddch(boardwin, ACS_ULCORNER);
-    for (j = 0; j < 7; j++) {
-	waddch(boardwin, ACS_HLINE);
-	waddch(boardwin, ACS_HLINE);
-	waddch(boardwin, ACS_HLINE);
-	waddch(boardwin, ACS_TTEE);
-    }
+  move(BOARDY, BOARDX);
+  waddch(boardwin, ACS_ULCORNER);
+  for (j = 0; j < 7; j++) {
     waddch(boardwin, ACS_HLINE);
     waddch(boardwin, ACS_HLINE);
     waddch(boardwin, ACS_HLINE);
-    waddch(boardwin, ACS_URCORNER);
+    waddch(boardwin, ACS_TTEE);
+  }
+  waddch(boardwin, ACS_HLINE);
+  waddch(boardwin, ACS_HLINE);
+  waddch(boardwin, ACS_HLINE);
+  waddch(boardwin, ACS_URCORNER);
 
-    for (i = 1; i < BDEPTH; i++) {
-	move(BOARDY + i * 2 - 1, BOARDX);
-	waddch(boardwin, ACS_VLINE);
-	for (j = 0; j < BWIDTH; j++) {
-	    waddch(boardwin, ' ');
-	    waddch(boardwin, ' ');
-	    waddch(boardwin, ' ');
-	    waddch(boardwin, ACS_VLINE);
-	}
-	move(BOARDY + i * 2, BOARDX);
-	waddch(boardwin, ACS_LTEE);
-	for (j = 0; j < BWIDTH - 1; j++) {
-	    waddch(boardwin, ACS_HLINE);
-	    waddch(boardwin, ACS_HLINE);
-	    waddch(boardwin, ACS_HLINE);
-	    waddch(boardwin, ACS_PLUS);
-	}
-	waddch(boardwin, ACS_HLINE);
-	waddch(boardwin, ACS_HLINE);
-	waddch(boardwin, ACS_HLINE);
-	waddch(boardwin, ACS_RTEE);
-    }
-
+  for (i = 1; i < BDEPTH; i++) {
     move(BOARDY + i * 2 - 1, BOARDX);
     waddch(boardwin, ACS_VLINE);
     for (j = 0; j < BWIDTH; j++) {
-	waddch(boardwin, ' ');
-	waddch(boardwin, ' ');
-	waddch(boardwin, ' ');
-	waddch(boardwin, ACS_VLINE);
+      waddch(boardwin, ' ');
+      waddch(boardwin, ' ');
+      waddch(boardwin, ' ');
+      waddch(boardwin, ACS_VLINE);
     }
-
     move(BOARDY + i * 2, BOARDX);
-    waddch(boardwin, ACS_LLCORNER);
+    waddch(boardwin, ACS_LTEE);
     for (j = 0; j < BWIDTH - 1; j++) {
-	waddch(boardwin, ACS_HLINE);
-	waddch(boardwin, ACS_HLINE);
-	waddch(boardwin, ACS_HLINE);
-	waddch(boardwin, ACS_BTEE);
+      waddch(boardwin, ACS_HLINE);
+      waddch(boardwin, ACS_HLINE);
+      waddch(boardwin, ACS_HLINE);
+      waddch(boardwin, ACS_PLUS);
     }
     waddch(boardwin, ACS_HLINE);
     waddch(boardwin, ACS_HLINE);
     waddch(boardwin, ACS_HLINE);
-    waddch(boardwin, ACS_LRCORNER);
+    waddch(boardwin, ACS_RTEE);
+  }
+
+  move(BOARDY + i * 2 - 1, BOARDX);
+  waddch(boardwin, ACS_VLINE);
+  for (j = 0; j < BWIDTH; j++) {
+    waddch(boardwin, ' ');
+    waddch(boardwin, ' ');
+    waddch(boardwin, ' ');
+    waddch(boardwin, ACS_VLINE);
+  }
+
+  move(BOARDY + i * 2, BOARDX);
+  waddch(boardwin, ACS_LLCORNER);
+  for (j = 0; j < BWIDTH - 1; j++) {
+    waddch(boardwin, ACS_HLINE);
+    waddch(boardwin, ACS_HLINE);
+    waddch(boardwin, ACS_HLINE);
+    waddch(boardwin, ACS_BTEE);
+  }
+  waddch(boardwin, ACS_HLINE);
+  waddch(boardwin, ACS_HLINE);
+  waddch(boardwin, ACS_HLINE);
+  waddch(boardwin, ACS_LRCORNER);
 }
 
 string Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){

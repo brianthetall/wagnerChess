@@ -17,12 +17,14 @@ using namespace std;
 class Player{
   string color;
   map<string,shared_ptr<Piece>> pieces;//map of pieces: cannot have map of abstract class
+  map<string,Piece*> deadPieces;
   unordered_map<string,Location*> locations;
   
 public:
 
   Player(){};
   Player(string c,unordered_map<string,Location*> locs);
+  int addToGraveyard(Piece* p);
 
 
   string toString();

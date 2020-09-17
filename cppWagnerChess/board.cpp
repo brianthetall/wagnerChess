@@ -150,6 +150,8 @@ MoveOutcome Board::move(string l,string lnew,string color){
     return MoveOutcome::IN_CHECK;
     
   }
+
+  gui->graveyard( temp==nullptr ? nullptr : temp );
   
   return MoveOutcome::ACCEPTED;
 }

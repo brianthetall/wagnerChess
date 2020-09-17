@@ -1,6 +1,7 @@
 #include <string>
 #include <ncurses.h>
 #include <map>
+#include "player.h"
 #include "piece.h"
 #include "coordinate.h"
 
@@ -31,12 +32,13 @@ using namespace std;
 class Gui{
 
   WINDOW *boardwin;	/* the board window */
-  WINDOW *movewin;
-
+  WINDOW *movewin;      //User input window
+  WINDOW *gravewin;     //Pieces removed from game
 
  public:
   Gui();
-  void dosquares();
+  void graveyard(void);
+  void dosquares(void);
   string update(map<Coordinate*,Piece*> pieces, bool isTurn);
 
 };
