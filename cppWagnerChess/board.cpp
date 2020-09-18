@@ -79,7 +79,7 @@ string Board::guiUpdate(bool isTurn){
   return gui->update(pieces,isTurn);//send the pieces? as a map
 }
 
-MoveOutcome Board::move(string l,string lnew,string color){
+MoveOutcome Board::move(string l,string lnew,string color,string moveString){
 
   Color movingColor = color=="white" ? Color::WHITE : Color::BLACK;
   Color enemyColor = color=="black" ? Color::WHITE : Color::BLACK;
@@ -155,6 +155,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
   Player *playerLosingPiece = enemyColor==Color::WHITE ? player["white"] : player["black"];
   Player *attacker = enemyColor==Color::BLACK ? player["white"] : player["black"];
   gui->graveyard( temp,playerLosingPiece,attacker );//safe to send nullptr for temp
+  gui->movesUpdate(moveString);//passed as parameter from main()
   
   return MoveOutcome::ACCEPTED;
 }

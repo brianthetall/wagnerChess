@@ -73,6 +73,7 @@ int main(int argc, char** argv){
       }else if(mode==Type::CLIENT){
 	b->guiUpdate(false);
 	moveString=socket.readString();
+	debug<<moveString<<endl;
 	//cout<<"Client RX'ed: "<<moveString<<endl;
       }
       stringstream ss{moveString};
@@ -80,7 +81,7 @@ int main(int argc, char** argv){
       start=temp;
       getline(ss, temp, ',');
       dest=temp;
-      if(b->move(start,dest,"white")==MoveOutcome::ACCEPTED)
+      if(b->move(start,dest,"white",moveString)==MoveOutcome::ACCEPTED)//send moveString for the GUI
 	break;
       
     }
@@ -101,6 +102,7 @@ int main(int argc, char** argv){
       }else if ( mode == Type::SERVER){
 	b->guiUpdate(false);
 	moveString=socket.readString();
+	debug<<moveString<<endl;
 	//cout<<"Server RX'ed: "<<moveString<<endl;
       }
       stringstream ss{moveString};
@@ -108,7 +110,7 @@ int main(int argc, char** argv){
       start=temp;
       getline(ss, temp, ',');
       dest=temp;
-      if(b->move(start,dest,"black")==MoveOutcome::ACCEPTED)
+      if(b->move(start,dest,"black",moveString)==MoveOutcome::ACCEPTED)//send moveString for the GUI
 	break;
       
     }

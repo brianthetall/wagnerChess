@@ -7,8 +7,9 @@ Gui::Gui(){
   cbreak();                   /* immediate char return */
   //noecho();                   /* no immediate echo */
   boardwin = newwin(BDEPTH * 2 + 1, BWIDTH * 4 + 1, BOARDY, BOARDX);
-  movewin = newwin(1,30,21,0);
+  movewin = newwin(1,30,21,0);//user input window
   gravewin = newwin(18,14,BOARDY-2,BOARDX+4*8+3);
+  moveswin = newwin(18,10,BOARDY-2,BOARDX+4*8+20);//list of previous moves window
   scrollok(movewin, TRUE);
   keypad(movewin, TRUE);
 
@@ -18,6 +19,24 @@ Gui::Gui(){
   }
 
 
+}
+
+int Gui::movesUpdate(string moveString){
+  
+  static forward_list<string> moves{};
+  moves.push_front(moveString);
+
+  werase(moveswin);
+  mvwaddstr(moveswin,0,0,"Moves:");
+  int i=1;
+  for(auto& s : moves){
+    mvwaddstr(moveswin,i,0,s.data());
+    i++;
+  }
+  refresh();
+  wrefresh(moveswin);
+
+  return 0;
 }
 
 int Gui::graveyard(Piece *p, Player *player,Player *attacker){
@@ -152,26 +171,26 @@ string Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
   
   dosquares();
   
-  ofstream debug;
-  debug.open("debug");
+  //ofstream debug;
+  //  debug.open("debug");
 
   for(auto& element : pieces){
     
     Coordinate *c=element.first;
     Piece *p=element.second;
 
-    debug<<p->toString()<<endl;
+    //debug<<p->toString()<<endl;
     
     int row=int(c->getRow()-65);//subtract 65 from row
     int col=c->getCol();
 
-    debug<<"Row:"<<row<<" Col:"<<col<<endl;
+    //    debug<<"Row:"<<row<<" Col:"<<col<<endl;
 
     cellmove(row,col);
 
     const char *s=p->toString().data();
 
-    debug<<"Adding s[0]="<<s[0]<<endl;
+    //    debug<<"Adding s[0]="<<s[0]<<endl;
 
     start_color();
     init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
@@ -201,12 +220,12 @@ string Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
 
     char move[16];
     mvwgetnstr(movewin,0,12,&move[0], 16);
-    debug<<"asshat"<<endl;
-    debug << "move=" << move << endl;
+    //debug<<"asshat"<<endl;
+    //debug << "move=" << move << endl;
     return string{move};
   }
   
-  debug.close();
+  //debug.close();
   return string{""};//if not isTurn
 
 }

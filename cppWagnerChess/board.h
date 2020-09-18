@@ -26,7 +26,7 @@ class Board{
 
  public:
   Board();
-  MoveOutcome move(string l,string lnew,string color);
+  MoveOutcome move(string l,string lnew,string color,string moveString);//moveString is for the GUI
   string toString();
   string guiUpdate(bool isTurn);
   bool isInCheck(Color c);

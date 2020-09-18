@@ -1,12 +1,12 @@
 #include <string>
 #include <ncurses.h>
 #include <map>
+#include <forward_list>
 #include "player.h"
 #include "piece.h"
 #include "coordinate.h"
 
 using namespace std;
-
 
 /* board size */
 #define BDEPTH	8
@@ -34,11 +34,13 @@ class Gui{
   WINDOW *boardwin;	/* the board window */
   WINDOW *movewin;      //User input window
   WINDOW *gravewin;     //Pieces removed from game
+  WINDOW *moveswin;     //History of most recent moves, N-deep
 
  public:
   Gui();
   int graveyard(Piece *p, Player *player, Player *attacker);
   void dosquares(void);
   string update(map<Coordinate*,Piece*> pieces, bool isTurn);
+  int movesUpdate(string moveString);
 
 };
