@@ -2,6 +2,8 @@
 
 Board::Board():player{2},locations{64}{
 
+  gui=new Gui{};
+  
   //Create Coordinates:
   int i=0;
   char alpha='A';
@@ -30,8 +32,8 @@ Board::Board():player{2},locations{64}{
   player["white"]=new Player("white",locations);
   player["black"]=new Player("black",locations);
 
-  cout<<player["white"]->toString();
-  cout<<player["black"]->toString();
+  //cout<<player["white"]->toString();
+  //cout<<player["black"]->toString();
   
 }
 
@@ -67,9 +69,24 @@ string Board::toString() {
   return oss.str();
 }
 
-MoveOutcome Board::move(string l,string lnew,string color){
+string Board::guiUpdate(bool isTurn){
+
+  map<Coordinate*,Piece*> pieces{};
+  for(auto& l : locations){
+
+    if(l.second->getPiece()!=nullptr){
+      pieces[l.second->getCoordinate()]=l.second->getPiece();
+    }
+
+  }
+  
+  return gui->update(pieces,isTurn);//send the pieces? as a map
+}
+
+MoveOutcome Board::move(string l,string lnew,string color,string moveString){
 
   Color movingColor = color=="white" ? Color::WHITE : Color::BLACK;
+  Color enemyColor = color=="black" ? Color::WHITE : Color::BLACK;
   Location *start,*dest;
   Piece* piece;
   Piece* temp;
@@ -82,7 +99,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
       throw InvalidLocation{};
   }
   catch(InvalidLocation e){
-    cout<<e.print()<<endl;
+    //cout<<e.print()<<endl;
     return MoveOutcome::ILLEGAL_MOVE;
   }catch(...){
     return MoveOutcome::ILLEGAL_MOVE;
@@ -95,7 +112,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
     if (piece->getColor()!=movingColor)
       throw NotYourPiece{};
   }catch(NotYourPiece e){
-    cout<<e.print()<<endl;
+    //cout<<e.print()<<endl;
     return MoveOutcome::NOT_YOUR_PIECE;
   }
   
@@ -116,7 +133,7 @@ MoveOutcome Board::move(string l,string lnew,string color){
       throw InvalidLocation{};
     }
   }catch(InvalidLocation e){
-    cout << e.print() << endl;
+    //cout << e.print() << endl;
     return MoveOutcome::ILLEGAL_MOVE;
   }
   
@@ -126,19 +143,24 @@ MoveOutcome Board::move(string l,string lnew,string color){
       throw InCheck{};
     }
   }catch(InCheck e){
-      cout << e.print() << endl;
-      start->setPiece(piece);
-      dest->setPiece(temp);
-      if(temp!=nullptr)
-	temp->setLocation(dest);
-      piece->setLocation(start);
-      if(!piece->isWhore())//whore is set after the second move; it is a latch
-	piece->unsex();
-
-      return MoveOutcome::IN_CHECK;
-
-    }
+    //cout << e.print() << endl;
+    start->setPiece(piece);
+    dest->setPiece(temp);
+    if(temp!=nullptr)
+      temp->setLocation(dest);
+    piece->setLocation(start);
+    if(!piece->isWhore())//whore is set after the second move; it is a latch
+      piece->unsex();
     
+    return MoveOutcome::IN_CHECK;
+    
+  }
+
+  Player *playerLosingPiece = enemyColor==Color::WHITE ? player["white"] : player["black"];
+  Player *attacker = enemyColor==Color::BLACK ? player["white"] : player["black"];
+  gui->graveyard( temp,playerLosingPiece,attacker );//safe to send nullptr for temp
+  gui->movesUpdate(moveString);//passed as parameter from main()
+  
   return MoveOutcome::ACCEPTED;
 }
 

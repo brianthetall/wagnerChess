@@ -1,4 +1,5 @@
 #include <boost/algorithm/string.hpp>
+#include <fstream>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
@@ -50,49 +51,66 @@ int main(int argc, char** argv){
 
   //the game:
   Board *b=new Board{};
+    
+  ofstream debug;
+  debug.open("mainDebug");
+
+  
   while(true){
     while(true){
 
-      cout << b->toString()<<endl;
-      cout << "White Move: \a";
+      //cout << b->toString()<<endl;
+      //cout << "White Move: \a";
       
       if(mode==Type::SERVER){
-	cin >> moveString;
+
+	cout<<'\a'<<flush;
+	moveString=b->guiUpdate(true);
 	boost::to_upper(moveString);
+	debug<<moveString<<endl;
+
 	socket.sendString(moveString);
       }else if(mode==Type::CLIENT){
+	b->guiUpdate(false);
 	moveString=socket.readString();
-	cout<<"Client RX'ed: "<<moveString<<endl;
+	debug<<moveString<<endl;
+	//cout<<"Client RX'ed: "<<moveString<<endl;
       }
       stringstream ss{moveString};
       getline(ss, temp, ',');
       start=temp;
       getline(ss, temp, ',');
       dest=temp;
-      if(b->move(start,dest,"white")==MoveOutcome::ACCEPTED)
+      if(b->move(start,dest,"white",moveString)==MoveOutcome::ACCEPTED)//send moveString for the GUI
 	break;
       
     }
 
     while(true){
 
-      cout << b->toString()<<endl;
-      cout << "Black Move: \a";
-
+      //cout << b->toString()<<endl;
+      //cout << "Black Move: \a";
+            
       if(mode==Type::CLIENT){
-	cin >> moveString;
+	
+	cout<<'\a'<<flush;
+	moveString=b->guiUpdate(true);
 	boost::to_upper(moveString);
+	debug<<moveString<<endl;
+	
 	socket.sendString(moveString);
       }else if ( mode == Type::SERVER){
+	b->guiUpdate(false);
 	moveString=socket.readString();
-	cout<<"Server RX'ed: "<<moveString<<endl;
+	debug<<moveString<<endl;
+	//cout<<"Server RX'ed: "<<moveString<<endl;
       }
       stringstream ss{moveString};
       getline(ss, temp, ',');
       start=temp;
       getline(ss, temp, ',');
       dest=temp;
-      if(b->move(start,dest,"black")==MoveOutcome::ACCEPTED)
+      if(b->move(start,dest,"black",moveString)==MoveOutcome::ACCEPTED)//send moveString for the GUI
 	break;
       
     }

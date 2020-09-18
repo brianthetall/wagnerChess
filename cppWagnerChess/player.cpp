@@ -50,10 +50,10 @@ Player::Player(string c,unordered_map<string,Location*> locs):color{c},locations
 
 
 string Player::toString() {
-  pieces["king"]->getMoves();
-  pieces["queen"]->getMoves();
-  pieces["bishop1"]->getMoves();
-  pieces["rook1"]->getMoves();
+  //pieces["king"]->getMoves();
+  //pieces["queen"]->getMoves();
+  //pieces["bishop1"]->getMoves();
+  //pieces["rook1"]->getMoves();
   /*
   for( auto& move : pieces["knight1"]->getMoves()){
     cout<<move->toString()<<",";
@@ -89,5 +89,17 @@ string Player::toString() {
   }cout<<endl;
   */
   
-  return "Player: " + color;
+  return color;
+}
+
+int Player::addToGraveyard(Piece *p){
+
+  if ( p==nullptr )
+    return -1;
+
+  //Add to the graveYard map:
+  deadPieces.push_back(p);
+
+  return 0;
+
 }
