@@ -35,12 +35,14 @@ class Gui{
   WINDOW *movewin;      //User input window
   WINDOW *gravewin;     //Pieces removed from game
   WINDOW *moveswin;     //History of most recent moves, N-deep
-
+  WINDOW *errorwin;     //Exception Explaination Window; in-check, etc
+  
  public:
   Gui();
   int graveyard(Piece *p, Player *player, Player *attacker);
   void dosquares(void);
   string update(map<Coordinate*,Piece*> pieces, bool isTurn);
   int movesUpdate(string moveString);
+  void outputError(string error);
 
 };

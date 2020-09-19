@@ -100,8 +100,10 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
   }
   catch(InvalidLocation e){
     //cout<<e.print()<<endl;
+    gui->outputError(e.print());
     return MoveOutcome::ILLEGAL_MOVE;
   }catch(...){
+    gui->outputError("Illegal Input or Move");
     return MoveOutcome::ILLEGAL_MOVE;
   }
   
@@ -112,6 +114,7 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
     if (piece->getColor()!=movingColor)
       throw NotYourPiece{};
   }catch(NotYourPiece e){
+    gui->outputError(e.print());
     //cout<<e.print()<<endl;
     return MoveOutcome::NOT_YOUR_PIECE;
   }
@@ -134,6 +137,7 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
     }
   }catch(InvalidLocation e){
     //cout << e.print() << endl;
+    gui->outputError(e.print());
     return MoveOutcome::ILLEGAL_MOVE;
   }
   
@@ -144,6 +148,7 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
     }
   }catch(InCheck e){
     //cout << e.print() << endl;
+    gui->outputError(e.print());//output to the GUI
     start->setPiece(piece);
     dest->setPiece(temp);
     if(temp!=nullptr)
@@ -160,7 +165,7 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
   Player *attacker = enemyColor==Color::BLACK ? player["white"] : player["black"];
   gui->graveyard( temp,playerLosingPiece,attacker );//safe to send nullptr for temp
   gui->movesUpdate(moveString);//passed as parameter from main()
-  
+  gui->outputError("");
   return MoveOutcome::ACCEPTED;
 }
 
