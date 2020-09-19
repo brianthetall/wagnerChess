@@ -231,8 +231,8 @@ string Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
     refresh();
     wrefresh(movewin);
 
-    char move[16];
-    mvwgetnstr(movewin,0,12,&move[0], 16);
+    char move[5];
+    mvwgetnstr(movewin,0,12,&move[0], 5);
     //debug<<"asshat"<<endl;
     //debug << "move=" << move << endl;
     return string{move};
