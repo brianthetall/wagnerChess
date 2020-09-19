@@ -6,10 +6,13 @@ Gui::Gui(){
   initscr();
   cbreak();                   /* immediate char return */
   //noecho();                   /* no immediate echo */
+
   boardwin = newwin(BDEPTH * 2 + 1, BWIDTH * 4 + 1, BOARDY, BOARDX);
   movewin = newwin(1,30,21,0);//user input window
   gravewin = newwin(18,14,BOARDY-2,BOARDX+4*8+3);
   moveswin = newwin(18,10,BOARDY-2,BOARDX+4*8+20);//list of previous moves window
+  errorwin = newwin(1,30,22,0);//error output window  
+  
   scrollok(movewin, TRUE);
   keypad(movewin, TRUE);
 
@@ -19,6 +22,16 @@ Gui::Gui(){
   }
 
 
+}
+
+void Gui::outputError(string error){
+
+  werase(errorwin);
+  mvwaddstr(errorwin,0,0,error.data());
+  
+  refresh();
+  wrefresh(errorwin);
+  
 }
 
 int Gui::movesUpdate(string moveString){
@@ -218,8 +231,8 @@ string Gui::update(map<Coordinate*,Piece*> pieces, bool isTurn){
     refresh();
     wrefresh(movewin);
 
-    char move[16];
-    mvwgetnstr(movewin,0,12,&move[0], 16);
+    char move[5];
+    mvwgetnstr(movewin,0,12,&move[0], 5);
     //debug<<"asshat"<<endl;
     //debug << "move=" << move << endl;
     return string{move};
