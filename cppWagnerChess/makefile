@@ -2,6 +2,6 @@ CC=g++
 CFLAGS=-lncurses
 
 chess:
-	$(CC) $(CFLAGS) -o chess *.cpp
+	$(CC) -o chess *.cpp $(CFLAGS)
 clean:
 	rm -rf *.o chess
