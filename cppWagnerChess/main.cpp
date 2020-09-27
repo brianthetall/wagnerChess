@@ -10,77 +10,33 @@
 #include "board.h"
 #include "mySocket.h"
 
+#include <cgicc/CgiDefs.h> 
+#include <cgicc/Cgicc.h> 
+#include <cgicc/HTTPHTMLHeader.h> 
+#include <cgicc/HTMLClasses.h>  
+
 #define BUFFER 256
 #define PORT 2599
 
-int main(int argc, char** argv){
+int main(void){
 
   Type mode;
   string moveString,temp,start,dest;
   MySocket socket;
-
-  //CONNECTION FSM STUFF:
-  if(argc==1){
-    printf("Must specify (c)lient or (s)erver. If client, must also provide IP address of server.\n");
-    return -1;
-  }
-
-  //SERVER SETUP:
-  else if (argc==2 && strcmp(*++argv,"s")==0){
-    
-    printf("setup server socket\n");
-    mode=Type::SERVER;
-    socket=MySocket{ PORT,BUFFER };
-  
-  }
-
-  //CLIENT SETUP:
-  else if(argc==3 && strcmp(*++argv,"c")==0){
-
-    printf("SETUP client socket\n");
-    mode=Type::CLIENT;
-    string ip{ *++argv };
-    socket=MySocket{ ip.c_str() , PORT , BUFFER };
-    
-  }
-  
-  else{
-    printf("Try Again...\n");
-    return -2;
-  }
+  static bool turn=true;//true == white
 
   //the game:
   Board *b=new Board{};
     
   ofstream debug;
-  debug.open("mainDebug");
+  debug.open("/home/user/logs/mainDebug");
 
   
   while(true){
     while(true){
 
-      //cout << b->toString()<<endl;
-      //cout << "White Move: \a";
+      cout << b->toString()<<endl;
       
-      if(mode==Type::SERVER){
-
-	cout<<'\a'<<flush;
-	moveString=b->guiUpdate(true);
-	boost::to_upper(moveString);
-	debug<<moveString<<endl;
-
-	socket.sendString(moveString);
-      }else if(mode==Type::CLIENT){
-	b->guiUpdate(false);
-	moveString=socket.readString();
-	debug<<moveString<<endl;
-	//cout<<"Client RX'ed: "<<moveString<<endl;
-      }
-      stringstream ss{moveString};
-      getline(ss, temp, ',');
-      start=temp;
-      getline(ss, temp, ',');
-      dest=temp;
       if(b->move(start,dest,"white",moveString)==MoveOutcome::ACCEPTED)//send moveString for the GUI
 	break;
       
@@ -88,28 +44,8 @@ int main(int argc, char** argv){
 
     while(true){
 
-      //cout << b->toString()<<endl;
-      //cout << "Black Move: \a";
-            
-      if(mode==Type::CLIENT){
-	
-	cout<<'\a'<<flush;
-	moveString=b->guiUpdate(true);
-	boost::to_upper(moveString);
-	debug<<moveString<<endl;
-	
-	socket.sendString(moveString);
-      }else if ( mode == Type::SERVER){
-	b->guiUpdate(false);
-	moveString=socket.readString();
-	debug<<moveString<<endl;
-	//cout<<"Server RX'ed: "<<moveString<<endl;
-      }
-      stringstream ss{moveString};
-      getline(ss, temp, ',');
-      start=temp;
-      getline(ss, temp, ',');
-      dest=temp;
+      cout << b->toString()<<endl;
+      
       if(b->move(start,dest,"black",moveString)==MoveOutcome::ACCEPTED)//send moveString for the GUI
 	break;
       
