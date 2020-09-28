@@ -7,16 +7,20 @@
 #include <iostream>
 #include <sstream>
 #include <map>
+#include <sqlException.h>
 
 using namespace std;
 
 class EzSql{
 
+private:
+  
   MYSQL *connector;
   string user,passwd;
 
-  void verifyConnection(void);
+  inline void verifyConnection(void);
 
+  
  public:
   EzSql(string username,string password):user{username},passwd{password}{
 
@@ -26,20 +30,21 @@ class EzSql{
       cout<<mysql_error(connector)<<endl;
     }
 
-    if (mysql_real_connect(connector, "localhost", "user", "passwd", NULL, 0, NULL, 0) == NULL) {
+    if (mysql_real_connect(connector, "localhost", user, passwd, NULL, 0, NULL, 0) == NULL) {
       cout<<mysql_error(connector)<<endl;
       mysql_close(connector);
     }  
 
   };
 
-  void createDb(string dbName);
-  void createTable(string db,string tableName);
-  void insertJsonFile(string fileName);
-  string selectElement(string name);
-  map<string,string> selectElementMap(string name);
-  void dropDb(string dbName);
-  void dropTable(string tableName);
+  int createDb(const string dbName);
+  int selectDb(const string db);
+  int createTable(const string db,const string tableName);
+  int insertJsonStream(const string table, stream jsonStream);
+  string selectElement(const string table, const string name);
+  map<string,string> selectElementMap(const string table, const string name);
+  int dropDb(const string dbName);
+  int dropTable(const string db, const string tableName);
   void close(void);
   string status(void);
 

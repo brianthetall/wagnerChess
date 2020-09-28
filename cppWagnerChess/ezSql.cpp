@@ -1,29 +1,38 @@
 #include "ezSql.h"
 
-void EzSql::createDb(string dbName){
+int EzSql::createDb(const string dbName){
 
   verifyConnection();
   stringstream ss{""};
   ss<<"CREATE DATABASE "<<dbName;
-  cout<<ss.str().data()<<endl;
+  //cout<<ss.str().data()<<endl;
   if (mysql_query(connector, ss.str().data() )){
-    cout<<mysql_error(connector)<<endl;
+    return 1;
+    //cout<<mysql_error(connector)<<endl;
   }
-  
+  return 0;
 }
 
-//creats a table of JSON elements with varchar names
-void EzSql::createTable(string db, string tableName){
+int EzSql::selectDb(const string db){
 
   verifyConnection();
   stringstream ss{""};
   ss<<"USE "<<db<<";"<<endl;
 
-  cout<<ss.str().data()<<endl;
   if (mysql_query(connector, ss.str().data() )){
-    cout<<mysql_error(connector)<<endl;
+    return 1;
+    //cout<<mysql_error(connector)<<endl;
   }
+  return 0;
+}
 
+//creats a table of JSON elements with varchar names
+int EzSql::createTable(const string db, const string tableName){
+
+  selectDb(db);
+  
+  verifyConnection();  
+  stringstream ss{""};
   ss.str("");
   ss<<"CREATE TABLE "<<tableName<<"(";
   ss<<"element JSON,";
@@ -32,28 +41,31 @@ void EzSql::createTable(string db, string tableName){
   
   cout<<ss.str().data()<<endl;
   if (mysql_query(connector, ss.str().data() )){
-    cout<<mysql_error(connector)<<endl;
+    return 1;
+    //cout<<mysql_error(connector)<<endl;
   }
-
+  return 0;
 }
 
 //insert entry into a JSON table
 //insert into partsTable(name,element) values('levelSensor0','{"name":"levelSensor0","level":70,"power":24}');
-void EzSql::insertJsonFile(string fileName){
+//expects the caller to:  std::ifstream jsonFile(fileName);
+//or std::istringstream
+int EzSql::insertJsonStream(const string table, istream jsonStream){
 
   using boost::property_tree::ptree;
 
   bool first=true;
   std::string name,insertCmd;
-  std::ifstream jsonFile(fileName);
+
   std::stringstream ss{""},ss2{""},nameStream{""};
   
   ptree pt;
-  read_json(jsonFile, pt);
+  read_json(jsonStream, pt);
     
   for (auto & array_element: pt) {
 
-    ss<<"INSERT INTO partsTable(name,element) VALUES('";
+    ss<<"INSERT INTO "<<table<<"(name,element) VALUES('";
     
     for (auto & property: array_element.second) {
 
@@ -72,7 +84,7 @@ void EzSql::insertJsonFile(string fileName){
     }
     
     ss<<name<<"','{"<<ss2.str()<<"}');";
-    cout<<ss.str()<<endl;
+    //cout<<ss.str()<<endl;
     insertCmd=ss.str();
     ss.str("");
     ss2.str("");
@@ -80,21 +92,22 @@ void EzSql::insertJsonFile(string fileName){
     first=true;
 
     if (mysql_query(connector, insertCmd.data() ))
-      cout<<mysql_error(connector)<<endl;
+      return 1;
+      //cout<<mysql_error(connector)<<endl;
       
   }
 
-    
+  return 0;
 }
 
-//can i return a json object instead?
-string EzSql::selectElement(string name){
+string EzSql::selectElement(const string table,const string name){
 
   stringstream ss{""};
-  ss<<"select * from partsTable where name='"<<name<<"';";
-  if (mysql_query(connector, ss.str().data() ))
-    cout<<mysql_error(connector)<<endl;
+  ss<<"select * from "<<table<<" where name='"<<name<<"';";
 
+  if (mysql_query(connector, ss.str().data() ))
+    throw sqlException(mysql_error(connector));
+      
   MYSQL_RES *result=mysql_store_result(connector);
   MYSQL_ROW row;
 
@@ -102,11 +115,11 @@ string EzSql::selectElement(string name){
   return row[0];
 }
 
-map<string,string> EzSql::selectElementMap(string name){
+map<string,string> EzSql::selectElementMap(const string table,const string name){
 
   stringstream ss{""};
-  ss<<this->selectElement(name);
-  cout<<"debug="<<ss.str()<<endl;
+  ss<<this->selectElement(table,name);
+  //cout<<"debug="<<ss.str()<<endl;
   
   boost::property_tree::ptree pt;
   read_json(ss,pt);
@@ -120,33 +133,37 @@ map<string,string> EzSql::selectElementMap(string name){
   for(auto& s : retval)
     cout<<s.first<<":"<<s.second<<endl;
   */
-  
+
   return retval;
   
 }
 
-void EzSql::dropDb(string dbName){
+int EzSql::dropDb(const string dbName){
 
   verifyConnection();
   stringstream ss{""};
   ss<<"DROP DATABASE "<<dbName;
-  cout<<ss.str().data()<<endl;
+  //  cout<<ss.str().data()<<endl;
   if (mysql_query(connector, ss.str().data() )){
-    cout<<mysql_error(connector)<<endl;
+    //cout<<mysql_error(connector)<<endl;
+    return 1;
   }
-  
+  return 0;
 }
 
-void EzSql::dropTable(string tableName){
+int EzSql::dropTable(const string db,const string tableName){
 
+  selectDb(db);
+  
   verifyConnection();
   stringstream ss{""};
   ss<<"DROP TABLE "<<tableName;
-  cout<<ss.str().data()<<endl;
+  //cout<<ss.str().data()<<endl;
   if (mysql_query(connector, ss.str().data() )){
-    cout<<mysql_error(connector)<<endl;
+    //cout<<mysql_error(connector)<<endl;
+    return 1;
   }  
-
+  return 0;
 }
 
 void EzSql::close(void){
@@ -158,14 +175,12 @@ string EzSql::status(void){
   return retval;
 }
 
-void EzSql::verifyConnection(void){
+inline void EzSql::verifyConnection(void){
   //ping the db, if fail, reconnect
   if(mysql_ping(connector))
     mariadb_reconnect(connector);
 }
 
 /*
-
 https://mariadb.com/kb/en/mysql_query/
-
 */
