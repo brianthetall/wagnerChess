@@ -2,7 +2,23 @@
 
 Board::Board():player{2},locations{64}{
 
-  gui=new Gui{};
+  string user,passwd;
+  ifstream passwdFile;
+  passwdFile.open("/usr/home/user/gitRepos/games/cppWagnerChess/password.file");//need full path as CGI will be executing in another path
+  getline(passwdFile,user);
+  getline(passwdFile,passwd);
+  passwdFile.close();
+
+  //Game must now rely on SQL for state data; CGI
+  sql=new EzSql{user,passwd};
+  //clear out anything from a previous game:
+  sql->dropTable("chess","board");
+  sql->dropTable("chess","graveyard");
+  sql->dropTable("chess","moves");
+  //create new tables:
+  sql->createTable("chess","board");
+  sql->createTable("chess","graveyard");
+  sql->createTable("chess","moves");
   
   //Create Coordinates:
   int i=0;
@@ -13,6 +29,12 @@ Board::Board():player{2},locations{64}{
     for(i=0 ; i <= H ; i++){
       oss<<alpha<<i;
       locations[ oss.str() ]={new Location{new Coordinate{alpha,i}}};
+
+      //populate the DB with locations:
+      stringstream ss{""};
+      ss<<"{name:"<<oss.str()<<",piece:null,color,null}";
+      sql->insertJsonStream("board",static_cast<iostream&>(ss));
+	
       oss.str("");//clear the stream
     }
   }
@@ -31,9 +53,6 @@ Board::Board():player{2},locations{64}{
   
   player["white"]=new Player("white",locations);
   player["black"]=new Player("black",locations);
-
-  //cout<<player["white"]->toString();
-  //cout<<player["black"]->toString();
   
 }
 
@@ -69,20 +88,6 @@ string Board::toString() {
   return oss.str();
 }
 
-string Board::guiUpdate(bool isTurn){
-
-  map<Coordinate*,Piece*> pieces{};
-  for(auto& l : locations){
-
-    if(l.second->getPiece()!=nullptr){
-      pieces[l.second->getCoordinate()]=l.second->getPiece();
-    }
-
-  }
-  
-  return gui->update(pieces,isTurn);//send the pieces? as a map
-}
-
 MoveOutcome Board::move(string l,string lnew,string color,string moveString){
 
   Color movingColor = color=="white" ? Color::WHITE : Color::BLACK;
@@ -99,11 +104,11 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
       throw InvalidLocation{};
   }
   catch(InvalidLocation e){
-    //cout<<e.print()<<endl;
-    gui->outputError(e.print());
+    cout<<e.print()<<endl;
+    //gui->outputError(e.print());
     return MoveOutcome::ILLEGAL_MOVE;
   }catch(...){
-    gui->outputError("Illegal Input or Move");
+    //gui->outputError("Illegal Input or Move");
     return MoveOutcome::ILLEGAL_MOVE;
   }
   
@@ -114,8 +119,8 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
     if (piece->getColor()!=movingColor)
       throw NotYourPiece{};
   }catch(NotYourPiece e){
-    gui->outputError(e.print());
-    //cout<<e.print()<<endl;
+    //gui->outputError(e.print());
+    cout<<e.print()<<endl;
     return MoveOutcome::NOT_YOUR_PIECE;
   }
   
@@ -136,8 +141,8 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
       throw InvalidLocation{};
     }
   }catch(InvalidLocation e){
-    //cout << e.print() << endl;
-    gui->outputError(e.print());
+    cout << e.print() << endl;
+    //gui->outputError(e.print());
     return MoveOutcome::ILLEGAL_MOVE;
   }
   
@@ -148,7 +153,7 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
     }
   }catch(InCheck e){
     //cout << e.print() << endl;
-    gui->outputError(e.print());//output to the GUI
+    //gui->outputError(e.print());//output to the GUI
     start->setPiece(piece);
     dest->setPiece(temp);
     if(temp!=nullptr)
@@ -163,9 +168,13 @@ MoveOutcome Board::move(string l,string lnew,string color,string moveString){
 
   Player *playerLosingPiece = enemyColor==Color::WHITE ? player["white"] : player["black"];
   Player *attacker = enemyColor==Color::BLACK ? player["white"] : player["black"];
+
+  /*
   gui->graveyard( temp,playerLosingPiece,attacker );//safe to send nullptr for temp
   gui->movesUpdate(moveString);//passed as parameter from main()
   gui->outputError("");
+  */
+  
   return MoveOutcome::ACCEPTED;
 }
 

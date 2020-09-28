@@ -49,46 +49,7 @@ Player::Player(string c,unordered_map<string,Location*> locs):color{c},locations
   };
 
 
-string Player::toString() {
-  //pieces["king"]->getMoves();
-  //pieces["queen"]->getMoves();
-  //pieces["bishop1"]->getMoves();
-  //pieces["rook1"]->getMoves();
-  /*
-  for( auto& move : pieces["knight1"]->getMoves()){
-    cout<<move->toString()<<",";
-  }cout<<endl;
-  for( auto& move : pieces["pawn1"]->getMoves()){
-    cout<<"Pawn Move1: "<<move->toString()<<",";
-  }cout<<endl;
-  for( auto& move : pieces["pawn2"]->getMoves()){
-    cout<<"Pawn Move2: "<<move->toString()<<",";
-  }cout<<endl;
-
-  for( auto& move : pieces["pawn3"]->getMoves()){
-    cout<<"Pawn Move3: "<<move->toString()<<",";
-  }cout<<endl;
-
-  for( auto& move : pieces["pawn4"]->getMoves()){
-    cout<<"Pawn Move4: "<<move->toString()<<",";
-  }cout<<endl;
-
-  for( auto& move : pieces["pawn5"]->getMoves()){
-    cout<<"Pawn Move5: "<<move->toString()<<",";
-  }cout<<endl;
-
-  for( auto& move : pieces["pawn6"]->getMoves()){
-    cout<<"Pawn Move6: "<<move->toString()<<",";
-  }cout<<endl;
-
-  for( auto& move : pieces["pawn7"]->getMoves()){
-    cout<<"Pawn Move7: "<<move->toString()<<",";
-  }cout<<endl;
-  for( auto& move : pieces["pawn8"]->getMoves()){
-    cout<<"Pawn Move8: "<<move->toString()<<",";
-  }cout<<endl;
-  */
-  
+string Player::toString() {  
   return color;
 }
 

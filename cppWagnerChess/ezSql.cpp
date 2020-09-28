@@ -51,7 +51,7 @@ int EzSql::createTable(const string db, const string tableName){
 //insert into partsTable(name,element) values('levelSensor0','{"name":"levelSensor0","level":70,"power":24}');
 //expects the caller to:  std::ifstream jsonFile(fileName);
 //or std::istringstream
-int EzSql::insertJsonStream(const string table, istream jsonStream){
+int EzSql::insertJsonStream(const string table, iostream& jsonStream){
 
   using boost::property_tree::ptree;
 
@@ -106,7 +106,7 @@ string EzSql::selectElement(const string table,const string name){
   ss<<"select * from "<<table<<" where name='"<<name<<"';";
 
   if (mysql_query(connector, ss.str().data() ))
-    throw sqlException(mysql_error(connector));
+    throw sqlException(string{mysql_error(connector)});
       
   MYSQL_RES *result=mysql_store_result(connector);
   MYSQL_ROW row;
