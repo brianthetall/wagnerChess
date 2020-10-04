@@ -54,8 +54,7 @@ public:
     address.sin_port = htons( port );
 
     // Forcefully attaching socket to the port 8080
-    if (bind(server_fd, (struct sockaddr *)&address,
-	     sizeof(address))<0)
+    if ( bind(server_fd, (struct sockaddr *)&address, sizeof(address) ) < 0 )
       {
 	perror("bind failed");
 	exit(EXIT_FAILURE);

@@ -1,4 +1,4 @@
-#include "board.h"
+#include <board.h>
 
 Board::Board():player{2},locations{64}{
 
@@ -33,7 +33,7 @@ Board::Board():player{2},locations{64}{
       //populate the DB with locations:
       stringstream ss{""};
       ss<<"{name:"<<oss.str()<<",piece:null,color,null}";
-      sql->insertJsonStream("board",static_cast<iostream&>(ss));
+      //      sql->insertJsonStream("board",static_cast<iostream&>(ss));
 	
       oss.str("");//clear the stream
     }

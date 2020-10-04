@@ -5,13 +5,13 @@
 #include <map>
 #include <iostream>
 #include <algorithm>
-#include "location.h"
-#include "piece.h"
-#include "coordinate.h"
-#include "player.h"
-#include "invalidLocation.h"
-#include "notYourPiece.h"
-#include "inCheck.h"
+#include <location.h>
+#include <piece.h>
+#include <coordinate.h>
+#include <player.h>
+#include <invalidLocation.h>
+#include <notYourPiece.h>
+#include <inCheck.h>
 #include <ezSql.h>
 
 using namespace std;

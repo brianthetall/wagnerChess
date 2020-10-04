@@ -7,8 +7,8 @@
 #include <sstream>
 #include <iostream>
 #include <string>
-#include "board.h"
-#include "mySocket.h"
+#include <board.h>
+#include <mySocket.h>
 
 #include <cgicc/CgiDefs.h> 
 #include <cgicc/Cgicc.h> 
@@ -24,6 +24,14 @@ int main(void){
   string moveString,temp,start,dest;
   MySocket socket;
   static bool turn=true;//true == white
+
+  cout << "Content-type:text/html\r\n\r\n";
+  cout << "<html>\n";
+  cout << "<head>\n";
+  cout << "<title>CGI Wagner Chess</title>\n";
+  cout << "</head>\n";
+  cout << "<body>\n";
+  cout << "Making Board...";
 
   //the game:
   Board *b=new Board{};

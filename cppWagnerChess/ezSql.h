@@ -1,5 +1,5 @@
-#include "boost/property_tree/ptree.hpp"
-#include "boost/property_tree/json_parser.hpp"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include <mysql/mysql.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -30,7 +30,7 @@ private:
       cout<<mysql_error(connector)<<endl;
     }
 
-    if (mysql_real_connect(connector, "localhost", user.data(), passwd.data(), NULL, 0, NULL, 0) == NULL) {
+    if (mysql_real_connect(connector, "localhost", user.data(), passwd.data(), NULL, 0, "/var/run/mysql/mysql.sock", 0) == NULL) {
       cout<<mysql_error(connector)<<endl;
       mysql_close(connector);
     }  
@@ -40,7 +40,7 @@ private:
   int createDb(const string dbName);
   int selectDb(const string db);
   int createTable(const string db,const string tableName);
-  int insertJsonStream(const string table, iostream& jsonStream);
+  int insertJsonStream(const string table, sstream& jsonStream);
   string selectElement(const string table, const string name);
   map<string,string> selectElementMap(const string table, const string name);
   int dropDb(const string dbName);

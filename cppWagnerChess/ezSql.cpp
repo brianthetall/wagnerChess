@@ -39,7 +39,7 @@ int EzSql::createTable(const string db, const string tableName){
   ss<<"name VARCHAR(128) primary key";
   ss<<");";
   
-  cout<<ss.str().data()<<endl;
+  cout<<ss.str().data()<<"<br>"<<endl;
   if (mysql_query(connector, ss.str().data() )){
     return 1;
     //cout<<mysql_error(connector)<<endl;
@@ -51,10 +51,14 @@ int EzSql::createTable(const string db, const string tableName){
 //insert into partsTable(name,element) values('levelSensor0','{"name":"levelSensor0","level":70,"power":24}');
 //expects the caller to:  std::ifstream jsonFile(fileName);
 //or std::istringstream
-int EzSql::insertJsonStream(const string table, iostream& jsonStream){
+int EzSql::insertJsonStream(const string table, sstream& jsonStream){
 
   using boost::property_tree::ptree;
 
+  string temp{""};
+
+  cout<<jsonStream.str()<<"<br>"<<endl;
+ 
   bool first=true;
   std::string name,insertCmd;
 
@@ -65,10 +69,12 @@ int EzSql::insertJsonStream(const string table, iostream& jsonStream){
     
   for (auto & array_element: pt) {
 
-    ss<<"INSERT INTO "<<table<<"(name,element) VALUES('";
+    ss<<"INSERT INTO "<<table<<" (name,element) VALUES('";
     
     for (auto & property: array_element.second) {
 
+      cout << "1st prop="<<property.first<<"<br>";
+      
       if(first)
 	ss2<<"\""<<property.first<<"\":\""<<property.second.get_value < std::string > ()<<"\"";
       else
@@ -84,7 +90,9 @@ int EzSql::insertJsonStream(const string table, iostream& jsonStream){
     }
     
     ss<<name<<"','{"<<ss2.str()<<"}');";
-    //cout<<ss.str()<<endl;
+
+    cout<<ss.str()<<"<br>"<<endl;
+    
     insertCmd=ss.str();
     ss.str("");
     ss2.str("");
