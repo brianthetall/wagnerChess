@@ -62,6 +62,13 @@ void createLocations(void){
 
 }
 
+void placePieces(void){
+
+  EzSql *sql=getDb();
+  sql->selectDb("chess");//use chess;
+  //open a json file that describes the initial locations of the pieces
+}
+
 int main(void){
 
   
@@ -75,6 +82,6 @@ int main(void){
 
   createTables();
   createLocations();
-
+  placePieces();
 
 }
