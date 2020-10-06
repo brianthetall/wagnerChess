@@ -51,60 +51,43 @@ int EzSql::createTable(const string db, const string tableName){
 //insert into partsTable(name,element) values('levelSensor0','{"name":"levelSensor0","level":70,"power":24}');
 //expects the caller to:  std::ifstream jsonFile(fileName);
 //or std::istringstream
-int EzSql::insertJsonStream(const string table, sstream& jsonStream){
+int EzSql::insertJsonStream(const string table, stringstream& jsonStream){
 
   using boost::property_tree::ptree;
-
-  string temp{""};
-
-  cout<<jsonStream.str()<<"<br>"<<endl;
  
   bool first=true;
-  std::string name,insertCmd;
 
-  std::stringstream ss{""},ss2{""},nameStream{""};
+  std::stringstream ss{""},ss2{""};
   
   ptree pt;
   read_json(jsonStream, pt);
-    
+
+  //insert into board (name,element) values('test1','{"ass":"hat"}');
+  ss<<"INSERT INTO "<<table<<" (name,element) VALUES('";
   for (auto & array_element: pt) {
 
-    ss<<"INSERT INTO "<<table<<" (name,element) VALUES('";
-    
-    for (auto & property: array_element.second) {
-
-      cout << "1st prop="<<property.first<<"<br>";
-      
+    if(array_element.first=="name"){
+      ss<<array_element.second.get_value <std::string>()<<"','{";
+    }else{
       if(first)
-	ss2<<"\""<<property.first<<"\":\""<<property.second.get_value < std::string > ()<<"\"";
+	ss2<<"\""<<array_element.first<<"\":\""<<array_element.second.get_value < std::string > ()<<"\"";
       else
-	ss2<<",\""<<property.first<<"\":\""<<property.second.get_value < std::string > ()<<"\"";
-      
-      if(property.first == "name"){
-	nameStream<<property.second.get_value < std::string > ();
-	name=nameStream.str();
-	nameStream.str("");
-      }
-      first=false;
-
+	ss2<<",\""<<array_element.first<<"\":\""<<array_element.second.get_value < std::string > ()<<"\"";
+      first=false;  
     }
     
-    ss<<name<<"','{"<<ss2.str()<<"}');";
-
-    cout<<ss.str()<<"<br>"<<endl;
-    
-    insertCmd=ss.str();
-    ss.str("");
-    ss2.str("");
-    nameStream.str("");
-    first=true;
-
-    if (mysql_query(connector, insertCmd.data() ))
-      return 1;
-      //cout<<mysql_error(connector)<<endl;
-      
+    //cout <<"debug:"<< array_element.first << "  " << array_element.second.get_value <std::string>() << "<br>"<<endl;
   }
 
+  ss<<ss2.str()<<"}');"<<endl;
+  cout << "DEBUG:" << ss.str() <<"<br>"<<endl;
+  
+  if (mysql_query(connector, ss.str().data() )){
+    cout<<mysql_error(connector)<<"<br>"<<endl;
+    return 1;
+    
+  }
+    
   return 0;
 }
 

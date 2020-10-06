@@ -39,6 +39,7 @@ void createTables(void){
 void createLocations(void){
 
   EzSql *sql=getDb();
+  sql->selectDb("chess");//use chess;
   ostringstream oss{""};
   char alpha='A';
   int i;
@@ -50,8 +51,9 @@ void createLocations(void){
       //populate the DB with locations:
       stringstream ss{""};
       ss<<"{\"name\":\""<<oss.str()<<"\",\"piece\":\"null\",\"color\":\"null\"}";
-      sql->insertJsonStream("board",&ss);
-      cout<<"\nInserted?: "<<ss.str()<<"<br>"<<endl;
+      if(sql->insertJsonStream("board",ss))
+	cout << "error writing to SQL <br>"<<endl;
+      //cout<<"\nInserted?: "<<ss.str()<<"<br>"<<endl;
       oss.str("");//clear the stream
     }
   }
