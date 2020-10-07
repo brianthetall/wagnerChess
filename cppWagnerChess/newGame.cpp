@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <sstream>
 #include <ezSql.h>
 #include <boost/property_tree/ptree.hpp>
@@ -75,12 +76,34 @@ void placePieces(void){
   pieceLocationJson.open("/usr/home/user/gitRepos/games/cppWagnerChess/initPieceLocations.json");
 
   //parse JSON
+  /*
+    name:A2
+    piece:null
+    color:null
+    name:A3
+    piece:rook1
+    color:black
+  */
   ptree pt;
   read_json(pieceLocationJson, pt);
   for(auto& dict:pt){
+
+    string name,piece,color;
+    
     for(auto& entry:dict.second){
       cout<<entry.first<<":"<<entry.second.get_value <std::string>() <<"<br>";
+
+      if(entry.first=="name")
+	name=entry.first;
+      else if(entry.first="piece")
+	piece=entry.first;
+      else if(entry.first="color")
+	color=entry.first;
+      
     }
+
+    //update SQL entry @ `name`
+    
   }
 
   pieceLocationJson.close();
