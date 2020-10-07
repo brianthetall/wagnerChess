@@ -91,6 +91,19 @@ int EzSql::insertJsonStream(const string table, stringstream& jsonStream){
   return 0;
 }
 
+
+int updateJsonEntry(const string table,const string key,const map<string,string> properties){
+
+  cout<<"updateJsonEntry:"<<table<<"@"<<key<<":";
+  for(auto& p:properties)
+    cout<<p.first<<"="<<p.second<<" ";
+  cout<<"<br>";
+
+  return 0;
+
+}
+
+
 string EzSql::selectElement(const string table,const string name){
 
   stringstream ss{""};

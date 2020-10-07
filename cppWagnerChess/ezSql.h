@@ -41,7 +41,7 @@ private:
   int selectDb(const string db);
   int createTable(const string db,const string tableName);
   int insertJsonStream(const string table, stringstream& jsonStream);
-  int updateJsonEntry(const string table,...);
+  int updateJsonEntry(const string table,const string key,const map<string,string> properties);
   string selectElement(const string table, const string name);
   map<string,string> selectElementMap(const string table, const string name);
   int dropDb(const string dbName);

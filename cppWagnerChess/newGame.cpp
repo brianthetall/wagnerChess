@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <map>
 #include <ezSql.h>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -88,26 +89,27 @@ void placePieces(void){
   read_json(pieceLocationJson, pt);
   for(auto& dict:pt){
 
-    string name,piece,color;
+    string name;
+    map<string,string> props{};
     
     for(auto& entry:dict.second){
       cout<<entry.first<<":"<<entry.second.get_value <std::string>() <<"<br>";
 
       if(entry.first=="name")
 	name=entry.first;
-      else if(entry.first="piece")
-	piece=entry.first;
-      else if(entry.first="color")
-	color=entry.first;
+      else if(entry.first=="piece")
+	props["piece"]=entry.first;
+      else if(entry.first=="color")
+	props["color"]=entry.first;
       
     }
 
     //update SQL entry @ `name`
-    
+    sql->updateJsonEntry("board",name,props);
   }
 
   pieceLocationJson.close();
-  
+  sql->close();
 }
 
 int main(void){
