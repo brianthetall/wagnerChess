@@ -1,6 +1,8 @@
 #include <iostream>
 #include <sstream>
 #include <ezSql.h>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 using namespace std;
 enum rows{A,B,C,D,E,F,G,H};
@@ -64,9 +66,25 @@ void createLocations(void){
 
 void placePieces(void){
 
+  using boost::property_tree::ptree;
+  
   EzSql *sql=getDb();
   sql->selectDb("chess");//use chess;
   //open a json file that describes the initial locations of the pieces
+  ifstream pieceLocationJson;
+  pieceLocationJson.open("/usr/home/user/gitRepos/games/cppWagnerChess/initPieceLocations.json");
+
+  //parse JSON
+  ptree pt;
+  read_json(pieceLocationJson, pt);
+  for(auto& dict:pt){
+    for(auto& entry:dict.second){
+      cout<<entry.first<<":"<<entry.second.get_value <std::string>() <<"<br>";
+    }
+  }
+
+  pieceLocationJson.close();
+  
 }
 
 int main(void){
