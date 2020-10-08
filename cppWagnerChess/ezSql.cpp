@@ -92,12 +92,20 @@ int EzSql::insertJsonStream(const string table, stringstream& jsonStream){
 }
 
 
-int updateJsonEntry(const string table,const string key,const map<string,string> properties){
+int EzSql::updateJsonEntry(const string table,const string key,const map<string,string> properties){
 
-  cout<<"updateJsonEntry:"<<table<<"@"<<key<<":";
-  for(auto& p:properties)
-    cout<<p.first<<"="<<p.second<<" ";
-  cout<<"<br>";
+  //update board element set element=JSON_REPLACE(element,'$.piece',"queen",'$.color',"white") where name="A0";
+  stringstream ss{""};
+  ss<<"update board element set element=JSON_REPLACE(element";
+  for(auto& p:properties){
+    ss<<",'$."<<p.first<<"',\""<<p.second<<"\"";
+  }
+  ss<<") where name=\""<<key<<"\";";
+
+  cout<<ss.str()<<"<br>";
+
+  if (mysql_query(connector, ss.str().data() ))
+    throw sqlException(string{mysql_error(connector)});
 
   return 0;
 

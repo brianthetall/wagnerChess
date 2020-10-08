@@ -93,14 +93,14 @@ void placePieces(void){
     map<string,string> props{};
     
     for(auto& entry:dict.second){
-      cout<<entry.first<<":"<<entry.second.get_value <std::string>() <<"<br>";
+      //cout<<entry.first<<":"<<entry.second.get_value <std::string>() <<"<br>";
 
       if(entry.first=="name")
-	name=entry.first;
+	name=entry.second.get_value <string>();
       else if(entry.first=="piece")
-	props["piece"]=entry.first;
+	props["piece"]=entry.second.get_value <string>();
       else if(entry.first=="color")
-	props["color"]=entry.first;
+	props["color"]=entry.second.get_value <string>();
       
     }
 
